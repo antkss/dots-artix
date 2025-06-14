@@ -1,0 +1,149 @@
+window.Bar {
+  all: unset;
+  font-family: "Ubuntu Nerd Font", "Fira Code", "Fira Mono", "Droid Sans Mono", sans-serif;
+  margin: 0px;
+  padding: 0px;
+}
+window.Bar .bar {
+  /* margin-right: 0.273rem; */
+  min-height: 25px;
+  background: #ffffff;
+  border-radius: 8px;
+  /* min-width: $screen_width; */
+  padding: 4px;
+  background-color: #FFF8F6;
+  color: #271812;
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 8px;
+}
+window.Bar .cir {
+  background-color: #FFE9E2;
+  color: #FFE9E2;
+}
+window.Bar .icon {
+  background-color: transparent;
+}
+window.Bar .panel {
+  background-color: #FFE9E2;
+  border-radius: 8px;
+  padding: 3px;
+  margin-left: 3px;
+  margin-right: 3px;
+  min-height: 2.5px;
+}
+window.Bar .play-pause {
+  background-color: #FFE9E2;
+  border: #271812;
+  border-radius: 100%;
+}
+window.Bar .text {
+  color: #271812;
+}
+window.Bar .tray > * {
+  background-color: #FFF8F6;
+  color: #271812;
+  border-radius: 8px;
+  padding: 7px;
+}
+window.Bar .button {
+  all: unset;
+  background-color: transparent;
+}
+window.Bar .button:hover label {
+  background-color: rgba(39, 24, 18, 0.2);
+  border-color: rgba(255, 233, 226, 0.2);
+}
+window.Bar .button:active label {
+  background-color: rgba(39, 24, 18, 0.2);
+}
+window.Bar .work {
+  /* all: unset; */
+  color: #271812;
+  background-color: transparent;
+  min-height: 22.5px;
+  min-width: 22.5px;
+}
+window.Bar .work:hover label {
+  background-color: rgba(255, 233, 226, 0.2);
+  border-color: rgba(39, 24, 18, 0.2);
+  border-radius: 8px;
+}
+window.Bar .work:active label {
+  background-color: rgba(39, 24, 18, 0.2);
+  border-radius: 8px;
+}
+window.Bar .label {
+  transition: 200ms;
+  padding: 0 8px;
+  margin: 2px;
+  border-radius: 8px;
+  border: 1pt solid transparent;
+}
+window.Bar .work-focused {
+  background-color: #A53C00;
+  color: #FFE9E2;
+  border-radius: 8px;
+  min-height: 22.5px;
+  min-width: 22.5px;
+}
+window.Bar .mediaBut {
+  background-color: #A53C00;
+  color: #FFE9E2;
+  border-radius: 8px;
+  min-height: 22.5px;
+  min-width: 22.5px;
+}
+window.Bar .FocusedClient {
+  color: #FFE9E2;
+}
+window.Bar .Cover {
+  /* min-height: 1.2em; */
+  /* min-width: 1.2em; */
+  border-radius: 8px;
+  background-position: center;
+  background-size: contain;
+}
+window.Bar .Time {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+window.Bar .Wifi {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+window.Bar .Battery {
+  margin-left: 7px;
+  margin-right: 7px;
+}
+window.Bar .AudioSlider * {
+  all: unset;
+  /* margin-left:4px; */
+  margin-right: 4px;
+}
+window.Bar .AudioSlider icon {
+  margin-right: 0.6em;
+}
+window.Bar .AudioSlider trough {
+  background-color: rgba(39, 24, 18, 0.2);
+  border-radius: 8px;
+}
+window.Bar .AudioSlider highlight {
+  background-color: #A53C00;
+  min-height: 0.8em;
+  border-radius: 8px;
+}
+window.Bar .AudioSlider slider {
+  background-color: #271812;
+  border-radius: 8px;
+  min-height: 1em;
+  min-width: 1em;
+  /* margin:0px; */
+  margin: -0.2em;
+  border-color: #A53C00;
+}
+window.Bar .volumeIcon {
+  color: #271812;
+}
+
+/*# sourceMappingURL=a.css.map */
