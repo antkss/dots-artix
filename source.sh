@@ -1,5 +1,20 @@
 #!/bin/bash
-pacman -S archlinux-mirrorlist --noconfirm
+if [ "$(id -u)" -ne 0 ]; then
+	echo "please run as root"
+	exit
+fi
+sort_mirror() {
+	pacman -S archlinux-mirrorlist pacman-contrib --noconfirm
+	echo "getting mirrorlist ..."
+	curl https://gitea.artixlinux.org/packages/artix-mirrorlist/raw/branch/master/mirrorlist -o /tmp/mirrorlist
+	echo "getting the fastest ..."
+	rankmirrors -v -n 5 /tmp/mirrorlist | tee /etc/pacman.d/mirrorlist
+	rm /tmp/mirrorlist
+}
+. func.sh
+choice "Do you want to sort the fastest artix mirror ?" sort_mirror
+
+
 pacman-key --init
 pacman-key --populate
 pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
