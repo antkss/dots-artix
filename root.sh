@@ -70,3 +70,4 @@ install_network || exit
 setup_utils || exit
 choice "do you want to install antkss packages ?" "antkss || exit"
 setup_clock
+setup_group
