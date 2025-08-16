@@ -9,6 +9,7 @@ echo "USER: $USER"
 SU=
 install_service() {
 	echo "setting up service"
+	$SU rc-update add ntpd
 }
 install_browser() {
 	echo "setting up browser ..."
