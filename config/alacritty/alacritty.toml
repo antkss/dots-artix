@@ -7,7 +7,7 @@ TERM = "xterm-256color"
 size = 13
 
 [font.normal]
-family = "Jetbrains Mono"
+family = "Jetbrains Mono Nerd Font"
 style = "bold"
 [font.bold]
 family = "victor mono"
