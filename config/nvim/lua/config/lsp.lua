@@ -105,7 +105,7 @@ require"lspconfig".pyright.setup {
 }
 require("lspconfig").clangd.setup{
 	capabilities = capabilities,
-	cmd = { "/usr/bin/clangd", "--background-index-priority=low","-j=1", "--log=verbose", "--index=false"},
+	cmd = { "clangd", "--background-index-priority=low","-j=1", "--log=verbose", "--index=false"},
 	filetypes = { "c", "cpp","h","hpp" },
 		workspace = {
 			maxPreload = 5,
@@ -129,7 +129,7 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function(ev)
 	vim.lsp.start({
 	  name = 'csharp',
-	  cmd = {'/usr/bin/csharp-ls'},
+	  cmd = {'csharp-ls'},
 
 	  -- Set the "root directory" to the parent directory of the file in the
 	  -- current buffer (`ev.buf`) that contains either a "setup.py" or a
