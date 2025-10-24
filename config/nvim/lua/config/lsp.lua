@@ -113,23 +113,14 @@ require("lspconfig").clangd.setup{
 		},
 
 }
-require('lspconfig').rust_analyzer.setup {
-  handlers = {
-	["textDocument/publishDiagnostics"] = vim.lsp.with(
-	  vim.lsp.diagnostic.on_publish_diagnostics, {
-		-- Disable virtual_text
-		virtual_text = false
-	  }
-	),
-  }
-}
+
 vim.api.nvim_create_autocmd('FileType', {
   -- This handler will fire when the buffer's 'filetype' is "python"
   pattern = 'cs',
   callback = function(ev)
 	vim.lsp.start({
 	  name = 'csharp',
-	  cmd = {'csharp-ls'},
+	  cmd = {'/usr/bin/csharp-ls'},
 
 	  -- Set the "root directory" to the parent directory of the file in the
 	  -- current buffer (`ev.buf`) that contains either a "setup.py" or a

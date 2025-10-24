@@ -51,7 +51,7 @@ vim.opt.shiftwidth = 4
 -- ]],
 -- 	false
 -- )
-vim.lsp.set_log_level("off")
+vim.lsp.log.set_level("off")
 
 require("config")
 
