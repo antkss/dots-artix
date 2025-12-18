@@ -7,8 +7,9 @@ sort_mirror() {
 	pacman -S archlinux-mirrorlist pacman-contrib parallel --noconfirm
 	echo "getting mirrorlist ..."
 	curl https://gitea.artixlinux.org/packages/artix-mirrorlist/raw/branch/master/mirrorlist -o /tmp/mirrorlist
+	sed -i '/#.*Server[[:space:]]*=/ s/#//' /tmp/mirrorlist
 	echo "getting the fastest ..."
-	./rankmirrors -v -n 5 -p /tmp/mirrorlist | tee /etc/pacman.d/mirrorlist
+	./rankmirrors -v -n 10 -p /tmp/mirrorlist | tee /etc/pacman.d/mirrorlist
 	rm /tmp/mirrorlist
 }
 . func.sh

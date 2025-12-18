@@ -5,6 +5,7 @@ libdir = get_option('prefix') / get_option('libdir')
 
 pkgconfig_deps = [
   dependency('glib-2.0'),
+  dependency('gtk-layer-shell-0'),
   dependency('gobject-2.0'),
   dependency('gtk+-3.0'),
   dependency('libnm'),
@@ -23,7 +24,7 @@ deps = pkgconfig_deps + meson.get_compiler('c').find_library('m')
 
 sources = files(
   'bar.vala',
-  'app.in.vala'
+  'app.vala'
 )
 
 executable(

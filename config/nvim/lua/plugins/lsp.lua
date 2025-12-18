@@ -1,15 +1,15 @@
 return {
 
 	{
-	'voldikss/vim-translator',
+		'voldikss/vim-translator',
 
-	config = function()
+		config = function()
 
-	end,
+		end,
 	},
 	{
 		'echasnovski/mini.indentscope',
-		event = "VeryLazy",
+		-- event = "VeryLazy",
 		config =  function ()
 		require('mini.indentscope').setup({ options = { try_as_border = true ,delay = 400} })
 
@@ -22,50 +22,27 @@ return {
 
 
 	},
-	-- {
-	-- 	'numToStr/Comment.nvim',
-	-- 	event = "VeryLazy",
-	-- 	config = function()
-	-- 	end,
-	-- },
-
 	{
 	    "hrsh7th/nvim-cmp",
-	    event = "TextChanged",
+	    -- event = "VeryLazy",
 
-	},
-	{
-		"neovim/nvim-lspconfig",
-		event = "VeryLazy",
 	},
 
 	{
 		"hrsh7th/cmp-nvim-lsp",
-		event = "VeryLazy",
+		-- event = "VeryLazy",
 
 	},
 	{
-	"L3MON4D3/LuaSnip",
-	-- follow latest release.
-	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-	-- install jsregexp (optional!).
-	build = "make install_jsregexp",
-	opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-	-- event = "VeryLazy",
+		"L3MON4D3/LuaSnip",
+		-- follow latest release.
+		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+		-- install jsregexp (optional!).
+		build = "make install_jsregexp"
 	},
 	{
 	    "hrsh7th/cmp-buffer",
 	    -- event = "VeryLazy"
-	},
-	{
-		"antkss/codeium",
-		event = "VeryLazy",
-		config = function ()
-		require('mini.pairs').setup()
-		-- require("Comment").setup()
-		vim.cmd("CodeiumDisable")
-
-		end
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -74,14 +51,28 @@ return {
 		---@type ibl.config
 		opts = {},
 	},
-	-- { 'echasnovski/mini.animate', version = false },
 	{
 	  "karb94/neoscroll.nvim",
 	  opts = {},
 	},
-	-- {
-	--   "sphamba/smear-cursor.nvim",
-	--   opts = {},
-	-- }
+	{
+		"neovim/nvim-lspconfig", 
+		config = function()
+			vim.lsp.config('typescript-language-server', {
+				 cmd = { 'typescript-language-server', "--stdio"},
+				 filetypes = { 'javascript', 'typescript' },
+			}) 
+			vim.lsp.config('java-language-server', {
+				 cmd = { 'jdtls' },
+				filetypes = { 'java' },
+
+			}) 
+			vim.lsp.config('rust-analyzer', {
+				cmd = { 'rust-analyzer' },
+				filetypes = { 'rust' },
+			})
+			vim.lsp.enable({'luals', 'rust-analyzer', 'clangd', 'typescript-language-server', 'pyright', 'java-language-server'})
+		end,
+	}
 
 }

@@ -39,7 +39,7 @@ setup_utils() {
 	fi
 }
 antkss() {
-	$SU pacman -S usb_modeswitch mkinitcpio linux-own intel-ucode firmware-own
+	$SU pacman -S usb_modeswitch mkinitcpio linux-own intel-ucode firmware-own nvidia-own v4l2loopback-own
 	$SU bash fstab.sh
 	$SU bash dev.sh
 	$SU ln -sr /boot/initramfs-own.img /boot/initrd -f
@@ -61,6 +61,10 @@ install_initial() {
 setup_group() {
 	$SU usermod -aG video $USER
 	$SU usermod -aG audio $USER
+	$SU usermod -aG input $USER
+}
+nvidia() {
+	bash ./nvidia.sh || exit
 }
 setup_source || exit
 install_initial || exit
@@ -69,6 +73,7 @@ install_browser || exit
 install_service || exit
 install_network || exit
 setup_utils || exit
+choice "do you want to install nvidia packages ?" "nvidia || exit"
 choice "do you want to install antkss packages ?" "antkss || exit"
 setup_clock
 setup_group

@@ -1,153 +1,201 @@
-* {
-  font-family: "Ubuntu Nerd Font", "Fira Code", "Fira Mono", "Droid Sans Mono", sans-serif;
-  margin: 0px;
-  padding: 0px;
-  font-size: 1em;
-  border-radius: 8px;
-  /* background-color: $bg; */
-  /* color: $fg; */
-  font-weight: bold;
-}
-
 .active-label {
   background-color: transparent;
-  color: #FFF8F6;
+  color: #FFF8F7;
 }
 
 .bar {
+  all: unset;
   /* margin-right: 0.273rem; */
   min-height: 25px;
   background: #ffffff;
   border-radius: 8px;
   /* min-width: $screen_width; */
   padding: 4px;
-  background-color: #FFF8F6;
-  color: #271815;
+  background-color: #FFF8F7;
+  color: #26181B;
   border-radius: 8px;
 }
 
 .cir {
-  background-color: #FFE9E6;
-  color: #FFE9E6;
+  all: unset;
+  background-color: #FFE8EB;
+  color: #FFE8EB;
 }
 
 .icon {
+  all: unset;
   background-color: transparent;
   padding-left: 4px;
   padding-right: 4px;
 }
 
 .panel {
-  background-color: #FFE9E6;
+  all: unset;
+  background-color: #FFE8EB;
   border-radius: 8px;
   padding: 3px;
   margin-left: 3px;
   margin-right: 3px;
-  min-height: 2.5px;
+  min-height: 22.5px;
+  min-width: 22.5px;
 }
 
 .scrollbar {
   all: unset;
-  background-color: #FFE9E6;
+  background-color: #FFE8EB;
 }
 
 .space {
+  all: unset;
   background-color: transparent;
   margin-left: 4px;
   margin-right: 4px;
 }
 
 .space-left {
+  all: unset;
   background-color: transparent;
   margin-left: 4px;
 }
 
-.space-right {
+.space_right {
+  all: unset;
   background-color: transparent;
   margin-right: 4px;
 }
 
-.play-pause {
-  background-color: #FFE9E6;
-  border: #271815;
-  border-radius: 100%;
-}
-
 .text {
-  color: #271815;
+  all: unset;
+  color: #26181B;
   background-color: transparent;
 }
 
 .tray {
-  background-color: #FFF8F6;
-  color: #271815;
+  all: unset;
+  background-color: #FFF8F7;
+  color: #26181B;
   border-radius: 8px;
   padding: 7px;
 }
 
 .button {
+  all: unset;
   background-color: transparent;
   min-height: 22.5px;
   min-width: 22.5px;
-  color: #271815;
+  color: #26181B;
 }
 .button:hover label {
-  background-color: rgba(255, 248, 246, 0.2);
-  border-color: rgba(39, 24, 21, 0.2);
+  background-color: rgba(255, 248, 247, 0.2);
+  border-color: rgba(38, 24, 27, 0.2);
   border-radius: 8px;
 }
 .button:active label {
-  background-color: rgba(39, 24, 21, 0.2);
+  background-color: rgba(38, 24, 27, 0.2);
+  border-radius: 8px;
+}
+.button:focus {
+  background-color: #BB0056;
+  color: #FFF8F7;
   border-radius: 8px;
 }
 
-.button-active {
-  background-color: #C00003;
+.button_big {
+  all: unset;
+  min-height: 25px;
+  min-width: 25px;
+  border-radius: 8px;
+}
+
+.button_active_big {
+  all: unset;
+  background-color: #BB0056;
+  border-radius: 8px;
+  min-height: 25px;
+  min-width: 25px;
+  color: #FFF8F7;
+}
+.button_active_big:hover label {
+  background-color: rgba(255, 248, 247, 0.2);
+  border-color: rgba(38, 24, 27, 0.2);
+  border-radius: 8px;
+}
+.button_active_big:active label {
+  background-color: rgba(38, 24, 27, 0.2);
+  border-radius: 8px;
+}
+
+.button_active {
+  all: unset;
+  background-color: #BB0056;
   border-radius: 8px;
   min-height: 22.5px;
   min-width: 22.5px;
-  color: #FFF8F6;
+  color: #FFF8F7;
 }
-.button-active:hover label {
-  background-color: rgba(192, 0, 3, 0.2);
-  border-color: rgba(39, 24, 21, 0.2);
+.button_active:hover label {
+  background-color: rgba(187, 0, 86, 0.2);
+  border-color: rgba(38, 24, 27, 0.2);
   border-radius: 8px;
 }
-.button-active:active label {
-  background-color: rgba(39, 24, 21, 0.2);
+.button_active:active label {
+  background-color: rgba(38, 24, 27, 0.2);
   border-radius: 8px;
 }
 
-.button-inactive {
+.button_inactive {
+  all: unset;
   background-color: transparent;
   border-radius: 8px;
   min-height: 22.5px;
   min-width: 22.5px;
-  border-color: #C00003;
-  color: #C00003;
+  border-color: #BB0056;
+  color: #BB0056;
+}
+
+.button_inactive_big {
+  all: unset;
+  background-color: #FFF8F7;
+  border-radius: 8px;
+  min-height: 25px;
+  min-width: 25px;
+  border-color: #BB0056;
+  color: #BB0056;
+}
+.button_inactive_big:hover label {
+  background-color: rgba(38, 24, 27, 0.2);
+  border-color: rgba(38, 24, 27, 0.2);
+  border-radius: 8px;
 }
 
 .label {
+  all: unset;
   transition: 200ms;
   background-color: transparent;
 }
 
 .hide {
+  all: unset;
   background: transparent;
 }
 
 .Time {
+  all: unset;
+  min-height: 22.5px;
+  min-width: 22.5px;
   margin-left: 5px;
   margin-right: 5px;
   background-color: transparent;
 }
 
 .Wifi {
+  all: unset;
   margin-left: 5px;
   margin-right: 5px;
 }
 
 .Battery {
+  all: unset;
   margin-left: 7px;
   margin-right: 7px;
   background-color: transparent;
@@ -162,26 +210,93 @@
   margin-right: 0.6em;
 }
 .AudioSlider trough {
-  background-color: rgba(39, 24, 21, 0.2);
+  background-color: rgba(38, 24, 27, 0.2);
   border-radius: 8px;
 }
 .AudioSlider highlight {
-  background-color: #C00003;
+  background-color: #BB0056;
   min-height: 0.8em;
   border-radius: 8px;
 }
 .AudioSlider slider {
-  background-color: #271815;
+  background-color: #26181B;
   border-radius: 8px;
   min-height: 1em;
   min-width: 1em;
   /* margin:0px; */
   margin: -0.2em;
-  border-color: #C00003;
+  border-color: #BB0056;
+}
+
+scrolledwindow.hidden-scroll scrollbar {
+  min-width: 0px;
+  min-height: 0px;
+  opacity: 0;
+}
+scrolledwindow.hidden-scroll scrollbar trough,
+scrolledwindow.hidden-scroll scrollbar slider {
+  background-color: transparent;
+  border: none;
+}
+
+.tray-menu {
+  background-color: #FFF8F7; /* Dark Background */
+  border-color: rgba(38, 24, 27, 0.2);
+  border-radius: 8px;
+  min-height: 22.5px;
+  min-width: 22.5px;
+  padding: 4px;
+}
+
+.button_panel {
+  all: unset;
+  background-color: #FFE8EB;
+  border-radius: 8px;
+  padding: 3px;
+  margin-left: 3px;
+  margin-right: 3px;
+  min-height: 22.5px;
+  min-width: 22.5px;
+}
+.button_panel:hover label {
+  background-color: rgba(255, 248, 247, 0.2);
+  border-radius: 8px;
+}
+.button_panel:active label {
+  background-color: rgba(38, 24, 27, 0.2);
+  border-radius: 8px;
+}
+.button_panel:focus {
+  background-color: #BB0056;
+  color: #FFF8F7;
+  border-radius: 8px;
+}
+
+.music_icon {
+  all: unset;
+  min-height: 100px;
+  min-width: 375px;
+  border-radius: 8px;
+  background-color: #FFE8EB;
+  margin: 4px;
+}
+.music_icon:hover label {
+  background-color: rgba(255, 248, 247, 0.2);
+  border-radius: 8px;
+}
+.music_icon:active label {
+  background-color: rgba(38, 24, 27, 0.2);
+  border-radius: 8px;
+}
+.music_icon:focus {
+  background-color: #BB0056;
+  color: #FFF8F7;
+  border-radius: 8px;
 }
 
 .volumeIcon {
-  color: #271815;
+  all: unset;
+  color: #26181B;
 }
 
 /*# sourceMappingURL=style.css.map */
