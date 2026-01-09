@@ -51,10 +51,10 @@ return {
 		---@type ibl.config
 		opts = {},
 	},
-	{
-	  "karb94/neoscroll.nvim",
-	  opts = {},
-	},
+	-- {
+	--   "karb94/neoscroll.nvim",
+	--   opts = {},
+	-- },
 	{
 		"neovim/nvim-lspconfig", 
 		config = function()
@@ -71,8 +71,19 @@ return {
 				cmd = { 'rust-analyzer' },
 				filetypes = { 'rust' },
 			})
-			vim.lsp.enable({'luals', 'rust-analyzer', 'clangd', 'typescript-language-server', 'pyright', 'java-language-server'})
+			vim.lsp.config('vala-lang', {
+				cmd = { 'vala-language-server' },
+				filetypes = { 'vala' },
+			})
+			vim.lsp.config('gopls', {
+				cmd = { 'gopls' },
+				filetypes = { 'go' },
+			})
+			vim.lsp.enable({'luals', 'rust-analyzer', 'clangd', 'typescript-language-server', 'pyright', 'java-language-server', 'vala-lang', 'gopls'})
 		end,
+	}, 
+	{
+		"vala-lang/vala.vim"
 	}
 
 }
