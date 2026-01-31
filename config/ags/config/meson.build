@@ -12,12 +12,13 @@ pkgconfig_deps = [
   dependency('astal-3.0'),
   dependency('astal-io-0.1'),
   dependency('astal-battery-0.1'),
-  dependency('astal-wireplumber-0.1'),
   dependency('astal-network-0.1'),
   dependency('astal-tray-0.1'),
   dependency('astal-mpris-0.1'),
   dependency('astal-hyprland-0.1'),
   dependency('astal-notifd-0.1'),
+  dependency('libpulse'), # 🟢 The C library
+  dependency('libpulse-mainloop-glib'), # 🟢 Required for GLib integration
 ]
 # add_project_arguments(['-static'], language: 'vala')
 deps = pkgconfig_deps + meson.get_compiler('c').find_library('m')
@@ -32,7 +33,7 @@ executable(
   [sources],
   dependencies: deps,
   install: true,
-  vala_args: ['--pkg', 'posix'],
+  vala_args: ['--pkg', 'posix', '--pkg', 'libpulse', '--pkg', 'libpulse-mainloop-glib'],
   install_dir: bindir,
 )
 

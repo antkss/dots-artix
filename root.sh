@@ -44,6 +44,9 @@ antkss() {
 	$SU bash dev.sh
 	$SU ln -sr /boot/initramfs-own.img /boot/initrd -f
 	$SU ln -sr /boot/vmlinuz-own /boot/vmlinuz -f
+	$SU mkdir -p /etc/pacman.d/hooks
+	$SU cp custom/00-dkms-global-gcc.hook /etc/pacman.d/hooks
+	$SU cp custom/dkms-global-gcc /usr/local/bin
 	# optional linux-firmware
 }
 setup_source() {
@@ -66,6 +69,9 @@ setup_group() {
 nvidia() {
 	bash ./nvidia.sh || exit
 }
+remove_sudodelay() {
+	sed -i '/pam_faillock\.so/ { /nodelay/! s/$/ nodelay/ }' /etc/pam.d/system-auth
+}
 setup_source || exit
 install_initial || exit
 bash ./package.sh || exit
@@ -77,3 +83,4 @@ choice "do you want to install nvidia packages ?" "nvidia || exit"
 choice "do you want to install antkss packages ?" "antkss || exit"
 setup_clock
 setup_group
+remove_sudodelay

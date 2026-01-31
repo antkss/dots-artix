@@ -1,6 +1,7 @@
 using GLib;
 using Posix;
 using GtkLayerShell;
+using PulseAudio;
 public string force_fit(string text, int limit) {
     // 🔵 Get the actual character count (handles UTF-8 correctly)
 	if (text == null) 
@@ -126,7 +127,7 @@ public class Command : Object {
     }
 
     public GLib.Pid spawn(
-    ) throws Error {
+    ) throws GLib.Error {
 		GLib.Pid async_pid;
 		Process.spawn_async_with_pipes(
 			null,                  // Working directory (null for current)
@@ -387,17 +388,15 @@ public class TrayMenu : Astal.Window {
 //
 //	Astal.widget_set_class_names(btn, {"button_active"});
 //	btn.clicked.connect(() => {
-//		player.play_pause();
-//		btn.label = player.playback_status == 0 ? "": "";
 //
 //	});
 //	return btn;
 //}
 class LabelBtn: Gtk.Button {
+	public Gtk.Label my_label = new Gtk.Label("");
 	public LabelBtn(string? str) {
-		var label = new Gtk.Label(str);
 		Astal.widget_set_class_names(this, { "button_inactive" });
-		add(label);
+		add(my_label);
 	}
 }
 class BigBtn: Gtk.Button {
@@ -789,11 +788,75 @@ public string[] get_subfolders(string path) {
                 folders += info.get_name();
             }
         }
-    } catch (Error e) {
+    } catch (GLib.Error e) {
 		print("Error: %s \n", e.message);
     }
 
     return folders;
+}
+
+public class VolumeWatcher : Object {
+    private GLibMainLoop loop;
+    private Context context;
+
+    // 📣 Signal for UI or other components to listen to
+    public signal void volume_changed(double volume_percent, bool muted);
+
+    public VolumeWatcher() {
+        // 🔄 Integration with GLib's MainLoop
+        this.loop = new GLibMainLoop(null);
+        this.context = new Context(loop.get_api(), "VolumeWatcher");
+
+        context.set_state_callback(on_state_changed);
+        context.connect(null, Context.Flags.NOFAIL, null);
+    }
+
+    private void on_state_changed(Context c) {
+        if (c.get_state() == Context.State.READY) {
+            // 🔔 Subscribe to Sink events (Volume/Mute changes)
+            c.set_subscribe_callback(on_event_received);
+            c.subscribe(PulseAudio.Context.SubscriptionMask.SINK, null);
+            
+            // 🏃 Initial fetch of current volume
+            update_volume_info();
+        }
+    }
+
+    private void on_event_received(Context c, PulseAudio.Context.SubscriptionEventType t, uint32 idx) {
+        // 🔍 Filter: Check if the event is a SINK CHANGE
+        if ((t & PulseAudio.Context.SubscriptionEventType.FACILITY_MASK) == PulseAudio.Context.SubscriptionEventType.SINK &&
+            (t & PulseAudio.Context.SubscriptionEventType.TYPE_MASK) == PulseAudio.Context.SubscriptionEventType.CHANGE) {
+            update_volume_info();
+        }
+    }
+
+    private void update_volume_info() {
+        context.get_sink_info_list((c, info, eol) => {
+            if (info != null) {
+                // 🧮 Convert PulseAudio internal scale (0 - 65536) to 0 - 100%
+                double vol = (double)info.volume.avg() / PulseAudio.Volume.NORM * 100;
+                this.volume_changed(vol, info.mute != 0);
+            }
+        });
+    }
+
+    public void set_volume(double percent) {
+        if (context.get_state() != Context.State.READY) return;
+
+        // 🎚️ Prepare volume struct
+        CVolume cv = CVolume();
+        PulseAudio.Volume v = (PulseAudio.Volume)(percent / 100 * PulseAudio.Volume.NORM);
+        cv.set(2, v); // Using 2 channels (Stereo)
+        
+        context.set_sink_volume_by_index(0, cv, null);
+    }
+
+    public void set_mute(bool mute) {
+        if (context.get_state() != Context.State.READY) return;
+        
+        // 🔇 Set mute status (Passing bool directly as per VAPI)
+        context.set_sink_mute_by_index(0, mute, null);
+    }
 }
 public class BrightnessWatcher : Object {
     // 🟢 1. Define the Signal (The Callback)
@@ -834,7 +897,7 @@ public class BrightnessWatcher : Object {
 
 				// Initial read
 				read_current_level();
-			} catch (Error e) {
+			} catch (GLib.Error e) {
 				warning("Error monitoring file: %s", e.message);
 			}
 		} else {
@@ -872,7 +935,7 @@ public class BrightnessWatcher : Object {
 				if (FileUtils.get_contents(path_max, out content)) {
 					this.max_level = double.parse(content.strip());
 				}
-			} catch (Error e) {
+			} catch (GLib.Error e) {
 				warning("Could not read max_brightness: %s", e.message);
 			}
 		} else {
@@ -893,7 +956,7 @@ public class BrightnessWatcher : Object {
 					// 🟢 3. Emit the signal (Trigger the callback)
 					brightness_changed(percent);
 				}
-			} catch (Error e) {
+			} catch (GLib.Error e) {
 				warning("Read error: %s", e.message);
 			}
 		} else {
@@ -909,7 +972,7 @@ public class BrightnessWatcher : Object {
 					double percent = (current / this.max_level) * 100.0;
 					return percent;
 				}
-			} catch (Error e) {
+			} catch (GLib.Error e) {
 				warning("Read error: %s", e.message);
 			}
 		} else {
@@ -920,11 +983,11 @@ public class BrightnessWatcher : Object {
 	}
 }
 class BrightSlider : Gtk.Box {
-    Astal.Slider slider = new Astal.Slider() { hexpand = true };
+    public Astal.Slider slider = new Astal.Slider() { hexpand = true };
     Gtk.Label icon = new Gtk.Label("󱩏");
+	public BrightnessWatcher bright = new BrightnessWatcher();
 
     public BrightSlider() {
-		var bright = new BrightnessWatcher();
 		add(icon);
         add(slider);
         Astal.widget_set_class_names(this, {"AudioSlider"});
@@ -946,7 +1009,6 @@ class BrightSlider : Gtk.Box {
 			slider.value = value;
 		});
 
-        //speaker.bind_property("volume", slider, "value", BindingFlags.SYNC_CREATE);
 		//print("%f \n", slider.max);
 		slider.max = 100.0f;
 		slider.set_value(bright.get_brightness());
@@ -954,20 +1016,35 @@ class BrightSlider : Gtk.Box {
     }
 }
 class AudioSlider : Gtk.Box {
-    Astal.Icon icon = new Astal.Icon();
-    Astal.Slider slider = new Astal.Slider() { hexpand = true };
-
+	Gtk.Label icon = new Gtk.Label("");
+    public Astal.Slider slider = new Astal.Slider() { hexpand = true };
+	public VolumeWatcher volume = new VolumeWatcher();
     public AudioSlider() {
         add(icon);
         add(slider);
         Astal.widget_set_class_names(this, {"AudioSlider"});
         Astal.widget_set_class_names(icon, {"volumeIcon"});
         Astal.widget_set_css(this, "min-width: 140px");
+		slider.max = 100.0f;
+		volume.volume_changed.connect((volume_percent, muted) => {
+			var icon_str = "";
+			if (muted || volume_percent <= 0) {
+				icon_str =  "󰝟"; // 󰝟 Speaker Muted
+			}
 
-        var speaker = AstalWp.get_default().audio.default_speaker;
-        speaker.bind_property("volume-icon", icon, "icon", BindingFlags.SYNC_CREATE);
-        speaker.bind_property("volume", slider, "value", BindingFlags.SYNC_CREATE);
-        slider.dragged.connect(() => speaker.volume = slider.value);
+			if (volume_percent >= 70.0) {
+				icon_str =  "󰕾"; // 󰕾 Speaker High (3 waves)
+			} else if (volume_percent >= 30.0) {
+				icon_str =  "󰖀"; // 󰖀 Speaker Medium (2 waves)
+			} else {
+				icon_str =  "󰕿"; // 󰕿 Speaker Low (1 wave)
+			}
+			icon.set_text(icon_str + " ");
+			slider.value = volume_percent;
+		});
+        slider.dragged.connect(() => {
+			volume.set_volume(slider.value);
+		});
     }
 }
 
@@ -1043,19 +1120,35 @@ class Center : Gtk.Box {
     }
 }
 class rightPart: Gtk.Box{
+	public int brightness_value = 0;
+	public double audio_value { get; set; default = 0; }
     public rightPart(Gdk.Monitor mon){
-		var tray_menu_btn = new LabelBtn("󱩖 󰝝");
+		var tray_menu_btn = new LabelBtn("󱩖 ");
 		var tray_menu = new TrayMenu(mon);
-		tray_menu.add_to_tray(new Panel(new AudioSlider()));
-		tray_menu.add_to_tray(new Panel(new BrightSlider()));
+		var brightness_slider = new BrightSlider();
+		var audio_slider = new AudioSlider();
+		//var speaker = AstalWp.get_default().audio.default_speaker;
+		//speaker.bind_property("volume", this, "audio_value", BindingFlags.SYNC_CREATE);
+		tray_menu.add_to_tray(new Panel(audio_slider));
+		tray_menu.add_to_tray(new Panel(brightness_slider));
         add(new SysTray());
         add(new Wifi());
 		tray_menu_btn.clicked.connect(()=> {
 			tray_menu.toggle_at_widget(tray_menu_btn);
 		});
 		add(tray_menu_btn);
-		//      add(new AudioSlider());
-		//add(new BrightSlider());
+		this.audio_value = (int)audio_slider.slider.value;
+		this.brightness_value = (int)brightness_slider.slider.value;
+		tray_menu_btn.my_label.set_label(@"$((int)this.brightness_value) 󱩖 $( "%.1f".printf(this.audio_value) )  ");
+		brightness_slider.bright.brightness_changed.connect((percent) => {
+			this.brightness_value = (int)percent;
+			tray_menu_btn.my_label.set_label(@"$((int)this.brightness_value) 󱩖 $((int)this.audio_value)  ");
+			//print("brightness: %f \n", percent);
+		});
+		audio_slider.volume.volume_changed.connect((percent, muted) => {
+			this.audio_value = percent;
+			tray_menu_btn.my_label.set_label(@"$((int)this.brightness_value) 󱩖 $( "%.1f".printf(this.audio_value) )  ");
+		});
     }
 }
 
@@ -1071,7 +1164,7 @@ class Utils: Gtk.Box{
 		GLib.Pid async_pid = -1;
 		try {
 			async_pid = cmd.spawn();
-		} catch (Error e) {
+		} catch (GLib.Error e) {
 			GLib.stderr.printf("error: %s \n", e.message);
 		}
 		if (async_pid >= 0) {
@@ -1093,7 +1186,7 @@ class Utils: Gtk.Box{
 		try {
 			async_pid = cmd.spawn();
 			Astal.widget_set_class_names(screenshot,{"button_active", "space_right"});
-		} catch (Error e){
+		} catch (GLib.Error e){
             GLib.stderr.printf("Error spawning: %s\n", e.message);
 		}
 		if (async_pid >= 0) {
@@ -1120,7 +1213,7 @@ class Utils: Gtk.Box{
 			GLib.stdout.printf("toggle on \n");
 			try {
 				child_pid = cmd.spawn();
-			} catch (Error e) {
+			} catch (GLib.Error e) {
 				GLib.stderr.printf("Error spawning: %s\n", e.message);
 			}
 		} else if (child_pid > 0){
@@ -1164,14 +1257,6 @@ class Right : Gtk.Box {
         add(new Panel(new Time()));
     }
 }
-//class Circle: Astal.Overlay{
-//    public Circle(){
-//	var cir = new Astal.CircularProgress();
-//	cir.set_visible(true);
-//	Astal.widget_set_class_names(cir,{"cir"});
-//	add(cir);
-//    }
-//}
 class Bar : Astal.Window {
     public Bar(Gdk.Monitor monitor, App app) {
 		int width = (int)(monitor.get_geometry().width * (98.7 / 100.0));
@@ -1192,82 +1277,3 @@ class Bar : Astal.Window {
 		show_all();
     }
 }
-//class Overlay : Astal.Overlay {
-//    public Overlay(Gdk.Monitor monitor) {
-//		int width = monitor.get_geometry().width;
-//		int height = monitor.get_geometry().height;
-//		Astal.widget_set_css(this, @"min-width: $width" + "px;" + @"min-height: $height" + "px;" + "background: #000000;");
-//		// Astal.widget_set_class_names(this, {"bar"});
-//	}
-//}
-
-//class Sidebox : Gtk.Box{
-//    public Sidebox(){
-//	sync();
-//    }
-//    public void sync(){
-//	Gtk.Scale slider = new Astal.Slider();
-//	try{
-//	    File maxBn = File.new_for_path("/sys/class/backlight/intel_backlight/max_brightness");
-//	    FileInputStream @ise = maxBn.read();
-//	    DataInputStream maxBn_dis = new DataInputStream (@ise);
-//	    slider.set_range(0.0,double.parse(maxBn_dis.read_line()));
-//	    add(slider);
-//	    slider.show_all();
-//	    File file = File.new_for_path("/sys/class/backlight/intel_backlight/brightness");
-//	    FileMonitor monitor = file.monitor(FileMonitorFlags.NONE,null);
-//	    print("\nmonitoring %s\n",file.get_path());
-//
-//	    monitor.changed.connect ((src, dest, event) => {
-//		try {
-//		    FileInputStream @is = file.read ();
-//		    DataInputStream dis = new DataInputStream (@is);
-//		    string line;
-//						//
-//		    if ((line = dis.read_line ()) != null) {
-//				slider.set_value(double.parse(line));
-//		    }
-//		} catch (Error e) {
-//			GLib.stderr.printf("error: %s \n", e.message);
-//		}
-//
-//
-//	});
-//
-//	} catch( Error e){
-//	    print("%s\n",e.message);
-//	}
-//
-//	new MainLoop().run();
-//    }
-//
-//
-//}
-//class SidePanel: Astal.Window{
-//    public SidePanel(Gdk.Monitor monitor){
-//        Object(
-//            anchor: Astal.WindowAnchor.LEFT,
-//            exclusivity: Astal.Exclusivity.NORMAL,
-//            gdkmonitor: monitor
-//        );
-//		add(new Sidebox());
-//    }
-//
-//}
-//class Notify: Astal.Window{
-//    public Notify(Gdk.Monitor monitor){
-//        Object(
-//            anchor: Astal.WindowAnchor.TOP,
-//            exclusivity: Astal.Exclusivity.NORMAL,
-//            gdkmonitor: monitor
-//        );
-//		set_visible(true);
-//		add(new Notification());
-//    }
-//}
-//class BrightnessService: GLib.Object{
-//    public signal void value_changed (double old_value, double new_value);
-//    public BrightnessService(){
-//    }
-//
-//}

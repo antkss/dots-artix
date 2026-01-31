@@ -3,10 +3,11 @@ if [ "$(id -u)" -ne 0 ]; then
 	echo "please run as root"
 	exit
 fi
+mirror="https://packages.artixlinux.org/mirrorlist/?country=all&protocol=http&protocol=https&ip_version=4&ip_version=6"
 sort_mirror() {
 	pacman -S archlinux-mirrorlist pacman-contrib parallel --noconfirm
 	echo "getting mirrorlist ..."
-	curl https://gitea.artixlinux.org/packages/artix-mirrorlist/raw/branch/master/mirrorlist -o /tmp/mirrorlist
+	curl $mirror -o /tmp/mirrorlist
 	sed -i '/#.*Server[[:space:]]*=/ s/#//' /tmp/mirrorlist
 	echo "getting the fastest ..."
 	./rankmirrors -v -n 10 -p /tmp/mirrorlist | tee /etc/pacman.d/mirrorlist
