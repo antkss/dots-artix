@@ -69,7 +69,7 @@ return {
 			}) 
 			vim.lsp.config('rust-analyzer', {
 				cmd = { 'rust-analyzer' },
-				filetypes = { 'rust' },
+				filetypes = { 'rust', 'rs' },
 			})
 			vim.lsp.config('vala-lang', {
 				cmd = { 'vala-language-server' },
@@ -79,11 +79,33 @@ return {
 				cmd = { 'gopls' },
 				filetypes = { 'go' },
 			})
+			-- vim.filetype.add({
+			--   extension = {
+			-- 	asm = 'nasm',
+			--   },
+			-- })
+			-- vim.lsp.config('asm-lsp', {
+			-- 	cmd = { 'nasm-lsp' },
+			-- 	filetypes = { 'nasm', 'asm' },
+			-- 	-- 🎨 Adding this block specifically for NASM support
+			-- 	initialization_options = {
+			-- 		assembler = "nasm"
+			-- 	}
+			-- })
 			vim.lsp.enable({'luals', 'rust-analyzer', 'clangd', 'typescript-language-server', 'pyright', 'java-language-server', 'vala-lang', 'gopls'})
 		end,
 	}, 
 	{
 		"vala-lang/vala.vim"
+	},
+	{
+		'MeanderingProgrammer/render-markdown.nvim',
+		dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' },            -- if you use the mini.nvim suite
+		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.icons' },        -- if you use standalone mini plugins
+		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+		---@module 'render-markdown'
+		---@type render.md.UserConfig
+		opts = {},
 	}
 
 }

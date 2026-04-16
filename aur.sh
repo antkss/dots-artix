@@ -1,1 +1,1 @@
-yay -S swww swappy bluetuith-git gradience --noconfirm
+yay -S swww swappy gradience --noconfirm

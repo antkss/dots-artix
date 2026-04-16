@@ -38,15 +38,15 @@ if [ ! -n "$(cat /etc/pacman.conf | grep $repo )" ]; then
 	echo "applying :$repo_ ..."
 	echo -ne "\n$repo_\n$server" >> /etc/pacman.conf
 fi
-repo="\[omniverse\]"
-repo_="[omniverse]"
-server="Server = https://artix.sakamoto.pl/omniverse/\$arch\n"
-server+="Server = https://eu-mirror.artixlinux.org/omniverse/\$arch\n"
-server+="Server = https://omniverse.artixlinux.org/\$arch"
-if [ ! -n "$(cat /etc/pacman.conf | grep $repo )" ]; then 
-	echo "applying :$repo_ ..."
-	echo -ne "\n$repo_\n$server" >> /etc/pacman.conf
-fi
+# repo="\[omniverse\]"
+# repo_="[omniverse]"
+# server="Server = https://artix.sakamoto.pl/omniverse/\$arch\n"
+# server+="Server = https://eu-mirror.artixlinux.org/omniverse/\$arch\n"
+# server+="Server = https://omniverse.artixlinux.org/\$arch"
+# if [ ! -n "$(cat /etc/pacman.conf | grep $repo )" ]; then 
+# 	echo "applying :$repo_ ..."
+# 	echo -ne "\n$repo_\n$server" >> /etc/pacman.conf
+# fi
 repo="\[extra\]"
 repo_="[extra]"
 server="Include = /etc/pacman.d/mirrorlist-arch"

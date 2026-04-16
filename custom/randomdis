@@ -32,16 +32,21 @@ start() {
 	#!/bin/bash
 
 	# Check if /dev/zram0 is already registered as swap
-	if ! grep -q "/dev/zram0" /proc/swaps; then
+	while ! grep -q "/dev/zram0" /proc/swaps; do
 	    echo "zRAM not active. Initializing..."
-	    modprobe zram
-	    zramctl /dev/zram0 --size 8G
-	    mkswap /dev/zram0
-	    swapon /dev/zram0
 	    
-	    echo "✅ zRAM /dev/zram0 is now swapon."
-	else
-	    echo "ℹ️ zRAM /dev/zram0 is already active."
-	fi
+	    # Try to initialize
+	    modprobe zram && \
+	    zramctl /dev/zram0 --size 8G && \
+	    mkswap /dev/zram0 && \
+	    swapon /dev/zram0 -p 100
+	    # Check if it succeeded
+	    if grep -q "/dev/zram0" /proc/swaps; then
+		echo "✅ zRAM /dev/zram0 is now swapon."
+		break
+	    else
+		echo "Retrying in enable zram..."
+	    fi
+	done
 	eend $?
 }

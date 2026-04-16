@@ -16,7 +16,7 @@ theme='power'
 
 # CMDs
 uptime="`uptime | sed -e 's/up //g'`"
-host=`hostname`
+host=`cat /etc/hostname`
 
 # Options
 shutdown='Shutdown'
@@ -64,13 +64,13 @@ run_cmd() {
 	selected="$(confirm_exit)"
 	if [[ "$selected" == "$yes" ]]; then
 		if [[ $1 == '--shutdown' ]]; then
-			loginctl poweroff
+			loginctl poweroff || poweroff
 		elif [[ $1 == '--reboot' ]]; then
-			loginctl reboot
+			loginctl reboot || reboot
 		elif [[ $1 == '--suspend' ]]; then
 			# mpc -q pause
 			# amixer set Master mute
-			# systemctl suspend
+			systemctl suspend
 			echo "not implemented"
 		elif [[ $1 == '--logout' ]]; then
 			hyprctl dispatch exit

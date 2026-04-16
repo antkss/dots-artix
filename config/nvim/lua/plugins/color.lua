@@ -1,8 +1,6 @@
 return {
 	{
-		'lilydjwg/colorizer',
-		cmd = "Color",
-
+		'chrisbra/Colorizer',
 	}
 
 

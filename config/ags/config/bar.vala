@@ -797,6 +797,7 @@ public string[] get_subfolders(string path) {
 
 public class VolumeWatcher : Object {
     private GLibMainLoop loop;
+	private string? default_sink_name = null;
     private Context context;
 
     // 📣 Signal for UI or other components to listen to
@@ -815,9 +816,14 @@ public class VolumeWatcher : Object {
         if (c.get_state() == Context.State.READY) {
             // 🔔 Subscribe to Sink events (Volume/Mute changes)
             c.set_subscribe_callback(on_event_received);
-            c.subscribe(PulseAudio.Context.SubscriptionMask.SINK, null);
+            c.subscribe(
+				PulseAudio.Context.SubscriptionMask.SINK |
+				PulseAudio.Context.SubscriptionMask.SERVER,
+				null
+			);
             
             // 🏃 Initial fetch of current volume
+			update_default_sink();
             update_volume_info();
         }
     }
@@ -826,19 +832,32 @@ public class VolumeWatcher : Object {
         // 🔍 Filter: Check if the event is a SINK CHANGE
         if ((t & PulseAudio.Context.SubscriptionEventType.FACILITY_MASK) == PulseAudio.Context.SubscriptionEventType.SINK &&
             (t & PulseAudio.Context.SubscriptionEventType.TYPE_MASK) == PulseAudio.Context.SubscriptionEventType.CHANGE) {
+			update_default_sink();
             update_volume_info();
         }
     }
+	private void update_default_sink() {
+		context.get_server_info((c, info) => {
+			if (info != null && info.default_sink_name != null) {
+				string new_name = info.default_sink_name;
+				if (new_name != default_sink_name) {
+					default_sink_name = new_name;
+				}
+			}
+		});
+	}
 
-    private void update_volume_info() {
-        context.get_sink_info_list((c, info, eol) => {
-            if (info != null) {
-                // 🧮 Convert PulseAudio internal scale (0 - 65536) to 0 - 100%
-                double vol = (double)info.volume.avg() / PulseAudio.Volume.NORM * 100;
-                this.volume_changed(vol, info.mute != 0);
-            }
-        });
-    }
+	private void update_volume_info() {
+		if (default_sink_name == null) return;
+
+		context.get_sink_info_by_name(default_sink_name, (c, info, eol) => {
+			if (info != null && eol == 0) {
+				double vol = (double)info.volume.avg() / PulseAudio.Volume.NORM * 100.0;
+				bool muted = (info.mute != 0);
+				this.volume_changed(vol, muted);
+			}
+		});
+	}
 
     public void set_volume(double percent) {
         if (context.get_state() != Context.State.READY) return;
@@ -847,15 +866,16 @@ public class VolumeWatcher : Object {
         CVolume cv = CVolume();
         PulseAudio.Volume v = (PulseAudio.Volume)(percent / 100 * PulseAudio.Volume.NORM);
         cv.set(2, v); // Using 2 channels (Stereo)
+		if (default_sink_name == null) return;
         
-        context.set_sink_volume_by_index(0, cv, null);
+        context.set_sink_volume_by_name(default_sink_name, cv, null);
     }
 
     public void set_mute(bool mute) {
         if (context.get_state() != Context.State.READY) return;
         
         // 🔇 Set mute status (Passing bool directly as per VAPI)
-        context.set_sink_mute_by_index(0, mute, null);
+        context.set_sink_mute_by_name(default_sink_name, mute, null);
     }
 }
 public class BrightnessWatcher : Object {

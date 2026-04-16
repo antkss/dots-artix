@@ -32,7 +32,7 @@ setup_user() {
 		echo "lock exist, skipping config overwrite ..."
 	fi
 }
-$SU /bin/sh -c 'echo -ne "#!/bin/sh\ndbus-run-session -- Hyprland $@" > /bin/starthypr && chmod 777 /bin/starthypr'
+$SU /bin/sh -c 'echo -ne "#!/bin/sh\ndbus-run-session -- start-hyprland $@" > /bin/starthypr && chmod 777 /bin/starthypr'
 
 
 
@@ -40,7 +40,7 @@ echo "setting up artix linux ..."
 $SU bash root.sh $(whoami) || exit
 choice "do you want to install aur packages ?" "bash aur.sh || exit"
 setup_user || exit
-echo "\e[0;33m** Use command 'starthypr' to start your full desktop environment ** \e[0;0m"
+printf "\e[0;33m** Use command 'starthypr' to start your full desktop environment ** \e[0;0m"
 echo "setup done ! please reboot your device"
 
 

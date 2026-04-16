@@ -39,7 +39,7 @@ setup_utils() {
 	fi
 }
 antkss() {
-	$SU pacman -S usb_modeswitch mkinitcpio linux-own intel-ucode firmware-own nvidia-own v4l2loopback-own
+	$SU pacman -S usb_modeswitch mkinitcpio intel-ucode linux-firmware mpv
 	$SU bash fstab.sh
 	$SU bash dev.sh
 	$SU ln -sr /boot/initramfs-own.img /boot/initrd -f
