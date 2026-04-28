@@ -42,11 +42,12 @@ antkss() {
 	$SU pacman -S usb_modeswitch mkinitcpio intel-ucode linux-firmware mpv
 	$SU bash fstab.sh
 	$SU bash dev.sh
-	$SU ln -sr /boot/initramfs-own.img /boot/initrd -f
-	$SU ln -sr /boot/vmlinuz-own /boot/vmlinuz -f
-	$SU mkdir -p /etc/pacman.d/hooks
-	$SU cp custom/00-dkms-global-gcc.hook /etc/pacman.d/hooks
-	$SU cp custom/dkms-global-gcc /usr/local/bin
+	$SU bash niri.sh
+	#$SU ln -sr /boot/initramfs-own.img /boot/initrd -f
+	#$SU ln -sr /boot/vmlinuz-own /boot/vmlinuz -f
+	#$SU mkdir -p /etc/pacman.d/hooks
+	#$SU cp custom/00-dkms-global-gcc.hook /etc/pacman.d/hooks
+	#$SU cp custom/dkms-global-gcc /usr/local/bin
 	# optional linux-firmware
 }
 setup_source() {

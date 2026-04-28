@@ -1,7 +1,7 @@
 [colors]
 draw_bold_text_with_bright_colors = false 
 [env]
-TERM = "xterm-256color"
+TERM = "alacritty"
 
 [font]
 size = 13
@@ -22,7 +22,6 @@ style = "bold italic"
 save_to_clipboard = false
 
 [window]
-fps = 40
 # dynamic_padding = true
 # dynamic_title = true
 opacity = 0.9
@@ -50,22 +49,44 @@ y = 0
 
 [cursor.style]
 blinking = "off"
-shape = "Block"
+shape = "block"
 
 [general]
 live_config_reload =false
 import = ["~/.config/alacritty/color.toml"]
+# shader = "shaders/smearfire.glsl"
 shader = "shaders/fire.glsl"
-# shader = "shaders/star.glsl"
+animated = false
+shader_duration = 1.0
+vframe_fps = 90
+# shader = "shaders/freeze.glsl"
+# shader = "shaders/shakefire.glsl"
+# shader = "shaders/water.glsl"
 # [features]
 # default = ["wayland"]
 [keyboard]
 bindings = [
 { key = "Enter", mods = "Shift", action = "CreateNewWindow" },
 { key = "L", mods = "Control|Shift", chars = "l" },
+{ key = "F8", chars = "ni\n" },
+{ key = "F9", chars = "c\n" },
+{ key = "F7", chars = "si\n" },
+{ key = "F7", mods = "Control", chars = "nextr\n" },
 ]
-[scrollbar]
-mode = "Fading"
+[mouse]
+bindings = [
+	{ mouse = "Right", chars = "ni\n" },
+	{ mouse = "Middle", chars = "si\n" },
+	{ mouse = "Back", chars = "c\n"},
+]
+# [scrollbar]
+# mode = "Fading"
 
 
    
+
+
+# [[keyboard.bindings]]
+# key = "Return"
+# mods = "Shift"
+# chars = "\u001B\r"

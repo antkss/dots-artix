@@ -5,13 +5,15 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 mirror="https://packages.artixlinux.org/mirrorlist/?country=all&protocol=http&protocol=https&ip_version=4&ip_version=6"
 sort_mirror() {
-	pacman -S archlinux-mirrorlist pacman-contrib parallel --noconfirm
+	pacman -Sy archlinux-mirrorlist pacman-contrib parallel --noconfirm
 	echo "getting mirrorlist ..."
 	curl $mirror -o /tmp/mirrorlist
-	sed -i '/#.*Server[[:space:]]*=/ s/#//' /tmp/mirrorlist
-	echo "getting the fastest ..."
-	./rankmirrors -v -n 10 -p /tmp/mirrorlist | tee /etc/pacman.d/mirrorlist
-	rm /tmp/mirrorlist
+	if [ -f /tmp/mirrorlist ]; then
+	    sed -i '/#.*Server[[:space:]]*=/ s/#//' /tmp/mirrorlist
+	    echo "getting the fastest ..."
+	    ./rankmirrors -v -n 10 -p /tmp/mirrorlist | tee /etc/pacman.d/mirrorlist
+	    rm /tmp/mirrorlist
+	fi
 }
 . func.sh
 choice "Do you want to sort the fastest artix mirror ?" sort_mirror

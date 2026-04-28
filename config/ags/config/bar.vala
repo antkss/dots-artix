@@ -2,6 +2,83 @@ using GLib;
 using Posix;
 using GtkLayerShell;
 using PulseAudio;
+public class Command : GLib.Object {
+    private string[] command;
+	string output = "";
+	string error_msg = "";
+
+    public Command(string[] command) {
+        this.command = command;
+    }
+	public string get_output() {
+		return output;
+	}
+	public string get_error() {
+		return error_msg;
+	}
+
+    public GLib.Pid spawn(
+    ) {
+		int stdout_fd;
+		GLib.Pid async_pid;
+		try {
+
+			Process.spawn_async_with_pipes(
+				null,                  // Working directory (null for current)
+				command, // Command and arguments
+				null,                  // Environment variables (null for current)
+				SpawnFlags.SEARCH_PATH, // Flags: Search for the executable in PATH
+				null,                  // Child setup function (no user data needed)
+				out async_pid,         // Output: Process ID of the spawned process
+				null,      // Input stream for the child
+				out stdout_fd,     // Output stream from the child (our input)
+				null      // Error stream from the child (our input)
+			);
+
+
+			var pipe = new UnixInputStream(stdout_fd, true);
+			var reader = new DataInputStream(pipe);
+			output = "";
+			size_t len;
+			// Read until null
+			string line;
+			while ((line = reader.read_line(out len, null)) != null) {
+				output += line;
+			}
+		} catch (GLib.Error e) {
+			error_msg = e.message;
+		}
+		return async_pid;
+
+    }
+	public void kill(GLib.Pid child) {
+		Posix.kill(child, Posix.Signal.KILL);
+	}
+}
+public string? execute_command(string command) {
+    string stdout_text;
+    string stderr_text;
+    int exit_status;
+
+    try {
+        Process.spawn_command_line_sync(
+            command, 
+            out stdout_text, 
+            out stderr_text, 
+            out exit_status
+        );
+
+        if (exit_status == 0) {
+            return stdout_text.strip(); // Remove trailing newlines
+        } else {
+            printf("Command failed with status %d: %s\n", exit_status, stderr_text);
+            return null;
+        }
+    } catch (GLib.Error e) {
+        printf("Execution Error: %s\n", e.message);
+        return null;
+    }
+}
 public string force_fit(string text, int limit) {
     // 🔵 Get the actual character count (handles UTF-8 correctly)
 	if (text == null) 
@@ -119,52 +196,71 @@ public class WiggleSeekbar : Gtk.DrawingArea {
         this.set_progress(new_p);
     }
 }
-public class Command : Object {
-    private string[] command;
 
-    public Command(string[] command) {
-        this.command = command;
-    }
-
-    public GLib.Pid spawn(
-    ) throws GLib.Error {
-		GLib.Pid async_pid;
-		Process.spawn_async_with_pipes(
-			null,                  // Working directory (null for current)
-			command, // Command and arguments
-			null,                  // Environment variables (null for current)
-			SpawnFlags.SEARCH_PATH, // Flags: Search for the executable in PATH
-			null,                  // Child setup function (no user data needed)
-			out async_pid,         // Output: Process ID of the spawned process
-			null,      // Input stream for the child
-			null,     // Output stream from the child (our input)
-			null      // Error stream from the child (our input)
-		);
-		return async_pid;
-
-    }
-	public void kill(GLib.Pid child) {
-		Posix.kill(child, Posix.Signal.KILL);
-	}
-}
 
 class Workspaces : Gtk.Box {
-    AstalHyprland.Hyprland hypr = AstalHyprland.get_default();
     // GLib.HashTable<int, string> icons = new GLib.HashTable<int,string>(GLib.direct_hash,GLib.direct_equal);
+    AstalHyprland.Hyprland? hypr = AstalHyprland.get_default();
+	NiriEventStream? niri = NiriEventStream.get_default();
+	public signal void niri_focus(int64 id, bool focused);
     public Workspaces() {
-	// icons.set(1, ""); 
-	// icons.set(2, ""); 
-	// icons.set(3, ""); 
-	// icons.set(4, ""); 
-	// icons.set(5, ""); 
-	// icons.set(6, ""); 
-	// icons.set(7, ""); 
-	// icons.set(8, ""); 
-	// icons.set(9,"");
-        hypr.notify["workspaces"].connect(sync);
-        sync();
+
+		//icons.set(1, ""); 
+		//icons.set(2, ""); 
+		//icons.set(3, ""); 
+		//icons.set(4, ""); 
+		//icons.set(5, ""); 
+		//icons.set(6, ""); 
+		//icons.set(7, ""); 
+		//icons.set(8, ""); 
+		//icons.set(9,"");
+		if (hypr != null) {
+			hypr.notify["workspaces"].connect(sync);
+			sync();
+		} else {
+			sync_niri();
+		}
+
 
     }
+	void sync_niri() {
+		niri.event_received.connect((obj)=> {
+			Json.Node? node_wsc = obj.get_member("WorkspacesChanged");
+			Json.Node? node_fa = obj.get_member("WorkspaceActivated");
+			if (node_wsc != null) {
+				Json.Object root = node_wsc.get_object();
+				Json.Array? wsp_arr = root.get_member("workspaces").get_array();
+				if (wsp_arr != null) {
+					foreach (var child in get_children())
+						child.destroy();
+					for (int i = 0; i < wsp_arr.get_length(); i++) {
+						Json.Object ws = wsp_arr.get_object_element(i);
+						int64 id = ws.get_int_member("id");
+						int64 idx = ws.get_int_member("idx");
+						//string output = ws.get_string_member("output");
+						//bool is_urgent = ws.get_boolean_member("is_urgent");
+						bool is_active = ws.get_boolean_member("is_active");
+						bool is_focused = ws.get_boolean_member("is_focused");
+						// debug
+						//print("workspace id=%lld idx=%lld output=%s focused=%s active=%s\n",
+						//	  id,
+						//	  idx,
+						//	  output,
+						//	  is_focused.to_string(),
+						//	  is_active.to_string());
+						add(button_ws(id, idx, is_focused, is_active));
+					}
+				} else {
+					print("malform niri output ! \n");
+				}
+			} else if (node_fa != null) {
+				Json.Object root = node_fa.get_object();
+				int64 id = root.get_int_member("id");
+				bool focused = root.get_boolean_member("focused");
+				niri_focus(id, focused);
+			}
+		});
+	}
 
     void sync() {
         foreach (var child in get_children())
@@ -173,7 +269,37 @@ class Workspaces : Gtk.Box {
         foreach (var ws in hypr.workspaces)
             add(button(ws));
     }
+    Gtk.Button button_ws(int64 id, int64 idx, bool is_focus, bool is_active) {
+		string icon = idx.to_string("%d");
+		if (idx < 0){
+		  icon = "";
+		}
+		var btn = new Gtk.Button() {
+			visible = true,
+			label = icon
+		};
+		var context = btn.get_style_context();
+		if (is_active) {
+			context.add_class("button_active");
+		} else {
+			context.remove_class("button_active");
+			context.add_class("button");
+		}
+		this.niri_focus.connect((focus_id, focused) => {
+				bool active_now = focus_id == id;
+				if (active_now) {
+					context.add_class("button_active");
+				} else {
+					context.remove_class("button_active");
+					context.add_class("button");
+				}
+		});
 
+		btn.clicked.connect(()=> {
+			execute_command(@"niri msg action focus-workspace $idx");
+		});
+        return btn;
+    }
     Gtk.Button button(AstalHyprland.Workspace ws) {
 	// string icon = icons.lookup(ws.id);
 	string icon = ws.id.to_string("%d");
@@ -188,17 +314,20 @@ class Workspaces : Gtk.Box {
 		label = icon
 	};
 	var focused = hypr.focused_workspace == ws;
+	var context = btn.get_style_context();
 	if (focused ) {
-	    Astal.widget_set_class_names(btn, {"button_active"});
+	    context.add_class("button_active");
 	} else {
-	    Astal.widget_set_class_names(btn, {"button"});
+		context.remove_class("button_active");
+	    context.add_class("button");
 	}
 	hypr.notify["focused-workspace"].connect(() => {
 	    focused = hypr.focused_workspace == ws;
             if (focused) {
-                Astal.widget_set_class_names(btn, {"button_active"});
+                context.add_class("button_active");
             } else {
-                Astal.widget_set_class_names(btn, {"button"});
+				context.remove_class("button_active");
+                context.add_class("button");
             }
         });
 
@@ -209,22 +338,65 @@ class Workspaces : Gtk.Box {
 
 class FocusedClient : Gtk.Box {
 	Gtk.Label label = new Gtk.Label("") { visible = true };
+	AstalHyprland.Hyprland? hypr = AstalHyprland.get_default();
+	NiriEventStream? niri = NiriEventStream.get_default();
+	string get_title(int64 wid) {
+		string title = "";
+		Json.Object obj = niri.request("\"Windows\"");
+		if (obj != null) {
+			//print("obj ready ! \n");
+			Json.Object winobjs = obj.get_member("Ok").get_object();
+			Json.Array? windows = winobjs.get_member("Windows").get_array();
+			//print(@"length: $(windows.get_length())");
+			for (int i = 0; i < windows.get_length(); i++) {
+				Json.Object w = windows.get_object_element(i);
+				int64 cur_id = w.get_int_member("id");
+				if (cur_id == wid) {
+					title = w.get_string_member("title");
+					break;
+				}
+			}
+		} else {
+			print("malform niri ipc response ! \n");
+		}
+		return title;
+	}
     public FocusedClient() {
-		AstalHyprland.get_default().notify["focused-client"].connect(sync_clients);
-		//AstalHyprland.get_default().notify.connect((sender, param_spec) => {
-		//	// 🟢 This prints ANY property that changes on the player
-		//	print(@"Property changed: $(param_spec.name)\n");
-		//	//print("%s \n", this.main_player.metadata.print(true));
-		//});
 		Astal.widget_set_class_names(this.label,{"text"});
 		this.label.set_xalign(0.0f);
 		this.label.set_ellipsize(Pango.EllipsizeMode.END);
 		this.label.set_max_width_chars(60);
 		add(this.label);
+		if (hypr != null) {
+			hypr.notify["focused-client"].connect(sync_clients);
+			//AstalHyprland.get_default().notify.connect((sender, param_spec) => {
+			//	// 🟢 This prints ANY property that changes on the player
+			//	print(@"Property changed: $(param_spec.name)\n");
+			//	//print("%s \n", this.main_player.metadata.print(true));
+			//});
+
+		} else if (niri != null){
+			niri.event_received.connect((obj)=> {
+				Json.Node fcc = obj.get_member("WindowFocusChanged");
+				if (fcc != null) {
+					Json.Object root = fcc.get_object();
+					string title = get_title(root.get_int_member("id"));
+					//print(@"title: $title \n");
+					if (title != null) {
+						this.label.set_text(title);
+					} else {
+						this.label.set_text("");
+					}
+				}
+
+
+			});
+		}
+
     }
 
     void sync_clients() {
-        var client = AstalHyprland.get_default().focused_client;
+        var client = this.hypr.focused_client;
         if (client == null)
             return;
 		var title = client.title;
@@ -236,7 +408,7 @@ class FocusedClient : Gtk.Box {
 
     }
 }
-public class TrayMenu : Astal.Window {
+public class TrayMenu : Gtk.Window {
     public Gtk.Box menu_box;
     private Gtk.Fixed fixed_layout;
 	public string? home = Environment.get_variable("HOME");
@@ -267,10 +439,29 @@ public class TrayMenu : Astal.Window {
 		return this.menu_box.get_children().index(widget);
 	}
     public TrayMenu(Gdk.Monitor mon) {
-        Object(layer: Astal.Layer.OVERLAY, 
-			   anchor: Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT,
-			   keymode: Astal.Keymode.ON_DEMAND
-			   );
+	// 1. Initialize Layer Shell
+        GtkLayerShell.init_for_window(this);
+
+        // 2. anchor: TOP | BOTTOM | LEFT | RIGHT (Full Screen)
+        // ➡️ Sets the window to cover the entire screen area
+        GtkLayerShell.set_anchor(this, GtkLayerShell.Edge.TOP, true);
+        GtkLayerShell.set_anchor(this, GtkLayerShell.Edge.BOTTOM, true);
+        GtkLayerShell.set_anchor(this, GtkLayerShell.Edge.LEFT, true);
+        GtkLayerShell.set_anchor(this, GtkLayerShell.Edge.RIGHT, true);
+
+        // ➡️ Places the window above everything, including full-screen apps
+        GtkLayerShell.set_layer(this, GtkLayerShell.Layer.OVERLAY);
+
+        // ➡️ Allows the window to take keyboard focus when needed
+        GtkLayerShell.set_keyboard_mode(this, GtkLayerShell.KeyboardMode.ON_DEMAND);
+
+        // 5. Visual Setup
+        // ➡️ Since it covers the whole screen, you usually want it transparent
+        this.set_app_paintable(true);
+        var visual = this.get_screen().get_rgba_visual();
+        if (visual != null) {
+            this.set_visual(visual);
+        }
         
 		init_css();
 		Astal.widget_set_css(this, "background: transparent;");
@@ -395,14 +586,14 @@ public class TrayMenu : Astal.Window {
 class LabelBtn: Gtk.Button {
 	public Gtk.Label my_label = new Gtk.Label("");
 	public LabelBtn(string? str) {
-		Astal.widget_set_class_names(this, { "button_inactive" });
+		this.get_style_context().add_class("button_inactive");
 		add(my_label);
 	}
 }
 class BigBtn: Gtk.Button {
 	public BigBtn(string ?str="") {
 		set_label(str);
-		Astal.widget_set_class_names(this, {"button_big"});
+		this.get_style_context().add_class("button_big");
 	}
 }
 class ActiveBtn: Gtk.Button {
@@ -704,24 +895,6 @@ class Media : Gtk.Box {
     }
 }
 
-//class Traylist: Gtk.Box{
-//  public Traylist(){
-//    Astal.widget_set_class_names(this, {"bar"});
-//  }
-//}
-//class TrayWin: Astal.Window{
-//  // public Traylist tray = new Traylist();
-//  public TrayWin(Gdk.Monitor monitor){
-//      Object(
-//		  anchor: Astal.WindowAnchor.TOP,
-//		  exclusivity: Astal.Exclusivity.NORMAL,
-//		  gdkmonitor: monitor,
-//		  vexpand: true,
-//		  hexpand: false
-//      );
-//    // add(new Traylist());
-//  }
-//}
 
 class SysTray : Gtk.Box {
     HashTable<string, Gtk.Widget> items = new HashTable<string, Gtk.Widget>(str_hash, str_equal);
@@ -795,90 +968,138 @@ public string[] get_subfolders(string path) {
     return folders;
 }
 
-public class VolumeWatcher : Object {
-    private GLibMainLoop loop;
-	private string? default_sink_name = null;
-    private Context context;
-
-    // 📣 Signal for UI or other components to listen to
+public class VolumeWatcher : GLib.Object {
     public signal void volume_changed(double volume_percent, bool muted);
 
+    private GLib.Subprocess? monitor_proc;
+    private GLib.DataInputStream? monitor_stream;
+    private uint refresh_timeout_id = 0;
+
+    private double last_volume = -1;
+    private bool last_muted = false;
+
     public VolumeWatcher() {
-        // 🔄 Integration with GLib's MainLoop
-        this.loop = new GLibMainLoop(null);
-        this.context = new Context(loop.get_api(), "VolumeWatcher");
-
-        context.set_state_callback(on_state_changed);
-        context.connect(null, Context.Flags.NOFAIL, null);
+        start_monitor();
+        queue_refresh();
     }
 
-    private void on_state_changed(Context c) {
-        if (c.get_state() == Context.State.READY) {
-            // 🔔 Subscribe to Sink events (Volume/Mute changes)
-            c.set_subscribe_callback(on_event_received);
-            c.subscribe(
-				PulseAudio.Context.SubscriptionMask.SINK |
-				PulseAudio.Context.SubscriptionMask.SERVER,
-				null
-			);
-            
-            // 🏃 Initial fetch of current volume
-			update_default_sink();
-            update_volume_info();
+    ~VolumeWatcher() {
+        if (monitor_proc != null) {
+            monitor_proc.force_exit();
         }
     }
-
-    private void on_event_received(Context c, PulseAudio.Context.SubscriptionEventType t, uint32 idx) {
-        // 🔍 Filter: Check if the event is a SINK CHANGE
-        if ((t & PulseAudio.Context.SubscriptionEventType.FACILITY_MASK) == PulseAudio.Context.SubscriptionEventType.SINK &&
-            (t & PulseAudio.Context.SubscriptionEventType.TYPE_MASK) == PulseAudio.Context.SubscriptionEventType.CHANGE) {
-			update_default_sink();
-            update_volume_info();
-        }
-    }
-	private void update_default_sink() {
-		context.get_server_info((c, info) => {
-			if (info != null && info.default_sink_name != null) {
-				string new_name = info.default_sink_name;
-				if (new_name != default_sink_name) {
-					default_sink_name = new_name;
-				}
-			}
-		});
-	}
-
-	private void update_volume_info() {
-		if (default_sink_name == null) return;
-
-		context.get_sink_info_by_name(default_sink_name, (c, info, eol) => {
-			if (info != null && eol == 0) {
-				double vol = (double)info.volume.avg() / PulseAudio.Volume.NORM * 100.0;
-				bool muted = (info.mute != 0);
-				this.volume_changed(vol, muted);
-			}
-		});
-	}
 
     public void set_volume(double percent) {
-        if (context.get_state() != Context.State.READY) return;
+        percent = percent.clamp(0.0, 100.0);
 
-        // 🎚️ Prepare volume struct
-        CVolume cv = CVolume();
-        PulseAudio.Volume v = (PulseAudio.Volume)(percent / 100 * PulseAudio.Volume.NORM);
-        cv.set(2, v); // Using 2 channels (Stereo)
-		if (default_sink_name == null) return;
-        
-        context.set_sink_volume_by_name(default_sink_name, cv, null);
+        try {
+            string vol = "%.0f%%".printf(percent);
+
+            var proc = new GLib.Subprocess.newv(
+                { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", vol },
+                GLib.SubprocessFlags.STDERR_SILENCE
+            );
+
+            proc.wait(null);
+        } catch (GLib.Error e) {
+            warning("set_volume failed: %s", e.message);
+        }
     }
 
-    public void set_mute(bool mute) {
-        if (context.get_state() != Context.State.READY) return;
-        
-        // 🔇 Set mute status (Passing bool directly as per VAPI)
-        context.set_sink_mute_by_name(default_sink_name, mute, null);
+    private void start_monitor() {
+        try {
+            monitor_proc = new GLib.Subprocess.newv(
+                { "pw-dump", "-m" },
+                GLib.SubprocessFlags.STDOUT_PIPE |
+                GLib.SubprocessFlags.STDERR_SILENCE
+            );
+
+            monitor_stream = new GLib.DataInputStream(
+                monitor_proc.get_stdout_pipe()
+            );
+
+            read_monitor_loop.begin();
+        } catch (GLib.Error e) {
+            warning("failed to start pw-dump -m: %s", e.message);
+        }
+    }
+
+    private async void read_monitor_loop() {
+        if (monitor_stream == null)
+            return;
+
+        try {
+            while (true) {
+                size_t len = 0;
+                string? line = yield monitor_stream.read_line_async(
+                    GLib.Priority.DEFAULT,
+                    null,
+                    out len
+                );
+
+                if (line == null)
+                    break;
+
+                // pw-dump -m can print many lines per event, so debounce refresh.
+                queue_refresh();
+            }
+        } catch (GLib.Error e) {
+            warning("pw-dump monitor read failed: %s", e.message);
+        }
+    }
+
+    private void queue_refresh() {
+        if (refresh_timeout_id != 0)
+            return;
+
+        refresh_timeout_id = GLib.Timeout.add(80, () => {
+            refresh_timeout_id = 0;
+            refresh_volume();
+            return GLib.Source.REMOVE;
+        });
+    }
+
+    private void refresh_volume() {
+        try {
+            string? stdout_buf;
+            string? stderr_buf;
+
+            var proc = new GLib.Subprocess.newv(
+                { "wpctl", "get-volume", "@DEFAULT_AUDIO_SINK@" },
+                GLib.SubprocessFlags.STDOUT_PIPE |
+                GLib.SubprocessFlags.STDERR_SILENCE
+            );
+
+            proc.communicate_utf8(null, null, out stdout_buf, out stderr_buf);
+
+            if (!proc.get_successful() || stdout_buf == null)
+                return;
+
+            // Example:
+            // Volume: 0.45
+            // Volume: 0.45 [MUTED]
+            bool muted = stdout_buf.index_of("[MUTED]") >= 0;
+
+            var re = new GLib.Regex("""Volume:\s*([0-9.]+)""");
+            GLib.MatchInfo match;
+
+            if (!re.match(stdout_buf, 0, out match))
+                return;
+
+            double linear = double.parse(match.fetch(1));
+            double percent = linear * 100.0;
+
+            if (Math.fabs(percent - last_volume) > 0.5 || muted != last_muted) {
+                last_volume = percent;
+                last_muted = muted;
+                volume_changed(percent, muted);
+            }
+        } catch (GLib.Error e) {
+            warning("refresh_volume failed: %s", e.message);
+        }
     }
 }
-public class BrightnessWatcher : Object {
+public class BrightnessWatcher : GLib.Object {
     // 🟢 1. Define the Signal (The Callback)
     // We send a double (0.0 to 100.0) so it works easily with Sliders
     public signal void brightness_changed(double percentage);
@@ -898,8 +1119,8 @@ public class BrightnessWatcher : Object {
 		//	print("%s \n", path);
 		//}
 		if (backlight != null && backlight.length > 0) {
-			this.path_brightness = Path.build_filename(path_dir, backlight[0] ,"brightness");
-			this.path_max = Path.build_filename(path_dir, backlight[0], "max_brightness");
+			this.path_brightness = GLib.Path.build_filename(path_dir, backlight[0] ,"brightness");
+			this.path_max = GLib.Path.build_filename(path_dir, backlight[0], "max_brightness");
 
 			// 1. Read Max Brightness first (needed for math)
 			read_max_level();
@@ -923,6 +1144,7 @@ public class BrightnessWatcher : Object {
 		} else {
 			print("No backlight found !");
 		}
+		brightness_changed(get_brightness());
 
     }
 	public void set_brightness(double percentage) {
@@ -972,6 +1194,7 @@ public class BrightnessWatcher : Object {
 					
 					// Calculate Percentage
 					double percent = (current / this.max_level) * 100.0;
+					//print(@"brightness: $percent \n");
 
 					// 🟢 3. Emit the signal (Trigger the callback)
 					brightness_changed(percent);
@@ -1002,69 +1225,114 @@ public class BrightnessWatcher : Object {
 		return 1.0;
 	}
 }
-class BrightSlider : Gtk.Box {
-    public Astal.Slider slider = new Astal.Slider() { hexpand = true };
-    Gtk.Label icon = new Gtk.Label("󱩏");
+public class BrightSlider : Gtk.Box {
+    public Gtk.Scale slider;
+    //private Gtk.Label value_label;
 	public BrightnessWatcher bright = new BrightnessWatcher();
+	public signal void changed(double value);
+	public bool is_holding = false;
+	private ulong slider_handler_id;
 
     public BrightSlider() {
-		add(icon);
-        add(slider);
-        Astal.widget_set_class_names(this, {"AudioSlider"});
-        Astal.widget_set_css(this, "min-width: 140px");
-		Astal.widget_set_class_names(icon, { "text" });
-		bright.brightness_changed.connect((value) => {
-			var icon_str = "󱩏";
-			if (value >= 100.0) {
-				icon_str = "󱩖";
-			} else if (value >= 75.0) {
-				icon_str = "󱩓";
-			} else if (value >= 50.0) {
-				icon_str = "󱩑";
-			} else if (value >= 25.0) {
-				icon_str = "󱩐";
-			}  
-			icon.set_text(icon_str);
-			//print("brightness %f %s\n", value, icon_str);
-			slider.value = value;
-		});
+        // 1. Setup the Outer Box (GTK 3 style)
+        // ➡️ In GTK 3, we use the constructor instead of the Object() block for simplicity
+        this.orientation = Gtk.Orientation.VERTICAL;
+        //this.spacing = 5;
 
-		//print("%f \n", slider.max);
-		slider.max = 100.0f;
-		slider.set_value(bright.get_brightness());
-        slider.dragged.connect(() => bright.set_brightness(slider.value));
+        // 2. Set Margins (GTK 3 uses separate properties)
+        //this.margin_top = 10;
+        //this.margin_bottom = 10;
+        //this.margin_start = 10;
+        //this.margin_end = 10;
+
+        // 3. Create the internal Scale (GTK 3)
+        slider = new Gtk.Scale.with_range(Gtk.Orientation.HORIZONTAL, 0, 100, 1);
+        slider.hexpand = true;
+        slider.draw_value = true;
+		slider.set_range(0, 100);
+
+        // 4. Create a Label
+        //value_label = new Gtk.Label("Value: 50");
+
+        // 5. Connect logic
+        slider.set_value(bright.get_brightness());
+		slider_handler_id = slider.value_changed.connect(() => {
+            bright.set_brightness(slider.get_value());
+        });
+		slider.button_press_event.connect(() => { is_holding = true; return false; });
+        slider.button_release_event.connect(() => { is_holding = false; return false; });
+
+		bright.brightness_changed.connect((bvalue) => {
+            if (!is_holding) {
+                GLib.SignalHandler.block(slider, slider_handler_id);
+                slider.set_value(bvalue);
+                GLib.SignalHandler.unblock(slider, slider_handler_id);
+            }
+        });
+
+        // 6. Add widgets (GTK 3 uses .add() or .pack_start())
+        //this.pack_start(value_label, false, false, 0);
+        this.pack_start(slider, true, true, 0);
+
+        // 🎨 Apply Styling (GTK 3 style)
+        var context = this.get_style_context();
+        context.add_class("slider-box-component");
+		context.add_class("slider_long");
     }
 }
-class AudioSlider : Gtk.Box {
-	Gtk.Label icon = new Gtk.Label("");
-    public Astal.Slider slider = new Astal.Slider() { hexpand = true };
+public class AudioSlider : Gtk.Box {
+    public Gtk.Scale slider;
+    //private Gtk.Label value_label;
 	public VolumeWatcher volume = new VolumeWatcher();
-    public AudioSlider() {
-        add(icon);
-        add(slider);
-        Astal.widget_set_class_names(this, {"AudioSlider"});
-        Astal.widget_set_class_names(icon, {"volumeIcon"});
-        Astal.widget_set_css(this, "min-width: 140px");
-		slider.max = 100.0f;
-		volume.volume_changed.connect((volume_percent, muted) => {
-			var icon_str = "";
-			if (muted || volume_percent <= 0) {
-				icon_str =  "󰝟"; // 󰝟 Speaker Muted
-			}
+	public signal void changed(double value);
+	public bool is_holding = false;
+	private ulong slider_handler_id;
 
-			if (volume_percent >= 70.0) {
-				icon_str =  "󰕾"; // 󰕾 Speaker High (3 waves)
-			} else if (volume_percent >= 30.0) {
-				icon_str =  "󰖀"; // 󰖀 Speaker Medium (2 waves)
-			} else {
-				icon_str =  "󰕿"; // 󰕿 Speaker Low (1 wave)
-			}
-			icon.set_text(icon_str + " ");
-			slider.value = volume_percent;
-		});
-        slider.dragged.connect(() => {
-			volume.set_volume(slider.value);
-		});
+    public AudioSlider() {
+        // 1. Setup the Outer Box (GTK 3 style)
+        // ➡️ In GTK 3, we use the constructor instead of the Object() block for simplicity
+        this.orientation = Gtk.Orientation.VERTICAL;
+        this.spacing = 5;
+
+        // 2. Set Margins (GTK 3 uses separate properties)
+        //this.margin_top = 10;
+        //this.margin_bottom = 10;
+        //this.margin_start = 10;
+        //this.margin_end = 10;
+
+        // 3. Create the internal Scale (GTK 3)
+        slider = new Gtk.Scale.with_range(Gtk.Orientation.HORIZONTAL, 0, 100, 1);
+        slider.hexpand = true;
+        slider.draw_value = true;
+		slider.set_range(0, 100);
+
+        // 4. Create a Label
+        //value_label = new Gtk.Label("Value: 50");
+
+        // 5. Connect logic
+        //slider.set_value(50);
+		slider_handler_id = slider.value_changed.connect(() => {
+            volume.set_volume(slider.get_value());
+        });
+		slider.button_press_event.connect(() => { is_holding = true; return false; });
+        slider.button_release_event.connect(() => { is_holding = false; return false; });
+
+		volume.volume_changed.connect((volume_percent, muted) => {
+            if (!is_holding) {
+                GLib.SignalHandler.block(slider, slider_handler_id);
+                slider.set_value(volume_percent);
+                GLib.SignalHandler.unblock(slider, slider_handler_id);
+            }
+        });
+
+        // 6. Add widgets (GTK 3 uses .add() or .pack_start())
+        //this.pack_start(value_label, false, false, 0);
+        this.pack_start(slider, true, true, 0);
+
+        // 🎨 Apply Styling (GTK 3 style)
+        var context = this.get_style_context();
+        context.add_class("slider-box-component");
+		context.add_class("slider_long");
     }
 }
 
@@ -1073,9 +1341,12 @@ class Battery : Gtk.Box {
     Astal.Label label = new Astal.Label();
 
     public Battery() {
-        Astal.widget_set_class_names(this, {"Battery"});
-        Astal.widget_set_class_names(icon, {"text"});
-		Astal.widget_set_class_names(label, {"text"});
+		var context = this.get_style_context();
+        context.add_class("Battery");
+		context = icon.get_style_context();
+		context.add_class("text");
+		context = label.get_style_context();
+		context.add_class("text");
         add(icon);
         add(label);
         var bat = AstalBattery.get_default();
@@ -1088,18 +1359,7 @@ class Battery : Gtk.Box {
         });
     }
 }
-//class Notification: Astal.EventBox{
-//    AstalNotifd.Notifd notifd = AstalNotifd.get_default();
-//    public Notification(){
-//	Astal.widget_set_class_names(this, {"bar"});
-//    }
-//    public void noti(string lmao,int id){
-//		var getNoti = notifd.get_notification(id);
-//		print(getNoti.app_name);
-//    }
-//
-//
-//}
+
 class Time : Astal.Label {
     string format;
     uint interval;
@@ -1120,7 +1380,7 @@ class Time : Astal.Label {
 
 class Left : Gtk.Box {
     public Left(Gdk.Monitor mon) {
-        Object(vexpand: true, hexpand: false);
+        GLib.Object(vexpand: true, hexpand: false);
         add(new Panel(new Media(mon)));
         add(new FocusedClient());
 
@@ -1128,14 +1388,14 @@ class Left : Gtk.Box {
 }
 class Panel: Gtk.Box {
     public Panel(Gtk.Widget widget){
-        Object(vexpand: true, hexpand: false);
+        GLib.Object(vexpand: true, hexpand: false);
 		Astal.widget_set_class_names(this, {"panel"});
 		add(widget);
     }
 }
 class Center : Gtk.Box {
     public Center() {
-        Object(vexpand: true, hexpand: false);
+        GLib.Object(vexpand: true, hexpand: false);
         add(new Panel(new Workspaces()));
     }
 }
@@ -1157,8 +1417,8 @@ class rightPart: Gtk.Box{
 			tray_menu.toggle_at_widget(tray_menu_btn);
 		});
 		add(tray_menu_btn);
-		this.audio_value = (int)audio_slider.slider.value;
-		this.brightness_value = (int)brightness_slider.slider.value;
+		this.audio_value = 0.0;
+		this.brightness_value = (int)brightness_slider.bright.get_brightness();
 		tray_menu_btn.my_label.set_label(@"$((int)this.brightness_value) 󱩖 $( "%.1f".printf(this.audio_value) )  ");
 		brightness_slider.bright.brightness_changed.connect((percent) => {
 			this.brightness_value = (int)percent;
@@ -1182,11 +1442,7 @@ class Utils: Gtk.Box{
     colorswitch.clicked.connect(()=>{
 		Command cmd = new Command({ app.home + "/.config/ags/scripts/color_generation/switchcolor.sh" });
 		GLib.Pid async_pid = -1;
-		try {
-			async_pid = cmd.spawn();
-		} catch (GLib.Error e) {
-			GLib.stderr.printf("error: %s \n", e.message);
-		}
+		async_pid = cmd.spawn();
 		if (async_pid >= 0) {
 			GLib.ChildWatch.add(async_pid, () => {
 				app.init_css();
@@ -1203,12 +1459,8 @@ class Utils: Gtk.Box{
     screenshot.clicked.connect(()=>{
 		Command cmd = new Command({  app.home + "/.config/ags/scripts/grimblast.sh", "--freeze", "copy", "area" });
 		GLib.Pid async_pid = -1;
-		try {
-			async_pid = cmd.spawn();
-			Astal.widget_set_class_names(screenshot,{"button_active", "space_right"});
-		} catch (GLib.Error e){
-            GLib.stderr.printf("Error spawning: %s\n", e.message);
-		}
+		async_pid = cmd.spawn();
+		Astal.widget_set_class_names(screenshot,{"button_active", "space_right"});
 		if (async_pid >= 0) {
 			GLib.ChildWatch.add(async_pid, () => {
 				Astal.widget_set_class_names(screenshot,{ "button_inactive", "space_right"});
@@ -1216,9 +1468,7 @@ class Utils: Gtk.Box{
 		}
     });
 	Command k = new Command({"killall", "-9", "wlsunset"});
-	try {
-		k.spawn();
-	} catch {};
+	k.spawn();
 	var reading = new Gtk.ToggleButton(){
 		visible = true,
 		label = ""
@@ -1231,11 +1481,7 @@ class Utils: Gtk.Box{
 		if (reading.get_active() && child_pid < 0) {
 			Astal.widget_set_class_names(reading,{"button_active"});
 			GLib.stdout.printf("toggle on \n");
-			try {
-				child_pid = cmd.spawn();
-			} catch (GLib.Error e) {
-				GLib.stderr.printf("Error spawning: %s\n", e.message);
-			}
+			child_pid = cmd.spawn();
 		} else if (child_pid > 0){
 			GLib.stdout.printf("toggle off \n");
 			Astal.widget_set_class_names(reading,{"button_inactive"});
@@ -1250,43 +1496,24 @@ class Utils: Gtk.Box{
 }
 class Right : Gtk.Box {
     public Right(App app, Gdk.Monitor mon) {
-        Object(vexpand: true, hexpand: false, halign: Gtk.Align.END);
-		//var scroller = new Gtk.ScrolledWindow(null, null);
-		//// Only scroll vertically
-		////scroller.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.NEVER);
-		//scroller.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.NEVER);
-		//
-		//// 3. Create a Horizontal Box to hold your items
-		//var box = new Gtk.Box(Gtk.Orientation.HORIZONTAL, 10) { hexpand = true };
-		//scroller.set_size_request(200, 10);
-		//scroller.get_style_context().add_class("hidden-scroll");
-		////Astal.widget_set_css(scroller, "min-width: 10px;");
-		//
-		//// 4. Add items (Make sure you have enough to overflow the window!)
-		//for (int i = 0; i < 20; i++) {
-		//	var btn = new Gtk.Button();
-		//	btn.set_label(@"Item $i");
-		//	Astal.widget_set_class_names(btn, { "button" });
-		//	box.pack_start(btn, false, false, 0); 
-		//}
-		//scroller.add(box);
-		//add(new Panel(scroller));
+        GLib.Object(vexpand: true, hexpand: false, halign: Gtk.Align.END);
 		add(new Panel(new rightPart(mon)));
         add(new Panel(new Battery()));
 		add(new Panel(new Utils(app)));
         add(new Panel(new Time()));
     }
 }
-class Bar : Astal.Window {
+class Bar : Gtk.Window {
     public Bar(Gdk.Monitor monitor, App app) {
 		int width = (int)(monitor.get_geometry().width * (98.7 / 100.0));
-        Object(
-            anchor: Astal.WindowAnchor.TOP,
-            exclusivity: Astal.Exclusivity.EXCLUSIVE,
-            gdkmonitor: monitor
-        );
+		GtkLayerShell.init_for_window(this);
+		GtkLayerShell.set_monitor(this, monitor);
+		GtkLayerShell.set_anchor(this, GtkLayerShell.Edge.TOP, true);
+		GtkLayerShell.set_anchor(this, GtkLayerShell.Edge.LEFT, true);
+		GtkLayerShell.set_anchor(this, GtkLayerShell.Edge.RIGHT, true);
+		GtkLayerShell.auto_exclusive_zone_enable(this);
 		print(@"screen width: $width"+"px \n");
-        Astal.widget_set_class_names(this, {"bar"});
+        this.get_style_context().add_class("bar");
 		var centerbox = new Astal.CenterBox();
 		centerbox.start_widget = new Left(monitor);
 		centerbox.center_widget = new Center();

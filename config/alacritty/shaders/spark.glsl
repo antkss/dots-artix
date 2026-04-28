@@ -15,6 +15,8 @@ uniform float iTimeCursorChange;
 uniform vec4 iCurrentCursorColor;
 uniform vec4 iPreviousCursorColor;
 uniform sampler2D iChannel0;
+uniform float iDuration;
+
 
 out vec4 fragColor;
 
@@ -94,7 +96,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
     float elapsed = iTime - iTimeCursorChange;
 
-    float duration = 0.2;
+    float duration = iDuration;
     float fadeInTime = 0.06;
     float fadeOutTime = 0.1;
     float fadeIn = smoothstep(0.0, fadeInTime, elapsed);

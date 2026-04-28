@@ -41,4 +41,5 @@ else
 fi
 
 # Generate colors for ags n stuff
-"$HOME"/.config/ags/scripts/color_generation/colorgen.sh "${imgpath}" --apply
+"$HOME"/.config/ags/scripts/color_generation/generate_colors_material.py --path "${imgpath}" --scheme vibrant --apply --mode light
+"$HOME"/.config/ags/scripts/color_generation/generate_gtk_material.py --path "${imgpath}" --scheme vibrant --mode light --set-gsettings

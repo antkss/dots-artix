@@ -1,1 +1,1 @@
- rm -rf venv dist build
+ rm -rf appimage

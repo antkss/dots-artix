@@ -316,6 +316,10 @@ scrolledwindow.hidden-scroll {
 //       color: $primary;
 //     }
 // }
+.slider_long {
+  background-color: transparent;
+  min-width: 300px;
+}
 .volumeIcon {
   all: unset;
   color: $fg;

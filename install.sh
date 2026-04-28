@@ -23,6 +23,9 @@ setup_user() {
 	if [ ! -d $HOME_DIR/.config ]; then
 		mkdir $HOME_DIR/.config
 	fi
+	if [ ! -f $HOME_DIR/.icons ]; then
+		cp -r .icons $HOME_DIR/.icons
+	fi
 	# setup config
 	if [ ! -f $HOME_DIR/.config/config_lock ]; then
 		cp -r config/* $HOME_DIR/.config
@@ -33,6 +36,7 @@ setup_user() {
 	fi
 }
 $SU /bin/sh -c 'echo -ne "#!/bin/sh\ndbus-run-session -- start-hyprland $@" > /bin/starthypr && chmod 777 /bin/starthypr'
+$SU /bin/sh -c 'echo -ne "#!/bin/sh\ndbus-run-session -- niri --session $@" > /bin/startniri && chmod 777 /bin/startniri'
 
 
 

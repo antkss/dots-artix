@@ -1,0 +1,4 @@
+./config/ags/config/build
+./config/ags/scripts/color_generation/generate_colors_material
+*compile_commands.json
+*.codex

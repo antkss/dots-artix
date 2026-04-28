@@ -1,0 +1,1496 @@
+# Gradience POT file
+# Copyright (C) 2022 Gradience Team
+# This file is distributed under the GNU GPLv3 license.
+# Gradience Team, 2022.
+#
+# 0xMRTT <0xMRTT@tuta.io>, 2022.
+# Daudix UFO <ddaudix@gmail.com>, 2022, 2023.
+# yangyangdaji <1504305527@qq.com>, 2022.
+# Luna Jernberg <droidbittin@gmail.com>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-08 12:15+0000\n"
+"PO-Revision-Date: 2023-02-26 18:39+0000\n"
+"Last-Translator: Luna Jernberg <droidbittin@gmail.com>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/GradienceTeam/"
+"gradience/sv/>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.16-dev\n"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:4
+#: data/com.github.GradienceTeam.Gradience.desktop.in.in:3 data/ui/window.blp:5
+msgid "Gradience"
+msgstr "Gradience"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:5
+#: data/ui/welcome_window.blp:64
+msgid "Change the look of Adwaita, with ease"
+msgstr "Ändra utseendet på Adwaita, med lätthet"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:6
+#: gradience/frontend/views/about_window.py:94
+msgid "Gradience Team"
+msgstr "Gradience Team"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:12
+msgid ""
+"Gradience is a tool for customizing Libadwaita applications and the adw-gtk3 "
+"theme."
+msgstr ""
+"Gradience är ett verktyg för att anpassa Libadwaita program och adw-gtk3-"
+"temat."
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:13
+msgid "The main features of Gradience include the following:"
+msgstr "Huvudfunktionerna i Gradience inkluderar följande:"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:15
+msgid "🎨️ Changing any color of Adwaita theme"
+msgstr "🎨️ Ändra valfri färg på Adwaita temat"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:16
+msgid "🖼️ Applying Material 3 color scheme from wallpaper"
+msgstr "🖼️ Applicera Material 3 färgscheman från bakgrundsbild"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:17
+msgid "🎁️ Usage of other users presets"
+msgstr "🎁️ Användning av andra användares förinställningar"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:18
+msgid "⚙️ Changing advanced options with CSS"
+msgstr "⚙️ Ändra avancerade alternativ med CSS"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:19
+msgid "🧩️ Extending functionality using plugins"
+msgstr "🧩️ Utökad funktionalitet med insticksprogram"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:24
+msgid "Screenshot of \"Colors\" Tab of Main UI"
+msgstr "Skärmdump av \"Färger\" fliken av Huvud UI"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:28
+msgid "Screenshot of \"Monet\" Tab of Main UI"
+msgstr "Skärmdump av \"Monet\" fliken av Huvud UI"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:32
+msgid "Screenshot of \"Advanced\" Tab of Main UI"
+msgstr "Skärmdump av \"Avancerat\" fliken av Huvud UI"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:36
+msgid "Screenshot of \"Installed\" Tab of Preset Manager"
+msgstr "Skärmdump av \"Avancerat\" fliken i förinställninghanteraren"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:40
+msgid "Screenshot of \"Explore\" Tab of Preset Manager"
+msgstr "Skärmdump av \"Färger\" fliken i förinställninghanteraren"
+
+#: data/ui/app_type_dialog.blp:14
+msgid "Select application types you want to theme:"
+msgstr "Välj programtyper som du vill ta upp i temat:"
+
+#: data/ui/app_type_dialog.blp:17
+msgid "Libadwaita and GTK 4 Applications"
+msgstr "Libadwaita och GTK 4 program"
+
+#: data/ui/app_type_dialog.blp:21
+msgid "GTK 3 Applications (adw-gtk3 theme is required)"
+msgstr "GTK 3 program (adw-gtk3-tema krävs)"
+
+#: data/ui/builtin_preset_row.blp:5
+msgid "Made by @GradienceTeam"
+msgstr "Skapad av @GradienceTeam"
+
+#: data/ui/builtin_preset_row.blp:11 data/ui/preset_row.blp:51
+#: data/ui/window.blp:30
+msgid "Apply Preset"
+msgstr "Använd förinställning"
+
+#: data/ui/custom_css_group.blp:5
+msgid "Custom CSS"
+msgstr "Anpassad CSS"
+
+#: data/ui/custom_css_group.blp:6
+msgid ""
+"Changing this may break some programs. Keep in mind that Libadwaita was made "
+"so that applications could hardcode values like paddings and margins."
+msgstr ""
+"Om du ändrar detta kan vissa program brytas. Tänk på att Libadwaita skapades "
+"för att programmen skulle kunna hårdkoda värden som paddings och marginaler."
+
+#: data/ui/custom_css_group.blp:33
+msgid "GTK 4"
+msgstr "GTK 4"
+
+#: data/ui/custom_css_group.blp:33
+msgid "GTK 3"
+msgstr "GTK 3"
+
+#: data/ui/explore_preset_row.blp:21
+msgid "Download and Apply"
+msgstr "Ladda ner och verkställ"
+
+#: data/ui/explore_preset_row.blp:32
+msgid "Download Only"
+msgstr "Endast nedladdning"
+
+#: data/ui/log_out_dialog.blp:5
+msgid "Log out"
+msgstr "Logga ut"
+
+#: data/ui/log_out_dialog.blp:6
+msgid "For the changes to take full effect, you need to log out."
+msgstr "För att ändringarna ska få full effekt måste du logga ut."
+
+#: data/ui/no_plugin_window.blp:5
+msgid "Plugin Preferences"
+msgstr "Plugin inställningar"
+
+#: data/ui/no_plugin_window.blp:32
+msgid "No Preferences"
+msgstr "Inga inställningar"
+
+#: data/ui/no_plugin_window.blp:33
+msgid "This plugin doesn't have any preferences."
+msgstr "Detta plugin har inga inställningar."
+
+#: data/ui/option_row.blp:10
+msgid "GTK 3 Support Warning"
+msgstr "GTK 3-stöd varning"
+
+#: data/ui/option_row.blp:18
+msgid "Explanation"
+msgstr "Förklaring"
+
+#: data/ui/option_row.blp:43
+msgid "Toggle Text Value"
+msgstr "Växla textvärde"
+
+#: data/ui/plugin_row.blp:8
+msgid "Toggle Plugin"
+msgstr "Växla plugin"
+
+#: data/ui/plugin_row.blp:16 data/ui/preferences_window.blp:5
+#: data/ui/window.blp:136
+msgid "Preferences"
+msgstr "Inställningar"
+
+#: data/ui/plugin_row.blp:28
+msgid "Remove Plugin"
+msgstr "Ta bort plugin"
+
+#: data/ui/preferences_window.blp:12
+msgid "GTK 4 Flatpak Applications"
+msgstr "GTK 4 Flatpak program"
+
+#: data/ui/preferences_window.blp:15
+msgid "Allow GTK 4 Flatpak Applications Theming"
+msgstr "Tillåt GTK 4 Flatpak program teman"
+
+#: data/ui/preferences_window.blp:16
+msgid ""
+"Override Flatpak permissions for current user to allow GTK 4 Flatpak "
+"applications to access custom themes."
+msgstr ""
+"Överrösta Flatpak-behörigheter för aktuell användare för att tillåta GTK 4 "
+"Flatpak-program att få tillgång till anpassade teman."
+
+#: data/ui/preferences_window.blp:25
+msgid "Allow GTK 4 Flatpak Applications Theming (System)"
+msgstr "Tillåt GTK 4 Flatpak-program med teman (System)"
+
+#: data/ui/preferences_window.blp:26
+msgid ""
+"Override Flatpak permissions for all users to allow GTK 4 Flatpak "
+"applications to access custom themes. (Requires root access)"
+msgstr ""
+"Överskrid Flatpak-behörigheter för alla användare för att tillåta GTK 4 "
+"Flatpak-program att få tillgång till anpassade teman. (Kräver root-åtkomst)"
+
+#: data/ui/preferences_window.blp:35
+msgid "GTK 3 Flatpak Applications"
+msgstr "GTK 3 Flatpak program"
+
+#: data/ui/preferences_window.blp:36
+msgid ""
+"Remember to install adw-gtk3 theme (as a Flatpak package) in order to get "
+"custom presets working in GTK 3 Flatpak applications."
+msgstr ""
+"Kom ihåg att installera adw-gtk3-temat (som ett Flatpak-paket) för att få "
+"anpassade förinställningar att fungera i GTK 3 Flatpak-program."
+
+#: data/ui/preferences_window.blp:39
+msgid "Allow GTK 3 Flatpak theming"
+msgstr "Tillåt GTK 3 Flatpak-tema"
+
+#: data/ui/preferences_window.blp:40
+msgid ""
+"Override Flatpak permissions for current user to allow GTK 3 Flatpak "
+"applications to access adw-gtk3 theme."
+msgstr ""
+"Överskrid Flatpak-behörigheter för aktuell användare för att tillåta GTK 3 "
+"Flatpak-program att få tillgång till adw-gtk3-temat."
+
+#: data/ui/preferences_window.blp:49
+msgid "GTK 3 Flatpak Applications (System)"
+msgstr "GTK 3 Flatpak-program (system)"
+
+#: data/ui/preferences_window.blp:50
+msgid ""
+"Override Flatpak permissions for all users to allow GTK 3 Flatpak "
+"applications to access adw-gtk3 theme. (Requires root access)"
+msgstr ""
+"Överskrid Flatpak-behörigheter för alla användare så att GTK 3 Flatpak-"
+"programmen får tillgång till adw-gtk3-temat. (Kräver root-åtkomst)"
+
+#: data/ui/preferences_window.blp:61
+msgid "Custom Preset Repositories"
+msgstr "Anpassade förinställda arkiv"
+
+#: data/ui/preferences_window.blp:64
+msgid "Custom repository URL address"
+msgstr "URL-adress för anpassat arkiv"
+
+#: data/ui/preset_row.blp:27
+msgid "Report an Issue…"
+msgstr "Rapportera ett problem…"
+
+#: data/ui/preset_row.blp:68
+msgid "Rename Preset"
+msgstr "Byt namn på förinställning"
+
+#: data/ui/preset_row.blp:80
+msgid "More Options"
+msgstr "Mer alternativ"
+
+#: data/ui/preset_row.blp:87
+msgid "Description"
+msgstr "Beskrivning"
+
+#: data/ui/preset_row.blp:88
+msgid "Sorry, but this preset don't have a description."
+msgstr "Tyvärr har denna förinställning ingen beskrivning."
+
+#: data/ui/preset_row.blp:100
+msgid "No Badges"
+msgstr "Inga märken"
+
+#: data/ui/preset_row.blp:111
+msgid "Remove preset"
+msgstr "Ta bort förinställning"
+
+#: data/ui/preset_row.blp:112
+msgid "Remove Preset"
+msgstr "Ta bort förinställning"
+
+#: data/ui/presets_manager_window.blp:5 data/ui/window.blp:56
+msgid "Presets"
+msgstr "Förinställningar"
+
+#: data/ui/presets_manager_window.blp:30
+msgid "Import"
+msgstr "Importera"
+
+#: data/ui/presets_manager_window.blp:31
+msgid "Import a Preset File"
+msgstr "Importera en förinställd fil"
+
+#: data/ui/presets_manager_window.blp:37
+msgid "Delete"
+msgstr "Ta bort"
+
+#: data/ui/presets_manager_window.blp:48 gradience/frontend/main.py:231
+msgid "Open in File Manager"
+msgstr "Öppna i filhanteraren"
+
+#: data/ui/presets_manager_window.blp:66
+msgid "Installed"
+msgstr "Installerad"
+
+#: data/ui/presets_manager_window.blp:75
+msgid "Explore"
+msgstr "Utforska"
+
+#: data/ui/presets_manager_window.blp:80
+msgid "Search for presets"
+msgstr "Sök efter förinställningar"
+
+#: data/ui/presets_manager_window.blp:81
+msgid ""
+"Enter a keyword to search on <a href=\"https://github.com/GradienceTeam/"
+"Community\">GradienceTeam/Community</a>."
+msgstr ""
+"Ange ett nyckelord för att söka på <a href=\"https://gradienceteam.github.io/"
+"presets\">GradienceTeam/Community</a>."
+
+#: data/ui/presets_manager_window.blp:94
+msgid "e.g. \"Pretty Purple\""
+msgstr "t.ex. \"Pretty Purple\""
+
+#: data/ui/presets_manager_window.blp:99
+msgid "All"
+msgstr "Alla"
+
+#: data/ui/presets_manager_window.blp:127
+msgid "No Results Found"
+msgstr "Inga resultat hittades"
+
+#: data/ui/presets_manager_window.blp:135
+msgid "Offline"
+msgstr "Offline"
+
+#: data/ui/presets_manager_window.blp:148
+#: gradience/frontend/views/presets_manager_window.py:123
+#: gradience/frontend/views/presets_manager_window.py:391
+msgid "Repositories"
+msgstr "Arkiv"
+
+#: data/ui/presets_manager_window.blp:168
+msgid "Import a Preset File (*.json)"
+msgstr "Importera en förinställd fil (*.json)"
+
+#: data/ui/presets_manager_window.blp:173
+msgid "All files"
+msgstr "Alla filer"
+
+#: data/ui/presets_manager_window.blp:178
+msgid "JSON file (*.json)"
+msgstr "JSON-fil (* .json)"
+
+#: data/ui/save_dialog.blp:5
+msgid "Save preset as…"
+msgstr "Spara förinställning som…"
+
+#: data/ui/save_dialog.blp:10
+msgid "Preset Name"
+msgstr "Förinställt namn"
+
+#: data/ui/share_window.blp:5
+msgid "Share Preset"
+msgstr "Dela förinställning"
+
+#: data/ui/share_window.blp:42 data/ui/welcome_window.blp:42
+msgid "Previous"
+msgstr "Föregående"
+
+#: data/ui/share_window.blp:65
+msgid "Share your preset"
+msgstr "Dela din förinställning"
+
+#: data/ui/share_window.blp:66
+msgid "Share your preset with the world!"
+msgstr "Dela din förinställning med världen!"
+
+#: data/ui/share_window.blp:73
+msgid "How it's work?"
+msgstr "Hur fungerar det?"
+
+#: data/ui/share_window.blp:74
+msgid ""
+"Gradience use GitHub to share your preset. You need to create a GitHub "
+"account and fork <a href='https://github.com/GradienceTeam/"
+"Community'>GradienceTeam/Community</a>. Then, you can upload your preset, "
+"make a pull request and share it with the world!"
+msgstr ""
+"Gradience använder GitHub för att dela din förinställning. Du måste skapa "
+"ett GitHub-konto och skapa en fork <a href=\"https://github.com/"
+"GradienceTeam/Community\">GradienceTeam/Community</a>. Därefter kan du ladda "
+"upp din förinställning, göra en pull request och dela den med världen!"
+
+#: data/ui/share_window.blp:81 data/ui/welcome_window.blp:79
+msgid "Warning"
+msgstr "Varning"
+
+#: data/ui/share_window.blp:82 data/ui/welcome_window.blp:80
+msgid ""
+"Changing the color scheme can negatively affect contrast and readability. "
+"Proceed with caution. Please do not report theming-related issues to app "
+"developers."
+msgstr ""
+"Om du ändrar färgschemat kan det påverka kontrasten och läsbarheten "
+"negativt. Var försiktig. Rapportera inte temarelaterade problem till "
+"apputvecklare."
+
+#: data/ui/share_window.blp:86 data/ui/welcome_window.blp:84
+msgid "I Understand The Consequences"
+msgstr "Jag förstår konsekvenserna"
+
+#: data/ui/share_window.blp:97 data/ui/welcome_window.blp:95
+msgid "Customize Adwaita Theme"
+msgstr "Anpassa Adwaita-tema"
+
+#: data/ui/share_window.blp:98
+msgid ""
+"Change colors of windows, buttons, lists and more, with advanced features "
+"like adding custom CSS"
+msgstr ""
+"Ändra färgerna på fönster, knappar, listor med mera, med avancerade "
+"funktioner som att lägga till egen CSS"
+
+#: data/ui/share_window.blp:104 data/ui/welcome_window.blp:102
+msgid "Configure Gradience"
+msgstr "Konfigurera Gradience"
+
+#: data/ui/share_window.blp:105 data/ui/welcome_window.blp:103
+msgid ""
+"Install adw-gtk3 theme for legacy applications and configure system for "
+"theming."
+msgstr ""
+"Installera adw-gtk3-tema för äldre program och konfigurera systemet för "
+"tematisering."
+
+#: data/ui/share_window.blp:110
+msgid "Legacy apps theming"
+msgstr "Gamla appar med tematisering"
+
+#: data/ui/share_window.blp:115 data/ui/welcome_window.blp:113
+msgid "Install adw-gtk3 theme for legacy apps theming"
+msgstr "Installera adw-gtk3-tema för tematisering av äldre appar"
+
+#: data/ui/share_window.blp:120
+msgid "System configuration"
+msgstr "Systemkonfiguration"
+
+#: data/ui/share_window.blp:126 data/ui/welcome_window.blp:124
+msgid "Configure system for theming, enables Flatpak theme override"
+msgstr ""
+"Konfigurera systemet för tematisering, aktiverar Flatpak-temaöverstyrning"
+
+#: data/ui/share_window.blp:136 data/ui/welcome_window.blp:134
+msgid "Installing Themes"
+msgstr "Installerar teman"
+
+#: data/ui/share_window.blp:137 data/ui/welcome_window.blp:135
+msgid "Please wait until theme will be installed."
+msgstr "Vänta tills temat har installerats."
+
+#: data/ui/share_window.blp:143 data/ui/welcome_window.blp:141
+msgid "Continue"
+msgstr "Fortsätt"
+
+#: data/ui/share_window.blp:162 data/ui/welcome_window.blp:160
+msgid "Done"
+msgstr "Klart"
+
+#: data/ui/share_window.blp:163 data/ui/welcome_window.blp:161
+msgid "Now you can make your own presets or download some online."
+msgstr "Nu kan du göra egna förinställningar eller ladda ner några på nätet."
+
+#: data/ui/share_window.blp:168 data/ui/welcome_window.blp:166
+msgid "Please finish the setup first"
+msgstr "Slutför installationen först"
+
+#: data/ui/share_window.blp:176 data/ui/welcome_window.blp:174
+msgid "Start Using Gradience"
+msgstr "Börja använda Gradience"
+
+#: data/ui/share_window.blp:193 data/ui/welcome_window.blp:191
+msgid "Next"
+msgstr "Nästa"
+
+#: data/ui/welcome_window.blp:5 data/ui/welcome_window.blp:63
+msgid "Welcome to Gradience"
+msgstr "Välkommen till Gradience"
+
+#: data/ui/welcome_window.blp:71
+msgid "What's new in 0.3.2"
+msgstr "Nyheter i 0.3.2"
+
+#: data/ui/welcome_window.blp:72
+msgid ""
+"In this release, we fixed the Firefox GNOME theme plugin, issues with "
+"presets always being saved with the same name, as well as some UX polish, "
+"and more."
+msgstr ""
+"I den här versionen fixade vi Firefox GNOME-temaplugin, problem med att "
+"förinställningar alltid sparas med samma namn, samt lite UX-polering och mer."
+
+#: data/ui/welcome_window.blp:96
+msgid ""
+"Change colors of windows, buttons, lists and more, with advanced features "
+"like adding custom CSS."
+msgstr ""
+"Ändra färgerna på fönster, knappar, listor med mera, med avancerade "
+"funktioner som att lägga till egen CSS."
+
+#: data/ui/welcome_window.blp:108
+msgid "Legacy Apps Theming"
+msgstr "Tematisering av äldre appar"
+
+#: data/ui/welcome_window.blp:118
+msgid "System Configuration"
+msgstr "Systemkonfiguration"
+
+#: data/ui/window.blp:29 gradience/frontend/views/main_window.py:141
+msgid "Apply"
+msgstr "Verkställ"
+
+#: data/ui/window.blp:37
+msgid "Show Preview Window"
+msgstr "Visa förhandsgranskningsfönster"
+
+#: data/ui/window.blp:48
+msgid "Main Menu"
+msgstr "Huvudmeny"
+
+#: data/ui/window.blp:57
+msgid "Presets Menu"
+msgstr "Förinställningsmeny"
+
+#: data/ui/window.blp:64
+msgid "Save Preset"
+msgstr "Spara förinställningar"
+
+#: data/ui/window.blp:73
+msgid "CSS Errors"
+msgstr "CSS-fel"
+
+#: data/ui/window.blp:88
+msgid "Colors"
+msgstr "Färger"
+
+#: data/ui/window.blp:96
+msgid "Monet"
+msgstr "Monet"
+
+#: data/ui/window.blp:104
+msgid "Advanced"
+msgstr "Avancerat"
+
+#: data/ui/window.blp:125
+msgid "Restore Applied Color Scheme"
+msgstr "Återställa tillämpat färgschema"
+
+#: data/ui/window.blp:130
+msgid "Reset Applied Color Scheme"
+msgstr "Återställ tillämpat färgschema"
+
+#: data/ui/window.blp:141
+msgid "About Gradience"
+msgstr "Om Gradience"
+
+#: data/ui/window.blp:149
+#: gradience/frontend/views/presets_manager_window.py:111
+msgid "Built-In Presets"
+msgstr "Inbyggda förinställningar"
+
+#: data/ui/window.blp:170
+msgid "Manage Presets"
+msgstr "Hantera förinställningar"
+
+#: gradience/frontend/dialogs/app_type_dialog.py:51
+#: gradience/frontend/dialogs/save_dialog.py:57
+msgid "_Cancel"
+msgstr "_Avbryt"
+
+#: gradience/frontend/dialogs/log_out_dialog.py:36
+msgid "OK"
+msgstr "OK"
+
+#: gradience/frontend/dialogs/save_dialog.py:39
+#, python-brace-format
+msgid ""
+"Saving preset to <tt>{0}</tt>. If that preset already exists, it will be "
+"overwritten!"
+msgstr ""
+"Sparar förinställning till <tt>{0}</tt>. Om den förinställningen redan finns "
+"kommer den att skrivas över!"
+
+#: gradience/frontend/dialogs/save_dialog.py:60
+msgid "Discard"
+msgstr "Kasta"
+
+#: gradience/frontend/dialogs/save_dialog.py:65
+msgid "_Save"
+msgstr "_Spara"
+
+#: gradience/frontend/main.py:184
+#: gradience/frontend/views/presets_manager_window.py:336
+msgid "Failed to load list of presets"
+msgstr "Misslyckades att ladda listan med förinställningar"
+
+#: gradience/frontend/main.py:217
+msgid "No presets found"
+msgstr "Inga förinställningar hittades"
+
+#: gradience/frontend/main.py:240
+msgid "Favorite Presets"
+msgstr "Favoritförinställningar"
+
+#: gradience/frontend/main.py:404
+msgid "Unsaved Changes"
+msgstr "Osparade ändringar"
+
+#: gradience/frontend/main.py:416
+msgid "Save Changes"
+msgstr "Spara ändringar"
+
+#: gradience/frontend/main.py:505
+msgid "Apply This Color Scheme?"
+msgstr "Använda detta färgschema?"
+
+#: gradience/frontend/main.py:507
+msgid ""
+"Warning: any custom CSS files for those app types will be irreversibly "
+"overwritten!"
+msgstr ""
+"Varning: alla anpassade CSS-filer för dessa programtyper kommer att skrivas "
+"över oåterkalleligt!"
+
+#: gradience/frontend/main.py:511
+msgid "_Apply"
+msgstr "_Verkställ"
+
+#: gradience/frontend/main.py:521
+msgid "Restore applied color scheme?"
+msgstr "Återskapa det färgschema som tillämpats?"
+
+#: gradience/frontend/main.py:522 gradience/frontend/main.py:536
+msgid "Make sure you have the current settings saved as a preset."
+msgstr ""
+"Se till att du har de aktuella inställningarna sparade som en förinställning."
+
+#: gradience/frontend/main.py:524
+msgid "_Restore"
+msgstr "_Återställ"
+
+#: gradience/frontend/main.py:535
+msgid "Reset applied color scheme?"
+msgstr "Återställ tillämpat färgschema?"
+
+#: gradience/frontend/main.py:538
+msgid "_Reset"
+msgstr "_Återställ"
+
+#: gradience/frontend/main.py:564
+msgid "You have unsaved changes!"
+msgstr "Du har osparade ändringar!"
+
+#: gradience/frontend/main.py:615
+msgid "Preset saved"
+msgstr "Förinställning sparad"
+
+#: gradience/frontend/main.py:632
+msgid "Preset set successfully"
+msgstr "Förinställningen lyckades"
+
+#: gradience/frontend/main.py:645
+msgid "Unable to restore GTK 4 backup"
+msgstr "Kunde inte återställa GTK 4-backup"
+
+#: gradience/frontend/main.py:658 gradience/frontend/main.py:666
+msgid "Unable to delete current preset"
+msgstr "Det går inte att radera nuvarande förinställning"
+
+#: gradience/frontend/schemas/preset_schema.py:23
+msgid "Accent Colors"
+msgstr "Accentfärger"
+
+#: gradience/frontend/schemas/preset_schema.py:25
+msgid ""
+"These colors are used across many different widgets, such as buttons, "
+"labels, and entries, to indicate that a widget is important, interactive, or "
+"currently active."
+msgstr ""
+"Dessa färger används i många olika widgets, såsom knappar, etiketter och "
+"poster, för att indikera att en widget är viktig, interaktiv eller för "
+"närvarande aktiv."
+
+#: gradience/frontend/schemas/preset_schema.py:32
+#: gradience/frontend/schemas/preset_schema.py:63
+#: gradience/frontend/schemas/preset_schema.py:95
+#: gradience/frontend/schemas/preset_schema.py:127
+#: gradience/frontend/schemas/preset_schema.py:158
+msgid "Standalone Color"
+msgstr "Fristående färg"
+
+#: gradience/frontend/schemas/preset_schema.py:34
+#: gradience/frontend/schemas/preset_schema.py:65
+#: gradience/frontend/schemas/preset_schema.py:97
+#: gradience/frontend/schemas/preset_schema.py:129
+#: gradience/frontend/schemas/preset_schema.py:160
+msgid ""
+"The standalone colors are similar to the background ones, but provide better "
+"contrast when used as foreground color on top of a neutral background - for "
+"example, colorful text in a window."
+msgstr ""
+"De fristående färgerna liknar bakgrundsfärgerna, men ger bättre kontrast när "
+"de används som förgrundsfärg ovanpå en neutral bakgrund - till exempel "
+"färgstark text i ett fönster."
+
+#: gradience/frontend/schemas/preset_schema.py:43
+#: gradience/frontend/schemas/preset_schema.py:74
+#: gradience/frontend/schemas/preset_schema.py:106
+#: gradience/frontend/schemas/preset_schema.py:138
+#: gradience/frontend/schemas/preset_schema.py:169
+#: gradience/frontend/schemas/preset_schema.py:186
+#: gradience/frontend/schemas/preset_schema.py:206
+#: gradience/frontend/schemas/preset_schema.py:227
+#: gradience/frontend/schemas/preset_schema.py:282
+#: gradience/frontend/schemas/preset_schema.py:309
+#: gradience/frontend/schemas/preset_schema.py:326
+msgid "Background Color"
+msgstr "Bakgrundsfärg"
+
+#: gradience/frontend/schemas/preset_schema.py:48
+#: gradience/frontend/schemas/preset_schema.py:79
+#: gradience/frontend/schemas/preset_schema.py:111
+#: gradience/frontend/schemas/preset_schema.py:143
+#: gradience/frontend/schemas/preset_schema.py:174
+#: gradience/frontend/schemas/preset_schema.py:191
+#: gradience/frontend/schemas/preset_schema.py:211
+#: gradience/frontend/schemas/preset_schema.py:232
+#: gradience/frontend/schemas/preset_schema.py:287
+#: gradience/frontend/schemas/preset_schema.py:314
+#: gradience/frontend/schemas/preset_schema.py:331
+msgid "Foreground Color"
+msgstr "Förgrundsfärg"
+
+#: gradience/frontend/schemas/preset_schema.py:55
+msgid "Destructive Colors"
+msgstr "Destruktiva färger"
+
+#: gradience/frontend/schemas/preset_schema.py:57
+msgid ""
+"These colors are used for buttons to indicate a dangerous action, such as "
+"deleting a file."
+msgstr ""
+"Dessa färger används för knappar för att indikera en farlig åtgärd, som att "
+"ta bort en fil."
+
+#: gradience/frontend/schemas/preset_schema.py:86
+msgid "Success Colors"
+msgstr "Framgångsfärger"
+
+#: gradience/frontend/schemas/preset_schema.py:88
+msgid ""
+"These colors are used across many different widgets, such as buttons, "
+"labels, entries, and level bars, to indicate a success or a high level."
+msgstr ""
+"Dessa färger används i många olika widgets, såsom knappar, etiketter, poster "
+"och nivåstaplar, för att indikera en framgång eller en hög nivå."
+
+#: gradience/frontend/schemas/preset_schema.py:118
+msgid "Warning Colors"
+msgstr "Varningsfärger"
+
+#: gradience/frontend/schemas/preset_schema.py:120
+msgid ""
+"These colors are used across many different widgets, such as buttons, "
+"labels, entries, and level bars, to indicate a warning or a low level."
+msgstr ""
+"Dessa färger används i många olika widgets, såsom knappar, etiketter, poster "
+"och nivåstaplar, för att indikera en varning eller en låg nivå."
+
+#: gradience/frontend/schemas/preset_schema.py:150
+msgid "Error Colors"
+msgstr "Felfärger"
+
+#: gradience/frontend/schemas/preset_schema.py:152
+msgid ""
+"These colors are used across many different widgets, such as buttons, "
+"labels, and entries, to indicate a failure."
+msgstr ""
+"Dessa färger används i många olika widgets, såsom knappar, etiketter och "
+"poster, för att indikera ett fel."
+
+#: gradience/frontend/schemas/preset_schema.py:181
+msgid "Window Colors"
+msgstr "Fönsterfärger"
+
+#: gradience/frontend/schemas/preset_schema.py:182
+msgid "These colors are used primarily for windows."
+msgstr "Dessa färger används främst för fönster."
+
+#: gradience/frontend/schemas/preset_schema.py:198
+msgid "View Colors"
+msgstr "Visningsfärger"
+
+#: gradience/frontend/schemas/preset_schema.py:200
+msgid ""
+"These colors are used in a variety of widgets, such as text views and "
+"entries."
+msgstr ""
+"Dessa färger används i en mängd olika widgets, såsom textvyer och poster."
+
+#: gradience/frontend/schemas/preset_schema.py:218
+msgid "Header Bar Colors"
+msgstr "Rubrikfältsfärger"
+
+#: gradience/frontend/schemas/preset_schema.py:220
+msgid ""
+"These colors are used for header bars, as well as widgets that are meant to "
+"be visually attached to it, such as search bars or tab bars."
+msgstr ""
+"Dessa färger används för rubrikfält, såväl som widgets som är avsedda att "
+"fästas visuellt till, såsom sökfält eller flikfält."
+
+#: gradience/frontend/schemas/preset_schema.py:237
+msgid "Border Color"
+msgstr "Kantfärger"
+
+#: gradience/frontend/schemas/preset_schema.py:239
+msgid ""
+"The border color has the same default value as a foreground color, but "
+"doesn't change along with it. This can be useful if a light window has a "
+"dark header bar with light text; in this case it may be desirable to keep "
+"the border dark. This variable is only used for vertical borders - for "
+"example, separators between the two header bars in a split header bar layout."
+msgstr ""
+"Kantfärgen har samma standardvärde som en förgrundsfärg, men ändras inte "
+"tillsammans med den. Detta kan vara användbart om ett ljust fönster har en "
+"mörk rubrik med ljus text; i detta fall kan det vara önskvärt att hålla "
+"bården mörk. Den här variabeln används endast för vertikala ramar - till "
+"exempel avgränsare mellan de två rubrikfälten i en layout med delad rubrik."
+
+#: gradience/frontend/schemas/preset_schema.py:252
+msgid "Backdrop Color"
+msgstr "Stödjarfärg"
+
+#: gradience/frontend/schemas/preset_schema.py:254
+msgid ""
+"The backdrop color is used instead of the background color when the window "
+"is not focused. By default it's an alias of the window's background color "
+"and changes together with it. When changing this variable, make sure to set "
+"it to a value matching your header bar background color."
+msgstr ""
+"Stödjarfärgen används istället för bakgrundsfärgen när fönstret inte är "
+"fokuserat. Som standard är det ett alias för fönstrets bakgrundsfärg och "
+"ändras tillsammans med den. När du ändrar den här variabeln, se till att "
+"ställa in den till ett värde som matchar bakgrundsfärgen för rubrikfältet."
+
+#: gradience/frontend/schemas/preset_schema.py:265
+#: gradience/frontend/schemas/preset_schema.py:292
+#: gradience/frontend/schemas/preset_schema.py:343
+msgid "Shade Color"
+msgstr "Nyansfärg"
+
+#: gradience/frontend/schemas/preset_schema.py:267
+msgid ""
+"The shade color is used to provide a dark border for header bars and similar "
+"widgets that separates them from the main window."
+msgstr ""
+"Nyansfärgen används för att ge en mörk ram för rubrikfält och liknande "
+"widgets som skiljer dem från huvudfönstret."
+
+#: gradience/frontend/schemas/preset_schema.py:277
+msgid "Card Colors"
+msgstr "Kortfärger"
+
+#: gradience/frontend/schemas/preset_schema.py:278
+msgid "These colors are used for cards and boxed lists."
+msgstr "Dessa färger används för kort och packade listor."
+
+#: gradience/frontend/schemas/preset_schema.py:294
+msgid ""
+"The shade color is used for shadows that are used by cards to separate "
+"themselves from the window background, as well as for row dividers in the "
+"cards."
+msgstr ""
+"Nyansfärgen används för skuggor som används av kort för att skilja sig från "
+"fönsterbakgrunden, samt för radavdelare i korten."
+
+#: gradience/frontend/schemas/preset_schema.py:304
+msgid "Dialog Colors"
+msgstr "Dialogfärger"
+
+#: gradience/frontend/schemas/preset_schema.py:305
+msgid "These colors are used for message dialogs."
+msgstr "Dessa färger används för meddelande dialoger."
+
+#: gradience/frontend/schemas/preset_schema.py:321
+msgid "Popover Colors"
+msgstr "Popover färger"
+
+#: gradience/frontend/schemas/preset_schema.py:322
+msgid "These colors are used for popovers."
+msgstr "Dessa färger används för popovers."
+
+#: gradience/frontend/schemas/preset_schema.py:338
+msgid "Miscellaneous Colors"
+msgstr "Diverse färger"
+
+#: gradience/frontend/schemas/preset_schema.py:339
+msgid "Colors that don't fit in any particular group."
+msgstr "Färger som inte passar in i någon speciell grupp."
+
+#: gradience/frontend/schemas/preset_schema.py:345
+msgid ""
+"The shade color is used by inline tab bars, as well as the transitions in "
+"leaflets and flaps, and info bar borders."
+msgstr ""
+"Nyansfärgen används av inline flikstaplar, såväl som övergångarna i "
+"broschyrer och klaffar, och informationsfältskanter."
+
+#: gradience/frontend/schemas/preset_schema.py:353
+msgid "Scrollbar Outline Color"
+msgstr "Rullningslistens konturfärg"
+
+#: gradience/frontend/schemas/preset_schema.py:355
+msgid ""
+"The scrollbar outline color is used by scrollbars to ensure that overlay "
+"scrollbars are visible regardless of the content color."
+msgstr ""
+"Rullningslistens konturfärg används av rullningslister för att säkerställa "
+"att överlagringsrullningslister är synliga oavsett innehållsfärg."
+
+#: gradience/frontend/schemas/preset_schema.py:365
+msgid "Blue"
+msgstr "Blå"
+
+#: gradience/frontend/schemas/preset_schema.py:366
+msgid "Green"
+msgstr "Grön"
+
+#: gradience/frontend/schemas/preset_schema.py:367
+msgid "Yellow"
+msgstr "Gul"
+
+#: gradience/frontend/schemas/preset_schema.py:368
+msgid "Orange"
+msgstr "Orange"
+
+#: gradience/frontend/schemas/preset_schema.py:369
+msgid "Red"
+msgstr "Röd"
+
+#: gradience/frontend/schemas/preset_schema.py:370
+msgid "Purple"
+msgstr "Lila"
+
+#: gradience/frontend/schemas/preset_schema.py:371
+msgid "Brown"
+msgstr "Brun"
+
+#: gradience/frontend/schemas/preset_schema.py:372
+#: gradience/frontend/views/main_window.py:206
+msgid "Light"
+msgstr "Ljus"
+
+#: gradience/frontend/schemas/preset_schema.py:373
+#: gradience/frontend/views/main_window.py:207
+msgid "Dark"
+msgstr "Mörk"
+
+#: gradience/frontend/views/about_window.py:116
+msgid "Copyright © 2022-2023 Gradience Team"
+msgstr "Copyright © 2022-2023 Gradience Team"
+
+#: gradience/frontend/views/about_window.py:125
+msgid "Plugins by"
+msgstr "Plugins av"
+
+#: gradience/frontend/views/about_window.py:133
+msgid "Presets by"
+msgstr "Förinställningar av"
+
+#: gradience/frontend/views/about_window.py:155
+msgid "Packages by"
+msgstr "Paket av"
+
+#: gradience/frontend/views/about_window.py:162
+msgid "Fixes by"
+msgstr "Fixar av"
+
+#: gradience/frontend/views/about_window.py:172
+msgid "Special thanks to"
+msgstr "Särskilda tack till"
+
+#: gradience/frontend/views/main_window.py:132
+msgid "Monet Engine"
+msgstr "Monet motor"
+
+#: gradience/frontend/views/main_window.py:135
+msgid ""
+"Monet is an engine that generates a Material Design 3 palette from an "
+"image's color."
+msgstr ""
+"Monet är en motor som genererar en Material Design 3-palett från en bilds "
+"färger."
+
+#: gradience/frontend/views/main_window.py:149
+msgid "Select an Image"
+msgstr "Välj en bild"
+
+#: gradience/frontend/views/main_window.py:152
+msgid "Choose a Image File"
+msgstr "Välj en bild fil"
+
+#: gradience/frontend/views/main_window.py:161
+msgid "Choose a File"
+msgstr "Välj en fil"
+
+#: gradience/frontend/views/main_window.py:183
+msgid "Monet Palette"
+msgstr "Monet Palett"
+
+#: gradience/frontend/views/main_window.py:202
+msgid "Theme"
+msgstr "Tema"
+
+#: gradience/frontend/views/main_window.py:205
+msgid "Auto"
+msgstr "Automatisk"
+
+#: gradience/frontend/views/main_window.py:241
+msgid "Failed to generate Monet palette"
+msgstr "Misslyckades att generera Monet-palett"
+
+#: gradience/frontend/views/main_window.py:245
+msgid "Palette generated"
+msgstr "Palett genererad"
+
+#: gradience/frontend/views/main_window.py:249
+msgid "Select a background first"
+msgstr "Välj en bakgrund först"
+
+#: gradience/frontend/views/main_window.py:273
+msgid "Palette Colors"
+msgstr "Palett färger"
+
+#: gradience/frontend/views/main_window.py:276
+msgid ""
+"Named palette colors used by some applications. Default colors follow the <a "
+"href=\"https://developer.gnome.org/hig/reference/palette.html\">GNOME Human "
+"Interface Guidelines</a>."
+msgstr ""
+"Namngivna palettfärger som används av vissa program. Standardfärgerna följer "
+"<a href=\"https://developer.gnome.org/hig/reference/palette.html\">GNOMEs "
+"riktlinjer för mänskligt gränssnitt</a>."
+
+#: gradience/frontend/views/plugins_list.py:89
+msgid "Plugins"
+msgstr "Plugins"
+
+#: gradience/frontend/views/plugins_list.py:92
+msgid ""
+"Plugins add additional features to Gradience, plugins are made by Gradience "
+"community and can cause issues."
+msgstr ""
+"Plugins lägger till ytterligare funktioner till Gradience, plugins görs av "
+"Gradience gemenskapen och kan orsaka problem."
+
+#: gradience/frontend/views/plugins_list.py:104
+msgid "No Plugins Found."
+msgstr "Inga plugins hittades."
+
+#: gradience/frontend/views/presets_manager_window.py:116
+#: gradience/frontend/views/presets_manager_window.py:352
+msgid "User Presets"
+msgstr "Användarförinställningar"
+
+#: gradience/frontend/views/presets_manager_window.py:191
+msgid "Add new repository"
+msgstr "Lägg till nytt arkiv"
+
+#: gradience/frontend/views/presets_manager_window.py:192
+msgid "Add a repository to install additional presets."
+msgstr "Lägg till ett arkiv för att installera ytterligare förinställningar."
+
+#: gradience/frontend/views/presets_manager_window.py:198
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: gradience/frontend/views/presets_manager_window.py:199
+msgid "Add"
+msgstr "Lägg till"
+
+#: gradience/frontend/views/presets_manager_window.py:295
+msgid "Preset already exists"
+msgstr "Förinställning finns redan"
+
+#: gradience/frontend/views/presets_manager_window.py:307
+msgid "Preset imported"
+msgstr "Förinställning importerad"
+
+#: gradience/frontend/views/presets_manager_window.py:310
+msgid "Unsupported file format, must be .json"
+msgstr "Filformat som inte stöds, måste vara .json"
+
+#: gradience/frontend/views/presets_manager_window.py:345
+msgid "Built-in Presets"
+msgstr "Inbyggda förinställningar"
+
+#: gradience/frontend/views/presets_manager_window.py:355
+msgid ""
+"See <a href=\"https://github.com/GradienceTeam/Community\">GradienceTeam/"
+"Community</a> on Github for more presets."
+msgstr ""
+"Se <a href=\"https://github.com/GradienceTeam/Community\">GradienceTeam/"
+"Community</a> på Github för fler förinställningar."
+
+#: gradience/frontend/views/presets_manager_window.py:381
+msgid ""
+"No preset found! Use the import button to import one or search one on the "
+"Explore tab."
+msgstr ""
+"Ingen förinställning hittades! Använd importknappen för att importera en "
+"eller sök efter en på fliken Utforska."
+
+#: gradience/frontend/views/welcome_window.py:97
+msgid "Thanks for updating Gradience!"
+msgstr "Tack för att du uppdaterade Gradience!"
+
+#: gradience/frontend/widgets/explore_preset_row.py:68
+#: gradience/frontend/widgets/explore_preset_row.py:94
+msgid "Preset could not be downloaded"
+msgstr "Förinställningen kunde inte laddas ner"
+
+#: gradience/frontend/widgets/explore_preset_row.py:82
+#: gradience/frontend/widgets/explore_preset_row.py:98
+msgid "Preset downloaded"
+msgstr "Förinställning nedladdad"
+
+#: gradience/frontend/widgets/option_row.py:52
+msgid "This option is only partially supported by the adw-gtk3 theme."
+msgstr "Det här alternativet stöds endast delvis av adw-gtk3-temat."
+
+#: gradience/frontend/widgets/option_row.py:57
+msgid "This option is not supported by the adw-gtk3 theme."
+msgstr "Det här alternativet stöds inte av adw-gtk3-temat."
+
+#: gradience/frontend/widgets/option_row.py:110
+msgid "Not a color, see text value"
+msgstr "Inte en färg, se textvärde"
+
+#: gradience/frontend/widgets/plugin_row.py:85
+msgid "Unable to remove"
+msgstr "Kan inte tas bort"
+
+#: gradience/frontend/widgets/plugin_row.py:86
+msgid "This is a system plugin, and cannot be removed."
+msgstr "Detta är ett systeminsticksprogram och kan inte tas bort."
+
+#: gradience/frontend/widgets/plugin_row.py:88
+msgid "Close"
+msgstr "Stäng"
+
+#: gradience/frontend/widgets/preset_row.py:87
+#: gradience/frontend/widgets/preset_row.py:104
+msgid "Remove from Favorites"
+msgstr "Ta bort från favoriter"
+
+#: gradience/frontend/widgets/preset_row.py:90
+#: gradience/frontend/widgets/preset_row.py:100
+msgid "Add to Favorites"
+msgstr "Lägg till i favoriter"
+
+#: gradience/frontend/widgets/preset_row.py:166
+msgid "Preset removed"
+msgstr "Förinställning borttagen"
+
+#: gradience/frontend/widgets/preset_row.py:167
+msgid "Undo"
+msgstr "Ångra"
+
+#: gradience/frontend/widgets/preset_row.py:182
+msgid "Pending Deletion"
+msgstr "Under pågående radering"
+
+#: gradience/frontend/widgets/preset_row.py:196
+msgid "Unable to delete preset"
+msgstr "Det går inte att radera förinställningen"
+
+#: gradience/frontend/widgets/repo_row.py:60
+msgid "Repository removed"
+msgstr "Arkiv raderat"
+
+#~ msgid "Background Image"
+#~ msgstr "Bakgrundsbild"
+
+#~ msgid "Tone"
+#~ msgstr "Ton"
+
+#, fuzzy
+#~ msgid "Adwaita Demo"
+#~ msgstr "Adwaita Demo"
+
+#~ msgid "GTK 4 Demo"
+#~ msgstr "GTK 4 Demo"
+
+#~ msgid "GTK 4 Widget Factory"
+#~ msgstr "GTK 4 Widget Factory"
+
+#, fuzzy
+#~ msgid "Failed to save override"
+#~ msgstr "Det gick inte att spara en åsidosättelse"
+
+#, fuzzy
+#~ msgid "Unexpected file error occurred"
+#~ msgstr "Ett oväntat filfel inträffade"
+
+#~ msgid "Save"
+#~ msgstr "Spara"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "Gradience is a tool for customizing Libadwaita applications and the adw-"
+#~ "gtk3 theme.\n"
+#~ "The main features of Gradience include the following:\n"
+#~ "\n"
+#~ "🎨️ Changing any color of Adwaita theme\n"
+#~ "🖼️ Applying Material 3 color scheme from wallpaper\n"
+#~ "🎁️ Usage of other users presets\n"
+#~ "⚙️ Changing advanced options with CSS\n"
+#~ "🧩️ Extending functionality using plugins\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Gradience är ett verktyg för att anpassa Libadwaita-programmen och adw-"
+#~ "gtk3-temat.\n"
+#~ "Med Gradience kan du:\n"
+#~ "\n"
+#~ "- Ändra vilken färg som helst i Adwaita-temat.\n"
+#~ "- Tillämpa Material 3-färger från wallpaper\n"
+#~ "- Använda andra användares förinställningar\n"
+#~ "- Ändra avancerade alternativ med CSS\n"
+#~ "- Utöka funktionaliteten med hjälp av plugins\n"
+#~ "\n"
+#~ "Den här appen är skriven i Python och använder GTK 4 och Libadwaita.\n"
+#~ "            "
+
+#~ msgid "Unsupported background type"
+#~ msgstr "Bakgrundstyp som inte stöds"
+
+#, fuzzy
+#~ msgid ""
+#~ "In this release, we added plugin support, a plugin repository, badges, "
+#~ "and a quick preset switcher. We also split the preset repository into an "
+#~ "“Official” repository and a “Curated” repositories."
+#~ msgstr ""
+#~ "I den här versionen har vi lagt till stöd för insticksprogram, ett "
+#~ "insticksprogramsförråd, märken och en snabb växlare för förinställningar. "
+#~ "Vi har också delat upp förinställningsregistret i ett \"officiellt\" "
+#~ "arkiv och ett \"kurerat\" arkiv."
+
+#~ msgid "Change the look of Adwaita, with ease."
+#~ msgstr "Ändra utseendet på Adwaita, med lätthet."
+
+#~ msgid "With Gradience you can:"
+#~ msgstr "Med Gradience kan du:"
+
+#~ msgid "This app is written in Python and uses GTK 4 and Libadwaita."
+#~ msgstr "Detta program är skrivet i Python och använder GTK och Libadwaita."
+
+#~ msgid "colors purple"
+#~ msgstr "färger lila"
+
+#~ msgid "monet purple"
+#~ msgstr "monet lila"
+
+#~ msgid "advanced purple"
+#~ msgstr "avancerad lila"
+
+#, fuzzy
+#~ msgid "Preset reseted"
+#~ msgstr "Förinställning återställd"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "<ul>\n"
+#~ "<li>Add AdwViewSwitcher in the header bar.</li>\n"
+#~ "<li>Move CSS to the \"Advanced\" tab</li>\n"
+#~ "<li>Move the rest to the \"colors\" tab</li>\n"
+#~ "<li>Add Monet tab which generates a theme from a background</li>\n"
+#~ "<li>Add disk saved and disk unsaved icon in the header bar</li>\n"
+#~ "<li>Update about dialog</li>\n"
+#~ "<li>Change license to GNU GPLv3</li>\n"
+#~ "<li>Begin plugin support</li>\n"
+#~ "<li>Move preset selector to a drop-down called palette (icon palette)</"
+#~ "li>\n"
+#~ "<li>Add ability to apply the theme only for dark theme or oy for light "
+#~ "theme</li>\n"
+#~ "<li>Automaticly use Adwaita-dark preset if the user prefered scheme is "
+#~ "dark.</li>\n"
+#~ "<li>Added Flatpak CI build</li>\n"
+#~ "<li>Added issue template for bug and feature request </li>\n"
+#~ "<li>`Main` branch is now protected by GitHub branch protection. The "
+#~ "development is done on `next` branch</li>\n"
+#~ "</ul>\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<ul>\n"
+#~ "         <li>Lägg till AdwViewSwitcher i rubrikfältet.</li>\n"
+#~ "         <li>Flytta CSS till fliken \"Avancerat\"</li>\n"
+#~ "         <li>Flytta resten till fliken \"Färger\"</li>\n"
+#~ "         <li>Lägg till Monet-fliken som genererar ett tema från en "
+#~ "bakgrund</li>\n"
+#~ "         <li>Lägg till disk sparad och disk osparad ikon i rubrikfältet</"
+#~ "li>\n"
+#~ "         <li>Uppdatera om dialog</li>\n"
+#~ "         <li>Ändrade licens till GNU GPLv3</li>\n"
+#~ "         <li>Börja jobba på stöd för insticksmoduler</li>\n"
+#~ "         <li>Flyttade förinställningsväljaren till en rullgardinsmeny som "
+#~ "heter palett (ikonpalett)</li>\n"
+#~ "         <li>La till möjlighet att tillämpa temat endast för mörkt tema "
+#~ "eller också för ljust tema</li>\n"
+#~ "         <li>Använd automatiskt Adwaita-mörk förinställning om det "
+#~ "användarinställda schemat är mörkt.</li>\n"
+#~ "         <li>Lade till Flatpak CI byggen</li>\n"
+#~ "         <li>La till problemmall för bugg- och funktionsbegäran </li>\n"
+#~ "         <li>`Main`-grenen är nu skyddad av GitHubs-grenskydd. "
+#~ "Utvecklingen görs på `next` grenen </li>\n"
+#~ "       </ul>\n"
+#~ "            "
+
+#, fuzzy
+#~ msgid "Share preset"
+#~ msgstr "Dela förinställning"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "                <ul>\n"
+#~ "                <li>Add AdwViewSwitcher in the header bar.</li>\n"
+#~ "                <li>Move CSS to the \"Advanced\" tab</li>\n"
+#~ "                <li>Move the rest to the \"colors\" tab</li>\n"
+#~ "                <li>Add Monet tab which generates a theme from a "
+#~ "background</li>\n"
+#~ "                <li>Add disk saved and disk unsaved icon in the header "
+#~ "bar</li>\n"
+#~ "                <li>Update about dialog</li>\n"
+#~ "                <li>Change license to GNU GPLv3</li>\n"
+#~ "                <li>Begin plugin support</li>\n"
+#~ "                <li>Move preset selector to a drop-down called palette "
+#~ "(icon palette)</li>\n"
+#~ "                <li>Add ability to apply the theme onlyfor dark theme or "
+#~ "oy for light theme</li>\n"
+#~ "                <li>Automaticly use Adwaita-dark preset if the user "
+#~ "prefered scheme is dark.</li>\n"
+#~ "                <li>Added Flatpak CI build</li>\n"
+#~ "                <li>Added issue template for bug and feature request </"
+#~ "li>\n"
+#~ "                <li>`Main` branch is now protected by GitHub branch "
+#~ "protection. The development is done on `next` branch</li>\n"
+#~ "                </ul>\n"
+#~ "                "
+#~ msgstr ""
+#~ "\n"
+#~ "<ul>\n"
+#~ "         <li>Lägg till AdwViewSwitcher i rubrikfältet.</li>\n"
+#~ "         <li>Flytta CSS till fliken \"Avancerat\"</li>\n"
+#~ "         <li>Flytta resten till fliken \"Färger\"</li>\n"
+#~ "         <li>Lägg till Monet-fliken som genererar ett tema från en "
+#~ "bakgrund</li>\n"
+#~ "         <li>Lägg till disk sparad och disk osparad ikon i rubrikfältet</"
+#~ "li>\n"
+#~ "         <li>Uppdatera om dialog</li>\n"
+#~ "         <li>Ändrade licens till GNU GPLv3</li>\n"
+#~ "         <li>Börja jobba på stöd för insticksmoduler</li>\n"
+#~ "         <li>Flyttade förinställningsväljaren till en rullgardinsmeny som "
+#~ "heter palett (ikonpalett)</li>\n"
+#~ "         <li>La till möjlighet att tillämpa temat endast för mörkt tema "
+#~ "eller också för ljust tema</li>\n"
+#~ "         <li>Använd automatiskt Adwaita-mörk förinställning om det "
+#~ "användarinställda schemat är mörkt.</li>\n"
+#~ "         <li>Lade till Flatpak CI byggen</li>\n"
+#~ "         <li>La till problemmall för bugg- och funktionsbegäran </li>\n"
+#~ "         <li>`Main`-grenen är nu skyddad av GitHubs-grenskydd. "
+#~ "Utvecklingen görs på `next` grenen </li>\n"
+#~ "       </ul>\n"
+#~ "            "
+
+#~ msgid "colors"
+#~ msgstr "färger"
+
+#~ msgid "monet"
+#~ msgstr "monet"
+
+#~ msgid "advanced"
+#~ msgstr "avancerat"
+
+#, fuzzy
+#~ msgid "New Release of Gradience."
+#~ msgstr "Om Gradience"
+
+#, fuzzy
+#~ msgid "First release of Gradience."
+#~ msgstr "Om Gradience"
+
+#, fuzzy
+#~ msgid "Select app types you want to affect:"
+#~ msgstr "Välj programtyper du vill påverka:"
+
+#~ msgid "Libadwaita and GTK 4 apps"
+#~ msgstr "Libadwaita och GTK 4 program"
+
+#, fuzzy
+#~ msgid "GTK 3 apps (adw-gtk3 theme required)"
+#~ msgstr "GTK 3 program (adw-gtk3-tema krävs)"
+
+#, fuzzy
+#~ msgid "Enable plugin"
+#~ msgstr "Växla textvärde"
+
+#, fuzzy
+#~ msgid "Open in file manager"
+#~ msgstr "Öppna i filhanteraren"
+
+#, fuzzy
+#~ msgid "Customize Adwaita with ease"
+#~ msgstr "Ändra utseendet på Adwaita, med lätthet."
+
+#, fuzzy
+#~ msgid "Configure themes"
+#~ msgstr "Om Gradience"
+
+#, fuzzy
+#~ msgid "Start using Gradience"
+#~ msgstr "Om Gradience"
+
+#~ msgid "Unsaved changes"
+#~ msgstr "Osparade ändringar"
+
+#~ msgid "Save changes"
+#~ msgstr "Spara ändringar"
+
+#~ msgid "Apply this color scheme?"
+#~ msgstr "Använd detta färgschema?"
+
+#, fuzzy
+#~ msgid "Builtin Presets"
+#~ msgstr "Inbyggda förinställningar"
+
+#~ msgid "Choose a file"
+#~ msgstr "Välj en fil"
+
+#~ msgid "Save preset as..."
+#~ msgstr "Spara förinställning som..."
+
+#, fuzzy
+#~ msgid "Installed Presets"
+#~ msgstr "Hantera förinställningar"
+
+#~ msgid "Adwaita"
+#~ msgstr "Adwaita"
+
+#~ msgid "Adwaita Dark"
+#~ msgstr "Adwaita mörk"
+
+#~ msgid "Scheme successfully saved!"
+#~ msgstr "Schema har sparats!"
+
+#~ msgid "Reset successfully!"
+#~ msgstr "Återställt framgångsrikt!"
+
+#, fuzzy
+#~ msgid "Rename preset"
+#~ msgstr "Spara förinställningar"
+
+#, fuzzy
+#~ msgid "Select app types you want to theme:"
+#~ msgstr "Välj programtyper du vill påverka:"
+
+#, fuzzy
+#~ msgid "GTK 3 apps (adw-gtk3 theme is required)"
+#~ msgstr "GTK 3 program (adw-gtk3-tema krävs)"
+
+#, fuzzy
+#~ msgid "Toggle plugin"
+#~ msgstr "Växla textvärde"

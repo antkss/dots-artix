@@ -8,6 +8,7 @@ pkgconfig_deps = [
   dependency('gtk-layer-shell-0'),
   dependency('gobject-2.0'),
   dependency('gtk+-3.0'),
+  dependency('gio-unix-2.0'),
   dependency('libnm'),
   dependency('astal-3.0'),
   dependency('astal-io-0.1'),
@@ -17,6 +18,7 @@ pkgconfig_deps = [
   dependency('astal-mpris-0.1'),
   dependency('astal-hyprland-0.1'),
   dependency('astal-notifd-0.1'),
+  dependency('json-glib-1.0'), 
   dependency('libpulse'), # 🟢 The C library
   dependency('libpulse-mainloop-glib'), # 🟢 Required for GLib integration
 ]
@@ -25,7 +27,9 @@ deps = pkgconfig_deps + meson.get_compiler('c').find_library('m')
 
 sources = files(
   'bar.vala',
-  'app.vala'
+  'niri.vala',
+  'app.vala',
+  'niri.vala'
 )
 
 executable(
@@ -36,4 +40,3 @@ executable(
   vala_args: ['--pkg', 'posix', '--pkg', 'libpulse', '--pkg', 'libpulse-mainloop-glib'],
   install_dir: bindir,
 )
-

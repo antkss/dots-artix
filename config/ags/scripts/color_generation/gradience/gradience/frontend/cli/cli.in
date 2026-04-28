@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+
+import os
+import sys
+
+
+version = "@VERSION@"
+is_local = @local_build@
+
+if is_local:
+    sys.path.insert(1, "@PYTHON@")
+    os.environ["XDG_DATA_DIRS"] = "@SCHEMAS_DIR@:" + os.environ.get("XDG_DATA_DIRS", "")
+
+from gradience.frontend.cli.runtime import main
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main(
+            version=version,
+            app_id="@APP_ID@",
+            source_root="@PYTHON@" if is_local else None,
+        )
+    )

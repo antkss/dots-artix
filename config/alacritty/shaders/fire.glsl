@@ -15,6 +15,7 @@ uniform float iTimeCursorChange;
 uniform vec4 iCurrentCursorColor;
 uniform vec4 iPreviousCursorColor;
 uniform sampler2D iChannel0;
+uniform float iDuration;
 
 out vec4 fragColor;
 
@@ -84,30 +85,33 @@ vec4 saturate(vec4 color, float factor) {
     float gray = dot(color, vec4(0.299, 0.587, 0.114, 0.)); // luminance
     return mix(vec4(gray), color, factor);
 }
-const vec4 TRAIL_COLOR = vec4(1.0, 0.725, 0.161, 1.0);
+const vec4 TRAIL_COLOR = vec4(1.0, 1.0, 1.0, 1.0);
 const vec4 TRAIL_COLOR_ACCENT = vec4(1.0, 0., 0., 1.0);
 const float DURATION = 1.0; //IN SECONDS
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord)
 {
     fragColor = texture(iChannel0, fragCoord.xy / iResolution.xy);
-    // Normalization for fragCoord to a space of -1 to 1;
+
+    float elapsed = iTime - iTimeCursorChange;
+    if (elapsed >= iDuration) {
+        return;
+    }
+
+    float progress = clamp(elapsed / iDuration, 0.0, 1.0);
+
     vec2 vu = norm(fragCoord, 1.);
     vec2 offsetFactor = vec2(-.5, 0.5);
 
-    // Normalization for cursor position and size;
-    // cursor xy has the postion in a space of -1 to 1;
-    // zw has the width and height
     vec4 currentCursor = vec4(norm(vec2(iCurrentCursor.x, iCurrentCursor.y), 1.), norm(iCurrentCursor.zw, 0.));
     vec4 previousCursor = vec4(norm(vec2(iPreviousCursor.x, iPreviousCursor.y), 1.), norm(iPreviousCursor.zw, 0.));
 
     vec2 centerCC = getRectangleCenter(currentCursor);
     vec2 centerCP = getRectangleCenter(previousCursor);
-    // When drawing a parellelogram between cursors for the trail i need to determine where to start at the top-left or top-right vertex of the cursor
+
     float vertexFactor = determineStartVertexFactor(currentCursor.xy, previousCursor.xy);
     float invertedVertexFactor = 1.0 - vertexFactor;
 
-    // Set every vertex of my parellogram
     vec2 v0 = vec2(currentCursor.x + currentCursor.z * vertexFactor, currentCursor.y - currentCursor.w);
     vec2 v1 = vec2(currentCursor.x + currentCursor.z * invertedVertexFactor, currentCursor.y);
     vec2 v2 = vec2(previousCursor.x + currentCursor.z * invertedVertexFactor, previousCursor.y);
@@ -116,20 +120,18 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord)
     float sdfCurrentCursor = getSdfRectangle(vu, currentCursor.xy - (currentCursor.zw * offsetFactor), currentCursor.zw * 0.5);
     float sdfTrail = getSdfParallelogram(vu, v0, v1, v2, v3);
 
-    float progress = clamp((iTime - iTimeCursorChange) / DURATION, 0.0, 1.0);
     float easedProgress = ease(progress);
-    // Distance between cursors determine the total length of the parallelogram;
     float lineLength = distance(centerCC, centerCP);
 
     float mod = .007;
-    //trailblaze
-    // HACK: Using the saturate function because I currently don't know how to blend colors without losing saturation.
+
     vec4 trail = mix(saturate(TRAIL_COLOR_ACCENT, 1.5), fragColor, 1. - smoothstep(0., sdfTrail + mod, 0.007));
     trail = mix(saturate(TRAIL_COLOR, 1.5), trail, 1. - smoothstep(0., sdfTrail + mod, 0.006));
     trail = mix(trail, saturate(TRAIL_COLOR, 1.5), step(sdfTrail + mod, 0.));
-    //cursorblaze
+
     trail = mix(saturate(TRAIL_COLOR_ACCENT, 1.5), trail, 1. - smoothstep(0., sdfCurrentCursor + .002, 0.004));
     trail = mix(saturate(TRAIL_COLOR, 1.5), trail, 1. - smoothstep(0., sdfCurrentCursor + .002, 0.004));
+
     fragColor = mix(trail, fragColor, 1. - smoothstep(0., sdfCurrentCursor, easedProgress * lineLength));
 }
 

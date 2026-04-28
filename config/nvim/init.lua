@@ -42,5 +42,5 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.lsp.log.set_level("off")
 require("config")
-
+vim.o.winborder = 'rounded'
 

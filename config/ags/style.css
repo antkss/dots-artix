@@ -1,6 +1,6 @@
 .active-label {
   background-color: transparent;
-  color: #FFF8F6;
+  color: #E9F9FF;
 }
 
 .bar {
@@ -11,15 +11,15 @@
   border-radius: 8px;
   /* min-width: $screen_width; */
   padding: 4px;
-  background-color: #FFF8F6;
-  color: #271812;
+  background-color: #E9F9FF;
+  color: #00343E;
   border-radius: 8px;
 }
 
 .cir {
   all: unset;
-  background-color: #FFE9E2;
-  color: #FFE9E2;
+  background-color: #BFF0FF;
+  color: #BFF0FF;
 }
 
 .icon {
@@ -31,7 +31,7 @@
 
 .panel {
   all: unset;
-  background-color: #FFE9E2;
+  background-color: #BFF0FF;
   border-radius: 8px;
   padding: 3px;
   margin-left: 3px;
@@ -42,7 +42,7 @@
 
 .scrollbar {
   all: unset;
-  background-color: #FFE9E2;
+  background-color: #BFF0FF;
 }
 
 .space {
@@ -66,14 +66,14 @@
 
 .text {
   all: unset;
-  color: #271812;
+  color: #00343E;
   background-color: transparent;
 }
 
 .tray {
   all: unset;
-  background-color: #FFF8F6;
-  color: #271812;
+  background-color: #E9F9FF;
+  color: #00343E;
   border-radius: 8px;
   padding: 7px;
 }
@@ -83,20 +83,20 @@
   background-color: transparent;
   min-height: 22.5px;
   min-width: 22.5px;
-  color: #271812;
+  color: #00343E;
 }
 .button:hover label {
-  background-color: rgba(255, 248, 246, 0.2);
-  border-color: rgba(39, 24, 18, 0.2);
+  background-color: rgba(233, 249, 255, 0.2);
+  border-color: rgba(0, 52, 62, 0.2);
   border-radius: 8px;
 }
 .button:active label {
-  background-color: rgba(39, 24, 18, 0.2);
+  background-color: rgba(0, 52, 62, 0.2);
   border-radius: 8px;
 }
 .button:focus {
-  background-color: #A33E00;
-  color: #FFF8F6;
+  background-color: #00666F;
+  color: #E9F9FF;
   border-radius: 8px;
 }
 
@@ -109,37 +109,37 @@
 
 .button_active_big {
   all: unset;
-  background-color: #A33E00;
+  background-color: #00666F;
   border-radius: 8px;
   min-height: 25px;
   min-width: 25px;
-  color: #FFF8F6;
+  color: #E9F9FF;
 }
 .button_active_big:hover label {
-  background-color: rgba(255, 248, 246, 0.2);
-  border-color: rgba(39, 24, 18, 0.2);
+  background-color: rgba(233, 249, 255, 0.2);
+  border-color: rgba(0, 52, 62, 0.2);
   border-radius: 8px;
 }
 .button_active_big:active label {
-  background-color: rgba(39, 24, 18, 0.2);
+  background-color: rgba(0, 52, 62, 0.2);
   border-radius: 8px;
 }
 
 .button_active {
   all: unset;
-  background-color: #A33E00;
+  background-color: #00666F;
   border-radius: 8px;
   min-height: 22.5px;
   min-width: 22.5px;
-  color: #FFF8F6;
+  color: #E9F9FF;
 }
 .button_active:hover label {
-  background-color: rgba(163, 62, 0, 0.2);
-  border-color: rgba(39, 24, 18, 0.2);
+  background-color: rgba(0, 102, 111, 0.2);
+  border-color: rgba(0, 52, 62, 0.2);
   border-radius: 8px;
 }
 .button_active:active label {
-  background-color: rgba(39, 24, 18, 0.2);
+  background-color: rgba(0, 52, 62, 0.2);
   border-radius: 8px;
 }
 
@@ -149,22 +149,22 @@
   border-radius: 8px;
   min-height: 22.5px;
   min-width: 22.5px;
-  border-color: #A33E00;
-  color: #A33E00;
+  border-color: #00666F;
+  color: #00666F;
 }
 
 .button_inactive_big {
   all: unset;
-  background-color: #FFF8F6;
+  background-color: #E9F9FF;
   border-radius: 8px;
   min-height: 25px;
   min-width: 25px;
-  border-color: #A33E00;
-  color: #A33E00;
+  border-color: #00666F;
+  color: #00666F;
 }
 .button_inactive_big:hover label {
-  background-color: rgba(39, 24, 18, 0.2);
-  border-color: rgba(39, 24, 18, 0.2);
+  background-color: rgba(0, 52, 62, 0.2);
+  border-color: rgba(0, 52, 62, 0.2);
   border-radius: 8px;
 }
 
@@ -210,22 +210,22 @@
   margin-right: 0.6em;
 }
 .AudioSlider trough {
-  background-color: rgba(39, 24, 18, 0.2);
+  background-color: rgba(0, 52, 62, 0.2);
   border-radius: 8px;
 }
 .AudioSlider highlight {
-  background-color: #A33E00;
+  background-color: #00666F;
   min-height: 0.8em;
   border-radius: 8px;
 }
 .AudioSlider slider {
-  background-color: #271812;
+  background-color: #00343E;
   border-radius: 8px;
   min-height: 1em;
   min-width: 1em;
   /* margin:0px; */
   margin: -0.2em;
-  border-color: #A33E00;
+  border-color: #00666F;
 }
 
 scrolledwindow.hidden-scroll scrollbar {
@@ -240,8 +240,8 @@ scrolledwindow.hidden-scroll scrollbar slider {
 }
 
 .tray-menu {
-  background-color: #FFF8F6; /* Dark Background */
-  border-color: rgba(39, 24, 18, 0.2);
+  background-color: #E9F9FF; /* Dark Background */
+  border-color: rgba(0, 52, 62, 0.2);
   border-radius: 8px;
   min-height: 22.5px;
   min-width: 22.5px;
@@ -250,7 +250,7 @@ scrolledwindow.hidden-scroll scrollbar slider {
 
 .button_panel {
   all: unset;
-  background-color: #FFE9E2;
+  background-color: #BFF0FF;
   border-radius: 8px;
   padding: 3px;
   margin-left: 3px;
@@ -259,16 +259,16 @@ scrolledwindow.hidden-scroll scrollbar slider {
   min-width: 22.5px;
 }
 .button_panel:hover label {
-  background-color: rgba(255, 248, 246, 0.2);
+  background-color: rgba(233, 249, 255, 0.2);
   border-radius: 8px;
 }
 .button_panel:active label {
-  background-color: rgba(39, 24, 18, 0.2);
+  background-color: rgba(0, 52, 62, 0.2);
   border-radius: 8px;
 }
 .button_panel:focus {
-  background-color: #A33E00;
-  color: #FFF8F6;
+  background-color: #00666F;
+  color: #E9F9FF;
   border-radius: 8px;
 }
 
@@ -277,26 +277,31 @@ scrolledwindow.hidden-scroll scrollbar slider {
   min-height: 100px;
   min-width: 375px;
   border-radius: 8px;
-  background-color: #FFE9E2;
+  background-color: #BFF0FF;
   margin: 4px;
 }
 .music_icon:hover label {
-  background-color: rgba(255, 248, 246, 0.2);
+  background-color: rgba(233, 249, 255, 0.2);
   border-radius: 8px;
 }
 .music_icon:active label {
-  background-color: rgba(39, 24, 18, 0.2);
+  background-color: rgba(0, 52, 62, 0.2);
   border-radius: 8px;
 }
 .music_icon:focus {
-  background-color: #A33E00;
-  color: #FFF8F6;
+  background-color: #00666F;
+  color: #E9F9FF;
   border-radius: 8px;
+}
+
+.slider_long {
+  background-color: transparent;
+  min-width: 300px;
 }
 
 .volumeIcon {
   all: unset;
-  color: #271812;
+  color: #00343E;
 }
 
 /*# sourceMappingURL=style.css.map */

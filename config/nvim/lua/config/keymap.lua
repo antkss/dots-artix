@@ -33,7 +33,7 @@ map('n', '<leader>r', vim.lsp.buf.rename ,{ noremap = true })
 map('n', '<leader>p', ":bprevious <CR>" ,{ noremap = true })
 map('n', '<leader>n', ":bnext <CR>" ,{ noremap = true })
 vim.g.translator_target_lang = 'vi'
-map({"v"}, "tt", ":Translate --engine=bing <CR>", { noremap = true })
+map({"v"}, "tt", ":Translate --engine=google <CR>", { noremap = true })
 map("v", ">", ">gv", { noremap = true })
 map("v", "<", "<gv", { noremap = true })
 -- map("v", "a", "<<gv", { noremap = true })

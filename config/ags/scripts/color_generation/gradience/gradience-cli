@@ -1,0 +1,63 @@
+#!/usr/bin/env python3
+
+import os
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parent
+APP_ID = "com.github.GradienceTeam.Gradience"
+sys.path.insert(0, str(ROOT))
+
+
+def _prepare_local_schema_dir():
+    template_path = ROOT / "data" / f"{APP_ID}.gschema.xml.in"
+    compiler = shutil.which("glib-compile-schemas")
+    if compiler is None or not template_path.exists():
+        return
+
+    cache_home = Path(
+        os.environ.get("XDG_CACHE_HOME", str(Path.home() / ".cache"))
+    )
+    schema_dir = cache_home / "gradience-cli" / "schemas"
+    schema_path = schema_dir / f"{APP_ID}.gschema.xml"
+    compiled_path = schema_dir / "gschemas.compiled"
+
+    try:
+        schema_dir.mkdir(parents=True, exist_ok=True)
+        rendered_schema = template_path.read_text(encoding="utf-8").replace(
+            "@APP_ID@", APP_ID
+        )
+
+        if (
+            not schema_path.exists()
+            or schema_path.read_text(encoding="utf-8") != rendered_schema
+        ):
+            schema_path.write_text(rendered_schema, encoding="utf-8")
+
+        if (
+            not compiled_path.exists()
+            or compiled_path.stat().st_mtime < schema_path.stat().st_mtime
+        ):
+            subprocess.run([compiler, str(schema_dir)], check=True)
+    except (OSError, subprocess.CalledProcessError):
+        return
+
+    os.environ["GSETTINGS_SCHEMA_DIR"] = str(schema_dir)
+
+
+_prepare_local_schema_dir()
+
+from gradience.frontend.cli.runtime import main
+
+
+if __name__ == "__main__":
+    raise SystemExit(
+        main(
+            version=None,
+            app_id=None,
+            source_root=str(ROOT),
+        )
+    )

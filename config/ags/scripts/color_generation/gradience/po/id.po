@@ -1,0 +1,1898 @@
+# Gradience POT file
+# Copyright (C) 2022 Gradience Team
+# This file is distributed under the GNU GPLv3 license.
+# Gradience Team, 2022.
+#
+# Bima <abimanyusrisetyo@gmail.com>, 2022.
+# 0xMRTT <0xMRTT@tuta.io>, 2022.
+# Daudix UFO <ddaudix@gmail.com>, 2022.
+# yangyangdaji <1504305527@qq.com>, 2022.
+# Reza Almanda <rezaalmanda27@gmail.com>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-08 12:15+0000\n"
+"PO-Revision-Date: 2023-03-03 00:53+0000\n"
+"Last-Translator: Reza Almanda <rezaalmanda27@gmail.com>\n"
+"Language-Team: Indonesian <https://hosted.weblate.org/projects/GradienceTeam/"
+"gradience/id/>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.16.2-dev\n"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:4
+#: data/com.github.GradienceTeam.Gradience.desktop.in.in:3 data/ui/window.blp:5
+msgid "Gradience"
+msgstr "Gradience"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:5
+#: data/ui/welcome_window.blp:64
+msgid "Change the look of Adwaita, with ease"
+msgstr "Ubah tampilan Adwaita, dengan mudah"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:6
+#: gradience/frontend/views/about_window.py:94
+msgid "Gradience Team"
+msgstr "Tim Gradience"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:12
+msgid ""
+"Gradience is a tool for customizing Libadwaita applications and the adw-gtk3 "
+"theme."
+msgstr ""
+"Gradience adalah alat untuk menyesuaikan aplikasi Libadwaita dan tema adw-"
+"gtk3."
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:13
+msgid "The main features of Gradience include the following:"
+msgstr "Fitur utama Gradience termasuk:"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:15
+msgid "🎨️ Changing any color of Adwaita theme"
+msgstr "🎨️ Ubah warna tema Adwaita"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:16
+msgid "🖼️ Applying Material 3 color scheme from wallpaper"
+msgstr "🖼️ Menerapkan 3 skema warna dari wallpaper"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:17
+msgid "🎁️ Usage of other users presets"
+msgstr "🎁️ Penggunaan preset pengguna lain"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:18
+msgid "⚙️ Changing advanced options with CSS"
+msgstr "⚙️ Mengubah opsi lanjutan dengan CSS"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:19
+msgid "🧩️ Extending functionality using plugins"
+msgstr "🧩️ Memperluas fungsionalitas menggunakan plugin"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:24
+msgid "Screenshot of \"Colors\" Tab of Main UI"
+msgstr "Tangkapan layar Tab \"Warna\" pada UI Utama"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:28
+msgid "Screenshot of \"Monet\" Tab of Main UI"
+msgstr "Cuplikan layar Tab \"Monet\" UI Utama"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:32
+msgid "Screenshot of \"Advanced\" Tab of Main UI"
+msgstr "Tangkapan layar Tab \"Lanjutan\" pada UI Utama"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:36
+msgid "Screenshot of \"Installed\" Tab of Preset Manager"
+msgstr "Tangkapan layar Tab \"Terinstal\" dari Manajer Preset"
+
+#: data/com.github.GradienceTeam.Gradience.appdata.xml.in.in:40
+msgid "Screenshot of \"Explore\" Tab of Preset Manager"
+msgstr "Tangkapan layar Tab \"Jelajahi\" pada Manajer Preset"
+
+#: data/ui/app_type_dialog.blp:14
+msgid "Select application types you want to theme:"
+msgstr "Pilih jenis aplikasi yang ingin Anda beri tema:"
+
+#: data/ui/app_type_dialog.blp:17
+msgid "Libadwaita and GTK 4 Applications"
+msgstr "Aplikasi Libadwaita dan GTK 4"
+
+#: data/ui/app_type_dialog.blp:21
+msgid "GTK 3 Applications (adw-gtk3 theme is required)"
+msgstr "Aplikasi GTK 3 (diperlukan tema adw-gtk3)"
+
+#: data/ui/builtin_preset_row.blp:5
+msgid "Made by @GradienceTeam"
+msgstr "Dibuat oleh @GradienceTeam"
+
+#: data/ui/builtin_preset_row.blp:11 data/ui/preset_row.blp:51
+#: data/ui/window.blp:30
+msgid "Apply Preset"
+msgstr "Terapkan Preset"
+
+#: data/ui/custom_css_group.blp:5
+msgid "Custom CSS"
+msgstr "CSS khusus"
+
+#: data/ui/custom_css_group.blp:6
+msgid ""
+"Changing this may break some programs. Keep in mind that Libadwaita was made "
+"so that applications could hardcode values like paddings and margins."
+msgstr ""
+"Mengubahnya dapat merusak beberapa program. Perlu diingat bahwa Libadwaita "
+"dibuat agar aplikasi dapat mengkodekan nilai seperti padding dan margin."
+
+#: data/ui/custom_css_group.blp:33
+msgid "GTK 4"
+msgstr "GTK 4"
+
+#: data/ui/custom_css_group.blp:33
+msgid "GTK 3"
+msgstr "GTK 3"
+
+#: data/ui/explore_preset_row.blp:21
+msgid "Download and Apply"
+msgstr "Unduh dan Terapkan"
+
+#: data/ui/explore_preset_row.blp:32
+msgid "Download Only"
+msgstr "Unduh Saja"
+
+#: data/ui/log_out_dialog.blp:5
+msgid "Log out"
+msgstr "Keluar"
+
+#: data/ui/log_out_dialog.blp:6
+msgid "For the changes to take full effect, you need to log out."
+msgstr "Agar perubahan diterapkan sepenuhnya, Anda harus keluar."
+
+#: data/ui/no_plugin_window.blp:5
+msgid "Plugin Preferences"
+msgstr "Preferensi Plugin"
+
+#: data/ui/no_plugin_window.blp:32
+msgid "No Preferences"
+msgstr "Tidak ada preferensi"
+
+#: data/ui/no_plugin_window.blp:33
+msgid "This plugin doesn't have any preferences."
+msgstr "Plugin ini tidak memiliki preferensi apa pun."
+
+#: data/ui/option_row.blp:10
+msgid "GTK 3 Support Warning"
+msgstr "Peringatan Dukungan GTK 3"
+
+#: data/ui/option_row.blp:18
+msgid "Explanation"
+msgstr "Penjelasan"
+
+#: data/ui/option_row.blp:43
+msgid "Toggle Text Value"
+msgstr "Mengalihkan Nilai Teks"
+
+#: data/ui/plugin_row.blp:8
+msgid "Toggle Plugin"
+msgstr "Beralih Plugin"
+
+#: data/ui/plugin_row.blp:16 data/ui/preferences_window.blp:5
+#: data/ui/window.blp:136
+msgid "Preferences"
+msgstr "Preferensi"
+
+#: data/ui/plugin_row.blp:28
+msgid "Remove Plugin"
+msgstr "Hapus Plugin"
+
+#: data/ui/preferences_window.blp:12
+msgid "GTK 4 Flatpak Applications"
+msgstr "Aplikasi GTK 4 Flatpak"
+
+#: data/ui/preferences_window.blp:15
+msgid "Allow GTK 4 Flatpak Applications Theming"
+msgstr "Izinkan Tema Aplikasi GTK 4 Flatpak"
+
+#: data/ui/preferences_window.blp:16
+#, fuzzy
+msgid ""
+"Override Flatpak permissions for current user to allow GTK 4 Flatpak "
+"applications to access custom themes."
+msgstr ""
+"Timpa izin Flatpak untuk pengguna saat ini untuk mengizinkan aplikasi GTK 4 "
+"Flatpak untuk mengakses tema kustom."
+
+#: data/ui/preferences_window.blp:25
+#, fuzzy
+msgid "Allow GTK 4 Flatpak Applications Theming (System)"
+msgstr "Izinkan Aplikasi GTK 4 Flatpak Theming (Sistem)"
+
+#: data/ui/preferences_window.blp:26
+#, fuzzy
+msgid ""
+"Override Flatpak permissions for all users to allow GTK 4 Flatpak "
+"applications to access custom themes. (Requires root access)"
+msgstr ""
+"Menimpa perizinan Flatpak untuk semua pengguna untuk mengizinkan aplikasi "
+"GTK 4 Flatpak untuk mengakses tema kustom. (Membutuhkan akses root)"
+
+#: data/ui/preferences_window.blp:35
+#, fuzzy
+msgid "GTK 3 Flatpak Applications"
+msgstr "Aplikasi GTK 3 Flatpak"
+
+#: data/ui/preferences_window.blp:36
+#, fuzzy
+msgid ""
+"Remember to install adw-gtk3 theme (as a Flatpak package) in order to get "
+"custom presets working in GTK 3 Flatpak applications."
+msgstr ""
+"Ingatlah untuk menginstal tema adw-gtk3 (sebagai paket Flatpak) untuk "
+"mendapatkan preset kustom yang bekerja di aplikasi GTK 3 Flatpak."
+
+#: data/ui/preferences_window.blp:39
+#, fuzzy
+msgid "Allow GTK 3 Flatpak theming"
+msgstr "Izinkan GTK 3 Flatpak bertema"
+
+#: data/ui/preferences_window.blp:40
+#, fuzzy
+msgid ""
+"Override Flatpak permissions for current user to allow GTK 3 Flatpak "
+"applications to access adw-gtk3 theme."
+msgstr ""
+"Timpa izin Flatpak untuk pengguna saat ini untuk mengizinkan aplikasi GTK 3 "
+"Flatpak untuk mengakses tema adw-gtk3."
+
+#: data/ui/preferences_window.blp:49
+#, fuzzy
+msgid "GTK 3 Flatpak Applications (System)"
+msgstr "Aplikasi GTK 3 Flatpak (Sistem)"
+
+#: data/ui/preferences_window.blp:50
+#, fuzzy
+msgid ""
+"Override Flatpak permissions for all users to allow GTK 3 Flatpak "
+"applications to access adw-gtk3 theme. (Requires root access)"
+msgstr ""
+"Menimpa perizinan Flatpak untuk semua pengguna untuk mengizinkan aplikasi "
+"GTK 3 Flatpak untuk mengakses tema adw-gtk3. (Membutuhkan akses root)"
+
+#: data/ui/preferences_window.blp:61
+#, fuzzy
+msgid "Custom Preset Repositories"
+msgstr "Repositori Preset Khusus"
+
+#: data/ui/preferences_window.blp:64
+#, fuzzy
+msgid "Custom repository URL address"
+msgstr "Alamat URL repositori khusus"
+
+#: data/ui/preset_row.blp:27
+#, fuzzy
+msgid "Report an Issue…"
+msgstr "Laporkan Masalah"
+
+#: data/ui/preset_row.blp:68
+#, fuzzy
+msgid "Rename Preset"
+msgstr "Ganti nama Preset"
+
+#: data/ui/preset_row.blp:80
+#, fuzzy
+msgid "More Options"
+msgstr "Opsi Lainnya"
+
+#: data/ui/preset_row.blp:87
+#, fuzzy
+msgid "Description"
+msgstr "Deskripsi"
+
+#: data/ui/preset_row.blp:88
+#, fuzzy
+msgid "Sorry, but this preset don't have a description."
+msgstr "Maaf, tetapi preset ini tidak memiliki deskripsi."
+
+#: data/ui/preset_row.blp:100
+#, fuzzy
+msgid "No Badges"
+msgstr "Tidak ada Lencana"
+
+#: data/ui/preset_row.blp:111
+msgid "Remove preset"
+msgstr "Hapus prasetel"
+
+#: data/ui/preset_row.blp:112
+#, fuzzy
+msgid "Remove Preset"
+msgstr "Hapus prasetel"
+
+#: data/ui/presets_manager_window.blp:5 data/ui/window.blp:56
+msgid "Presets"
+msgstr "Preset"
+
+#: data/ui/presets_manager_window.blp:30
+msgid "Import"
+msgstr "Impor"
+
+#: data/ui/presets_manager_window.blp:31
+#, fuzzy
+msgid "Import a Preset File"
+msgstr "Mengimpor File Preset"
+
+#: data/ui/presets_manager_window.blp:37
+msgid "Delete"
+msgstr "Hapus"
+
+#: data/ui/presets_manager_window.blp:48 gradience/frontend/main.py:231
+#, fuzzy
+msgid "Open in File Manager"
+msgstr "Tampilkan di Pengelola Berkas"
+
+#: data/ui/presets_manager_window.blp:66
+msgid "Installed"
+msgstr "Terpasang"
+
+#: data/ui/presets_manager_window.blp:75
+msgid "Explore"
+msgstr "Jelajahi"
+
+#: data/ui/presets_manager_window.blp:80
+msgid "Search for presets"
+msgstr "Cari preset"
+
+#: data/ui/presets_manager_window.blp:81
+#, fuzzy
+msgid ""
+"Enter a keyword to search on <a href=\"https://github.com/GradienceTeam/"
+"Community\">GradienceTeam/Community</a>."
+msgstr ""
+"Masukkan kata kunci untuk ditelusuri di <a href=\"https://github.com/"
+"GradienceTeam/Community\">GradienceTeam/Community</a>."
+
+#: data/ui/presets_manager_window.blp:94
+msgid "e.g. \"Pretty Purple\""
+msgstr "misalnya \"Pretty Purple\""
+
+#: data/ui/presets_manager_window.blp:99
+#, fuzzy
+msgid "All"
+msgstr "Semua"
+
+#: data/ui/presets_manager_window.blp:127
+msgid "No Results Found"
+msgstr "Tidak Ada Hasil yang Ditemukan"
+
+#: data/ui/presets_manager_window.blp:135
+msgid "Offline"
+msgstr "Offline"
+
+#: data/ui/presets_manager_window.blp:148
+#: gradience/frontend/views/presets_manager_window.py:123
+#: gradience/frontend/views/presets_manager_window.py:391
+#, fuzzy
+msgid "Repositories"
+msgstr "Repositori"
+
+#: data/ui/presets_manager_window.blp:168
+#, fuzzy
+msgid "Import a Preset File (*.json)"
+msgstr "Mengimpor File Preset (*.json)"
+
+#: data/ui/presets_manager_window.blp:173
+#, fuzzy
+msgid "All files"
+msgstr "Semua berkas"
+
+#: data/ui/presets_manager_window.blp:178
+#, fuzzy
+msgid "JSON file (*.json)"
+msgstr "file JSON (*.json)"
+
+#: data/ui/save_dialog.blp:5
+msgid "Save preset as…"
+msgstr "Simpan preset sebagai…"
+
+#: data/ui/save_dialog.blp:10
+#, fuzzy
+msgid "Preset Name"
+msgstr "Nama preset diganti"
+
+#: data/ui/share_window.blp:5
+#, fuzzy
+msgid "Share Preset"
+msgstr "Bagikan Preset"
+
+#: data/ui/share_window.blp:42 data/ui/welcome_window.blp:42
+msgid "Previous"
+msgstr "Sebelumnya"
+
+#: data/ui/share_window.blp:65
+#, fuzzy
+msgid "Share your preset"
+msgstr "Bagikan preset Anda"
+
+#: data/ui/share_window.blp:66
+#, fuzzy
+msgid "Share your preset with the world!"
+msgstr "Bagikan preset Anda dengan dunia!"
+
+#: data/ui/share_window.blp:73
+#, fuzzy
+msgid "How it's work?"
+msgstr "Bagaimana cara kerjanya?"
+
+#: data/ui/share_window.blp:74
+#, fuzzy
+msgid ""
+"Gradience use GitHub to share your preset. You need to create a GitHub "
+"account and fork <a href='https://github.com/GradienceTeam/"
+"Community'>GradienceTeam/Community</a>. Then, you can upload your preset, "
+"make a pull request and share it with the world!"
+msgstr ""
+"Gradience menggunakan GitHub untuk membagikan preset Anda. Anda perlu "
+"membuat akun GitHub dan fork <a href=\"https://github.com/GradienceTeam/"
+"Community\">GradienceTeam/Community</a>. Kemudian, Anda dapat mengunggah "
+"preset Anda, membuat pull request, dan membagikannya kepada dunia!"
+
+#: data/ui/share_window.blp:81 data/ui/welcome_window.blp:79
+#, fuzzy
+msgid "Warning"
+msgstr "Peringatan"
+
+#: data/ui/share_window.blp:82 data/ui/welcome_window.blp:80
+#, fuzzy
+msgid ""
+"Changing the color scheme can negatively affect contrast and readability. "
+"Proceed with caution. Please do not report theming-related issues to app "
+"developers."
+msgstr ""
+"Mengubah skema warna bisa berdampak negatif pada kontras dan keterbacaan. "
+"Lanjutkan dengan hati-hati. Harap jangan melaporkan masalah terkait tema "
+"kepada pengembang aplikasi."
+
+#: data/ui/share_window.blp:86 data/ui/welcome_window.blp:84
+#, fuzzy
+msgid "I Understand The Consequences"
+msgstr "Saya Memahami Konsekuensinya"
+
+#: data/ui/share_window.blp:97 data/ui/welcome_window.blp:95
+msgid "Customize Adwaita Theme"
+msgstr "Sesuaikan Tema Adwaita"
+
+#: data/ui/share_window.blp:98
+#, fuzzy
+msgid ""
+"Change colors of windows, buttons, lists and more, with advanced features "
+"like adding custom CSS"
+msgstr ""
+"Ubah warna jendela, tombol, daftar, dan lainnya dengan fitur lanjutan "
+"seperti menambahkan CSS khusus"
+
+#: data/ui/share_window.blp:104 data/ui/welcome_window.blp:102
+#, fuzzy
+msgid "Configure Gradience"
+msgstr "Konfigurasi Gradience"
+
+#: data/ui/share_window.blp:105 data/ui/welcome_window.blp:103
+#, fuzzy
+msgid ""
+"Install adw-gtk3 theme for legacy applications and configure system for "
+"theming."
+msgstr ""
+"Instal tema adw-gtk3 untuk aplikasi lama dan konfigurasikan sistem untuk "
+"tematik."
+
+#: data/ui/share_window.blp:110
+#, fuzzy
+msgid "Legacy apps theming"
+msgstr "Aplikasi lama bertema"
+
+#: data/ui/share_window.blp:115 data/ui/welcome_window.blp:113
+#, fuzzy
+msgid "Install adw-gtk3 theme for legacy apps theming"
+msgstr "Instal tema adw-gtk3 untuk aplikasi lawas bertema"
+
+#: data/ui/share_window.blp:120
+msgid "System configuration"
+msgstr "Sistem konfigurasi"
+
+#: data/ui/share_window.blp:126 data/ui/welcome_window.blp:124
+#, fuzzy
+msgid "Configure system for theming, enables Flatpak theme override"
+msgstr ""
+"Mengkonfigurasi sistem untuk tematik, memungkinkan penggantian tema Flatpak"
+
+#: data/ui/share_window.blp:136 data/ui/welcome_window.blp:134
+#, fuzzy
+msgid "Installing Themes"
+msgstr "Memasang tema"
+
+#: data/ui/share_window.blp:137 data/ui/welcome_window.blp:135
+#, fuzzy
+msgid "Please wait until theme will be installed."
+msgstr "Harap tunggu sampai tema akan dipasang."
+
+#: data/ui/share_window.blp:143 data/ui/welcome_window.blp:141
+msgid "Continue"
+msgstr "Melanjutkan"
+
+#: data/ui/share_window.blp:162 data/ui/welcome_window.blp:160
+msgid "Done"
+msgstr "Selesai"
+
+#: data/ui/share_window.blp:163 data/ui/welcome_window.blp:161
+#, fuzzy
+msgid "Now you can make your own presets or download some online."
+msgstr ""
+"Sekarang Anda dapat membuat preset Anda sendiri, atau mengunduh beberapa "
+"secara online."
+
+#: data/ui/share_window.blp:168 data/ui/welcome_window.blp:166
+#, fuzzy
+msgid "Please finish the setup first"
+msgstr "Harap Selesaikan pengaturan terlebih dahulu"
+
+#: data/ui/share_window.blp:176 data/ui/welcome_window.blp:174
+#, fuzzy
+msgid "Start Using Gradience"
+msgstr "Mulai menggunakan Gradience"
+
+#: data/ui/share_window.blp:193 data/ui/welcome_window.blp:191
+msgid "Next"
+msgstr "Lanjut"
+
+#: data/ui/welcome_window.blp:5 data/ui/welcome_window.blp:63
+msgid "Welcome to Gradience"
+msgstr "Selamat Datang di Gradience"
+
+#: data/ui/welcome_window.blp:71
+#, fuzzy
+msgid "What's new in 0.3.2"
+msgstr "Apa yang baru di 0.3.0"
+
+#: data/ui/welcome_window.blp:72
+msgid ""
+"In this release, we fixed the Firefox GNOME theme plugin, issues with "
+"presets always being saved with the same name, as well as some UX polish, "
+"and more."
+msgstr ""
+
+#: data/ui/welcome_window.blp:96
+#, fuzzy
+msgid ""
+"Change colors of windows, buttons, lists and more, with advanced features "
+"like adding custom CSS."
+msgstr ""
+"Ubah warna jendela, tombol, daftar, dan lainnya dengan fitur lanjutan "
+"seperti menambahkan CSS khusus"
+
+#: data/ui/welcome_window.blp:108
+#, fuzzy
+msgid "Legacy Apps Theming"
+msgstr "Theming Aplikasi Lama"
+
+#: data/ui/welcome_window.blp:118
+#, fuzzy
+msgid "System Configuration"
+msgstr "Konfigurasi Sistem"
+
+#: data/ui/window.blp:29 gradience/frontend/views/main_window.py:141
+msgid "Apply"
+msgstr "Terapkan"
+
+#: data/ui/window.blp:37
+msgid "Show Preview Window"
+msgstr ""
+
+#: data/ui/window.blp:48
+#, fuzzy
+msgid "Main Menu"
+msgstr "Menu Utama"
+
+#: data/ui/window.blp:57
+#, fuzzy
+#| msgid "Presets"
+msgid "Presets Menu"
+msgstr "Menu Preset"
+
+#: data/ui/window.blp:64
+msgid "Save Preset"
+msgstr "Simpan Preset"
+
+#: data/ui/window.blp:73
+#, fuzzy
+msgid "CSS Errors"
+msgstr "Kesalahan CSS"
+
+#: data/ui/window.blp:88
+msgid "Colors"
+msgstr "Warna"
+
+#: data/ui/window.blp:96
+msgid "Monet"
+msgstr "Monet"
+
+#: data/ui/window.blp:104
+#, fuzzy
+msgid "Advanced"
+msgstr "Tingkat Lanjut"
+
+#: data/ui/window.blp:125
+#, fuzzy
+msgid "Restore Applied Color Scheme"
+msgstr "Kembalikan Skema Warna yang Diterapkan"
+
+#: data/ui/window.blp:130
+msgid "Reset Applied Color Scheme"
+msgstr "Setel Ulang Skema Warna Terapan"
+
+#: data/ui/window.blp:141
+msgid "About Gradience"
+msgstr "Tentang Gradience"
+
+#: data/ui/window.blp:149
+#: gradience/frontend/views/presets_manager_window.py:111
+#, fuzzy
+msgid "Built-In Presets"
+msgstr "Preset Bawaan"
+
+#: data/ui/window.blp:170
+#, fuzzy
+msgid "Manage Presets"
+msgstr "Kelola Preset"
+
+#: gradience/frontend/dialogs/app_type_dialog.py:51
+#: gradience/frontend/dialogs/save_dialog.py:57
+#, fuzzy
+#| msgid "Cancel"
+msgid "_Cancel"
+msgstr "Membatalkan"
+
+#: gradience/frontend/dialogs/log_out_dialog.py:36
+msgid "OK"
+msgstr ""
+
+#: gradience/frontend/dialogs/save_dialog.py:39
+#, python-brace-format
+msgid ""
+"Saving preset to <tt>{0}</tt>. If that preset already exists, it will be "
+"overwritten!"
+msgstr ""
+"Menyimpan preset ke <tt>{0}</tt>. Jika preset itu sudah ada, itu akan "
+"ditimpa!"
+
+#: gradience/frontend/dialogs/save_dialog.py:60
+#, fuzzy
+msgid "Discard"
+msgstr "Abaikan"
+
+#: gradience/frontend/dialogs/save_dialog.py:65
+#, fuzzy
+#| msgid "Save"
+msgid "_Save"
+msgstr "Simpan"
+
+#: gradience/frontend/main.py:184
+#: gradience/frontend/views/presets_manager_window.py:336
+#, fuzzy
+msgid "Failed to load list of presets"
+msgstr "Gagal memuat preset"
+
+#: gradience/frontend/main.py:217
+#, fuzzy
+#| msgid "No Results Found"
+msgid "No presets found"
+msgstr "Tidak ada preset yang ditemukan"
+
+#: gradience/frontend/main.py:240
+#, fuzzy
+msgid "Favorite Presets"
+msgstr "Preset Favorit"
+
+#: gradience/frontend/main.py:404
+#, fuzzy
+msgid "Unsaved Changes"
+msgstr "Perubahan yang belum disimpan"
+
+#: gradience/frontend/main.py:416
+#, fuzzy
+msgid "Save Changes"
+msgstr "Simpan Perubahan"
+
+#: gradience/frontend/main.py:505
+#, fuzzy
+msgid "Apply This Color Scheme?"
+msgstr "Menerapkan Skema Warna Ini?"
+
+#: gradience/frontend/main.py:507
+msgid ""
+"Warning: any custom CSS files for those app types will be irreversibly "
+"overwritten!"
+msgstr ""
+"Peringatan: file CSS khusus apa pun untuk jenis aplikasi tersebut akan "
+"ditimpa secara permanen!"
+
+#: gradience/frontend/main.py:511
+#, fuzzy
+#| msgid "Apply"
+msgid "_Apply"
+msgstr "Terapkan"
+
+#: gradience/frontend/main.py:521
+#, fuzzy
+msgid "Restore applied color scheme?"
+msgstr "Mengembalikan skema warna yang diterapkan?"
+
+#: gradience/frontend/main.py:522 gradience/frontend/main.py:536
+msgid "Make sure you have the current settings saved as a preset."
+msgstr ""
+"Pastikan Anda memiliki pengaturan saat ini yang disimpan sebagai preset."
+
+#: gradience/frontend/main.py:524
+#, fuzzy
+msgid "_Restore"
+msgstr "Mengembalikan"
+
+#: gradience/frontend/main.py:535
+msgid "Reset applied color scheme?"
+msgstr "Setel ulang skema warna yang diterapkan?"
+
+#: gradience/frontend/main.py:538
+#, fuzzy
+#| msgid "Reset"
+msgid "_Reset"
+msgstr "Mengatur ulang"
+
+#: gradience/frontend/main.py:564
+#, fuzzy
+msgid "You have unsaved changes!"
+msgstr "Anda memiliki perubahan yang belum disimpan!"
+
+#: gradience/frontend/main.py:615
+msgid "Preset saved"
+msgstr "Preset disimpan"
+
+#: gradience/frontend/main.py:632
+#, fuzzy
+#| msgid "Preset set sucessfully"
+msgid "Preset set successfully"
+msgstr "Preset berhasil disetel"
+
+#: gradience/frontend/main.py:645
+#, fuzzy
+msgid "Unable to restore GTK 4 backup"
+msgstr "Tidak dapat memulihkan cadangan GTK 4"
+
+#: gradience/frontend/main.py:658 gradience/frontend/main.py:666
+#, fuzzy
+msgid "Unable to delete current preset"
+msgstr "Tidak dapat menghapus preset"
+
+#: gradience/frontend/schemas/preset_schema.py:23
+#, fuzzy
+msgid "Accent Colors"
+msgstr "Warna Aksen"
+
+#: gradience/frontend/schemas/preset_schema.py:25
+#, fuzzy
+msgid ""
+"These colors are used across many different widgets, such as buttons, "
+"labels, and entries, to indicate that a widget is important, interactive, or "
+"currently active."
+msgstr ""
+"Warna-warna ini digunakan di banyak widget yang berbeda, seperti tombol, "
+"label, dan entri, untuk mengindikasikan bahwa widget itu penting, "
+"interaktif, atau sedang aktif."
+
+#: gradience/frontend/schemas/preset_schema.py:32
+#: gradience/frontend/schemas/preset_schema.py:63
+#: gradience/frontend/schemas/preset_schema.py:95
+#: gradience/frontend/schemas/preset_schema.py:127
+#: gradience/frontend/schemas/preset_schema.py:158
+#, fuzzy
+msgid "Standalone Color"
+msgstr "Warna Mandiri"
+
+#: gradience/frontend/schemas/preset_schema.py:34
+#: gradience/frontend/schemas/preset_schema.py:65
+#: gradience/frontend/schemas/preset_schema.py:97
+#: gradience/frontend/schemas/preset_schema.py:129
+#: gradience/frontend/schemas/preset_schema.py:160
+#, fuzzy
+msgid ""
+"The standalone colors are similar to the background ones, but provide better "
+"contrast when used as foreground color on top of a neutral background - for "
+"example, colorful text in a window."
+msgstr ""
+"Warna mandiri mirip dengan warna latar belakang, tetapi memberikan kontras "
+"yang lebih baik apabila digunakan sebagai warna latar depan di atas latar "
+"belakang netral - misalnya, teks berwarna-warni di jendela."
+
+#: gradience/frontend/schemas/preset_schema.py:43
+#: gradience/frontend/schemas/preset_schema.py:74
+#: gradience/frontend/schemas/preset_schema.py:106
+#: gradience/frontend/schemas/preset_schema.py:138
+#: gradience/frontend/schemas/preset_schema.py:169
+#: gradience/frontend/schemas/preset_schema.py:186
+#: gradience/frontend/schemas/preset_schema.py:206
+#: gradience/frontend/schemas/preset_schema.py:227
+#: gradience/frontend/schemas/preset_schema.py:282
+#: gradience/frontend/schemas/preset_schema.py:309
+#: gradience/frontend/schemas/preset_schema.py:326
+#, fuzzy
+msgid "Background Color"
+msgstr "Warna Latar"
+
+#: gradience/frontend/schemas/preset_schema.py:48
+#: gradience/frontend/schemas/preset_schema.py:79
+#: gradience/frontend/schemas/preset_schema.py:111
+#: gradience/frontend/schemas/preset_schema.py:143
+#: gradience/frontend/schemas/preset_schema.py:174
+#: gradience/frontend/schemas/preset_schema.py:191
+#: gradience/frontend/schemas/preset_schema.py:211
+#: gradience/frontend/schemas/preset_schema.py:232
+#: gradience/frontend/schemas/preset_schema.py:287
+#: gradience/frontend/schemas/preset_schema.py:314
+#: gradience/frontend/schemas/preset_schema.py:331
+#, fuzzy
+msgid "Foreground Color"
+msgstr "Warna Latar Depan:"
+
+#: gradience/frontend/schemas/preset_schema.py:55
+#, fuzzy
+msgid "Destructive Colors"
+msgstr "Warna yang Merusak"
+
+#: gradience/frontend/schemas/preset_schema.py:57
+#, fuzzy
+msgid ""
+"These colors are used for buttons to indicate a dangerous action, such as "
+"deleting a file."
+msgstr ""
+"Warna-warna ini digunakan untuk tombol-tombol untuk mengindikasikan tindakan "
+"berbahaya, seperti menghapus file."
+
+#: gradience/frontend/schemas/preset_schema.py:86
+#, fuzzy
+msgid "Success Colors"
+msgstr "Warna Sukses"
+
+#: gradience/frontend/schemas/preset_schema.py:88
+#, fuzzy
+msgid ""
+"These colors are used across many different widgets, such as buttons, "
+"labels, entries, and level bars, to indicate a success or a high level."
+msgstr ""
+"Warna-warna ini digunakan di banyak widget yang berbeda, seperti tombol, "
+"label, entri, dan bar level, untuk mengindikasikan keberhasilan atau level "
+"tinggi."
+
+#: gradience/frontend/schemas/preset_schema.py:118
+#, fuzzy
+msgid "Warning Colors"
+msgstr "Warna Peringatan"
+
+#: gradience/frontend/schemas/preset_schema.py:120
+#, fuzzy
+msgid ""
+"These colors are used across many different widgets, such as buttons, "
+"labels, entries, and level bars, to indicate a warning or a low level."
+msgstr ""
+"Warna-warna ini digunakan di banyak widget yang berbeda, seperti tombol, "
+"label, entri, dan bar level, untuk mengindikasikan peringatan atau level "
+"rendah."
+
+#: gradience/frontend/schemas/preset_schema.py:150
+#, fuzzy
+msgid "Error Colors"
+msgstr "Warna Kesalahan"
+
+#: gradience/frontend/schemas/preset_schema.py:152
+#, fuzzy
+msgid ""
+"These colors are used across many different widgets, such as buttons, "
+"labels, and entries, to indicate a failure."
+msgstr ""
+"Warna-warna ini digunakan di banyak widget yang berbeda, seperti tombol, "
+"label, dan entri, untuk mengindikasikan kegagalan."
+
+#: gradience/frontend/schemas/preset_schema.py:181
+#, fuzzy
+msgid "Window Colors"
+msgstr "Warna Jendela"
+
+#: gradience/frontend/schemas/preset_schema.py:182
+#, fuzzy
+msgid "These colors are used primarily for windows."
+msgstr "Warna-warna ini digunakan terutama untuk jendela."
+
+#: gradience/frontend/schemas/preset_schema.py:198
+#, fuzzy
+msgid "View Colors"
+msgstr "Lihat Warna"
+
+#: gradience/frontend/schemas/preset_schema.py:200
+#, fuzzy
+msgid ""
+"These colors are used in a variety of widgets, such as text views and "
+"entries."
+msgstr ""
+"Warna-warna ini digunakan dalam berbagai widget, seperti tampilan teks dan "
+"entri."
+
+#: gradience/frontend/schemas/preset_schema.py:218
+#, fuzzy
+msgid "Header Bar Colors"
+msgstr "Warna Batang Header"
+
+#: gradience/frontend/schemas/preset_schema.py:220
+#, fuzzy
+msgid ""
+"These colors are used for header bars, as well as widgets that are meant to "
+"be visually attached to it, such as search bars or tab bars."
+msgstr ""
+"Warna-warna ini digunakan untuk header bar, serta widget yang dimaksudkan "
+"untuk dilekatkan secara visual padanya, seperti bilah pencarian atau bilah "
+"tab."
+
+#: gradience/frontend/schemas/preset_schema.py:237
+#, fuzzy
+msgid "Border Color"
+msgstr "Warna Border"
+
+#: gradience/frontend/schemas/preset_schema.py:239
+#, fuzzy
+msgid ""
+"The border color has the same default value as a foreground color, but "
+"doesn't change along with it. This can be useful if a light window has a "
+"dark header bar with light text; in this case it may be desirable to keep "
+"the border dark. This variable is only used for vertical borders - for "
+"example, separators between the two header bars in a split header bar layout."
+msgstr ""
+"Warna border memiliki nilai default yang sama dengan warna latar depan, "
+"tetapi tidak berubah seiring dengan itu. Hal ini dapat berguna jika jendela "
+"terang memiliki header bar gelap dengan teks terang; dalam hal ini mungkin "
+"diinginkan untuk menjaga border tetap gelap. Variabel ini hanya digunakan "
+"untuk border vertikal - misalnya, pemisah antara dua header bar dalam tata "
+"letak header bar terpisah."
+
+#: gradience/frontend/schemas/preset_schema.py:252
+#, fuzzy
+msgid "Backdrop Color"
+msgstr "Warna Latar Belakang"
+
+#: gradience/frontend/schemas/preset_schema.py:254
+#, fuzzy
+msgid ""
+"The backdrop color is used instead of the background color when the window "
+"is not focused. By default it's an alias of the window's background color "
+"and changes together with it. When changing this variable, make sure to set "
+"it to a value matching your header bar background color."
+msgstr ""
+"Warna latar belakang digunakan sebagai pengganti warna latar belakang ketika "
+"jendela tidak difokuskan. Secara default, ini adalah alias dari warna latar "
+"belakang jendela dan berubah bersamaan dengan warna latar belakang. Saat "
+"mengubah variabel ini, pastikan untuk mengaturnya ke nilai yang sesuai "
+"dengan warna latar belakang header bar Anda."
+
+#: gradience/frontend/schemas/preset_schema.py:265
+#: gradience/frontend/schemas/preset_schema.py:292
+#: gradience/frontend/schemas/preset_schema.py:343
+#, fuzzy
+msgid "Shade Color"
+msgstr "Warna Naungan"
+
+#: gradience/frontend/schemas/preset_schema.py:267
+#, fuzzy
+msgid ""
+"The shade color is used to provide a dark border for header bars and similar "
+"widgets that separates them from the main window."
+msgstr ""
+"Warna bayangan digunakan untuk memberikan batas gelap untuk header bar dan "
+"widget serupa yang memisahkannya dari jendela utama."
+
+#: gradience/frontend/schemas/preset_schema.py:277
+#, fuzzy
+msgid "Card Colors"
+msgstr "Warna Kartu"
+
+#: gradience/frontend/schemas/preset_schema.py:278
+#, fuzzy
+msgid "These colors are used for cards and boxed lists."
+msgstr "Warna-warna ini digunakan untuk kartu dan daftar kotak."
+
+#: gradience/frontend/schemas/preset_schema.py:294
+#, fuzzy
+msgid ""
+"The shade color is used for shadows that are used by cards to separate "
+"themselves from the window background, as well as for row dividers in the "
+"cards."
+msgstr ""
+"Warna bayangan digunakan untuk bayangan yang digunakan oleh kartu untuk "
+"memisahkan diri dari latar belakang jendela, serta untuk pembagi baris dalam "
+"kartu."
+
+#: gradience/frontend/schemas/preset_schema.py:304
+#, fuzzy
+msgid "Dialog Colors"
+msgstr "Warna Dialog"
+
+#: gradience/frontend/schemas/preset_schema.py:305
+#, fuzzy
+msgid "These colors are used for message dialogs."
+msgstr "Warna-warna ini digunakan untuk dialog pesan."
+
+#: gradience/frontend/schemas/preset_schema.py:321
+#, fuzzy
+msgid "Popover Colors"
+msgstr "Warna Popover"
+
+#: gradience/frontend/schemas/preset_schema.py:322
+#, fuzzy
+msgid "These colors are used for popovers."
+msgstr "Warna-warna ini digunakan untuk popover."
+
+#: gradience/frontend/schemas/preset_schema.py:338
+#, fuzzy
+msgid "Miscellaneous Colors"
+msgstr "Warna Lain-lain"
+
+#: gradience/frontend/schemas/preset_schema.py:339
+#, fuzzy
+msgid "Colors that don't fit in any particular group."
+msgstr "Warna-warna yang tidak sesuai dengan kelompok tertentu."
+
+#: gradience/frontend/schemas/preset_schema.py:345
+#, fuzzy
+msgid ""
+"The shade color is used by inline tab bars, as well as the transitions in "
+"leaflets and flaps, and info bar borders."
+msgstr ""
+"Warna bayangan digunakan oleh bar tab sebaris, serta transisi dalam leaflet "
+"dan flap, dan batas bar info."
+
+#: gradience/frontend/schemas/preset_schema.py:353
+#, fuzzy
+msgid "Scrollbar Outline Color"
+msgstr "Warna Garis Besar Bilah Gulir"
+
+#: gradience/frontend/schemas/preset_schema.py:355
+#, fuzzy
+msgid ""
+"The scrollbar outline color is used by scrollbars to ensure that overlay "
+"scrollbars are visible regardless of the content color."
+msgstr ""
+"Warna garis besar scrollbar digunakan oleh scrollbar untuk memastikan bahwa "
+"scrollbar overlay terlihat terlepas dari warna konten."
+
+#: gradience/frontend/schemas/preset_schema.py:365
+#, fuzzy
+msgid "Blue"
+msgstr "Biru"
+
+#: gradience/frontend/schemas/preset_schema.py:366
+#, fuzzy
+msgid "Green"
+msgstr "Hijau"
+
+#: gradience/frontend/schemas/preset_schema.py:367
+#, fuzzy
+msgid "Yellow"
+msgstr "Kuning"
+
+#: gradience/frontend/schemas/preset_schema.py:368
+#, fuzzy
+msgid "Orange"
+msgstr "Oranye"
+
+#: gradience/frontend/schemas/preset_schema.py:369
+#, fuzzy
+msgid "Red"
+msgstr "Merah"
+
+#: gradience/frontend/schemas/preset_schema.py:370
+#, fuzzy
+msgid "Purple"
+msgstr "Ungu"
+
+#: gradience/frontend/schemas/preset_schema.py:371
+#, fuzzy
+msgid "Brown"
+msgstr "Cokelat"
+
+#: gradience/frontend/schemas/preset_schema.py:372
+#: gradience/frontend/views/main_window.py:206
+#, fuzzy
+msgid "Light"
+msgstr "Terang"
+
+#: gradience/frontend/schemas/preset_schema.py:373
+#: gradience/frontend/views/main_window.py:207
+#, fuzzy
+msgid "Dark"
+msgstr "Gelap"
+
+#: gradience/frontend/views/about_window.py:116
+msgid "Copyright © 2022-2023 Gradience Team"
+msgstr ""
+
+#: gradience/frontend/views/about_window.py:125
+#, fuzzy
+msgid "Plugins by"
+msgstr "Plugin oleh"
+
+#: gradience/frontend/views/about_window.py:133
+#, fuzzy
+#| msgid "Presets"
+msgid "Presets by"
+msgstr "Preset oleh"
+
+#: gradience/frontend/views/about_window.py:155
+#, fuzzy
+msgid "Packages by"
+msgstr "Paket oleh"
+
+#: gradience/frontend/views/about_window.py:162
+#, fuzzy
+msgid "Fixes by"
+msgstr "Perbaikan oleh"
+
+#: gradience/frontend/views/about_window.py:172
+#, fuzzy
+msgid "Special thanks to"
+msgstr "Terima kasih khusus kepada"
+
+#: gradience/frontend/views/main_window.py:132
+#, fuzzy
+msgid "Monet Engine"
+msgstr "Mesin Monet"
+
+#: gradience/frontend/views/main_window.py:135
+#, fuzzy
+msgid ""
+"Monet is an engine that generates a Material Design 3 palette from an "
+"image's color."
+msgstr ""
+"Monet adalah mesin yang menghasilkan palet Material Design 3 dari warna "
+"gambar."
+
+#: gradience/frontend/views/main_window.py:149
+msgid "Select an Image"
+msgstr ""
+
+#: gradience/frontend/views/main_window.py:152
+#, fuzzy
+msgid "Choose a Image File"
+msgstr "Pilih Berkas"
+
+#: gradience/frontend/views/main_window.py:161
+#, fuzzy
+msgid "Choose a File"
+msgstr "Pilih Berkas"
+
+#: gradience/frontend/views/main_window.py:183
+#, fuzzy
+msgid "Monet Palette"
+msgstr "Palet Monet"
+
+#: gradience/frontend/views/main_window.py:202
+#, fuzzy
+msgid "Theme"
+msgstr "Tema"
+
+#: gradience/frontend/views/main_window.py:205
+#, fuzzy
+msgid "Auto"
+msgstr "Otomatis"
+
+#: gradience/frontend/views/main_window.py:241
+msgid "Failed to generate Monet palette"
+msgstr ""
+
+#: gradience/frontend/views/main_window.py:245
+#, fuzzy
+msgid "Palette generated"
+msgstr "Palet yang dihasilkan"
+
+#: gradience/frontend/views/main_window.py:249
+#, fuzzy
+msgid "Select a background first"
+msgstr "Pilih latar belakang terlebih dulu"
+
+#: gradience/frontend/views/main_window.py:273
+#, fuzzy
+msgid "Palette Colors"
+msgstr "Warna Palet"
+
+#: gradience/frontend/views/main_window.py:276
+#, fuzzy
+msgid ""
+"Named palette colors used by some applications. Default colors follow the <a "
+"href=\"https://developer.gnome.org/hig/reference/palette.html\">GNOME Human "
+"Interface Guidelines</a>."
+msgstr ""
+"Warna palet bernama yang digunakan oleh beberapa aplikasi. Warna default "
+"mengikuti <a href=\"https://developer.gnome.org/hig/reference/palette.html"
+"\">Pedoman Antarmuka Manusia GNOME</a>."
+
+#: gradience/frontend/views/plugins_list.py:89
+#, fuzzy
+msgid "Plugins"
+msgstr "Plugin"
+
+#: gradience/frontend/views/plugins_list.py:92
+#, fuzzy
+msgid ""
+"Plugins add additional features to Gradience, plugins are made by Gradience "
+"community and can cause issues."
+msgstr ""
+"Plugin menambahkan fitur tambahan ke Gradience, plugin dibuat oleh komunitas "
+"Gradience dan dapat menyebabkan masalah."
+
+#: gradience/frontend/views/plugins_list.py:104
+#, fuzzy
+msgid "No Plugins Found."
+msgstr "Tidak Ada Plugin yang Ditemukan."
+
+#: gradience/frontend/views/presets_manager_window.py:116
+#: gradience/frontend/views/presets_manager_window.py:352
+#, fuzzy
+msgid "User Presets"
+msgstr "Aturan Lanjut"
+
+#: gradience/frontend/views/presets_manager_window.py:191
+#, fuzzy
+msgid "Add new repository"
+msgstr "Tambahkan repositori baru"
+
+#: gradience/frontend/views/presets_manager_window.py:192
+#, fuzzy
+msgid "Add a repository to install additional presets."
+msgstr "Tambahkan repositori untuk menginstal preset tambahan."
+
+#: gradience/frontend/views/presets_manager_window.py:198
+msgid "Cancel"
+msgstr "Membatalkan"
+
+#: gradience/frontend/views/presets_manager_window.py:199
+#, fuzzy
+msgid "Add"
+msgstr "Tambahkan"
+
+#: gradience/frontend/views/presets_manager_window.py:295
+#, fuzzy
+msgid "Preset already exists"
+msgstr "Preset sudah ada"
+
+#: gradience/frontend/views/presets_manager_window.py:307
+#, fuzzy
+msgid "Preset imported"
+msgstr "Preset yang diimpor"
+
+#: gradience/frontend/views/presets_manager_window.py:310
+#, fuzzy
+msgid "Unsupported file format, must be .json"
+msgstr "Format file yang tidak didukung, harus .json"
+
+#: gradience/frontend/views/presets_manager_window.py:345
+#, fuzzy
+msgid "Built-in Presets"
+msgstr "Preset Built-in"
+
+#: gradience/frontend/views/presets_manager_window.py:355
+#, fuzzy
+msgid ""
+"See <a href=\"https://github.com/GradienceTeam/Community\">GradienceTeam/"
+"Community</a> on Github for more presets."
+msgstr ""
+"Lihat <a href=\"https://github.com/GradienceTeam/Community\">GradienceTeam/"
+"Community</a> di Github untuk lebih banyak preset."
+
+#: gradience/frontend/views/presets_manager_window.py:381
+#, fuzzy
+msgid ""
+"No preset found! Use the import button to import one or search one on the "
+"Explore tab."
+msgstr ""
+"Tidak ada preset yang ditemukan! Gunakan tombol impor untuk mengimpor satu "
+"atau cari satu pada tab Explore."
+
+#: gradience/frontend/views/welcome_window.py:97
+#, fuzzy
+msgid "Thanks for updating Gradience!"
+msgstr "Terima kasih untuk memperbarui Gradience!"
+
+#: gradience/frontend/widgets/explore_preset_row.py:68
+#: gradience/frontend/widgets/explore_preset_row.py:94
+msgid "Preset could not be downloaded"
+msgstr "Preset tidak dapat diunduh"
+
+#: gradience/frontend/widgets/explore_preset_row.py:82
+#: gradience/frontend/widgets/explore_preset_row.py:98
+msgid "Preset downloaded"
+msgstr "Preset diunduh"
+
+#: gradience/frontend/widgets/option_row.py:52
+msgid "This option is only partially supported by the adw-gtk3 theme."
+msgstr "Opsi ini hanya didukung sebagian oleh tema adw-gtk3."
+
+#: gradience/frontend/widgets/option_row.py:57
+msgid "This option is not supported by the adw-gtk3 theme."
+msgstr "Opsi ini tidak didukung oleh tema adw-gtk3."
+
+#: gradience/frontend/widgets/option_row.py:110
+msgid "Not a color, see text value"
+msgstr "Bukan warna, lihat nilai teks"
+
+#: gradience/frontend/widgets/plugin_row.py:85
+#, fuzzy
+msgid "Unable to remove"
+msgstr "Tidak dapat menghapus"
+
+#: gradience/frontend/widgets/plugin_row.py:86
+msgid "This is a system plugin, and cannot be removed."
+msgstr "Ini adalah plugin sistem, dan tidak dapat dihapus."
+
+#: gradience/frontend/widgets/plugin_row.py:88
+#, fuzzy
+msgid "Close"
+msgstr "Tutup"
+
+#: gradience/frontend/widgets/preset_row.py:87
+#: gradience/frontend/widgets/preset_row.py:104
+#, fuzzy
+msgid "Remove from Favorites"
+msgstr "Hapus dari favorit"
+
+#: gradience/frontend/widgets/preset_row.py:90
+#: gradience/frontend/widgets/preset_row.py:100
+#, fuzzy
+msgid "Add to Favorites"
+msgstr "Tambah ke favorit"
+
+#: gradience/frontend/widgets/preset_row.py:166
+#, fuzzy
+msgid "Preset removed"
+msgstr "Preset dihapus"
+
+#: gradience/frontend/widgets/preset_row.py:167
+#, fuzzy
+msgid "Undo"
+msgstr "Urung"
+
+#: gradience/frontend/widgets/preset_row.py:182
+#, fuzzy
+msgid "Pending Deletion"
+msgstr "Penghapusan Tertunda"
+
+#: gradience/frontend/widgets/preset_row.py:196
+#, fuzzy
+msgid "Unable to delete preset"
+msgstr "Tidak dapat menghapus preset"
+
+#: gradience/frontend/widgets/repo_row.py:60
+#, fuzzy
+msgid "Repository removed"
+msgstr "Repositori dihapus."
+
+#, fuzzy
+#~ msgid "Background Image"
+#~ msgstr "Background Image"
+
+#, fuzzy
+#~ msgid "Tone"
+#~ msgstr "Nada..."
+
+#~ msgid "Adwaita Demo"
+#~ msgstr "Demo Adwaita"
+
+#~ msgid "GTK 4 Demo"
+#~ msgstr "Demo GTK 4"
+
+#~ msgid "GTK 4 Widget Factory"
+#~ msgstr "Pabrik Widget GTK 4"
+
+#, fuzzy
+#~ msgid "Failed to save override"
+#~ msgstr "Gagal menyimpan override"
+
+#, fuzzy
+#~ msgid "Unexpected file error occurred"
+#~ msgstr "Terjadi kesalahan file yang tidak terduga"
+
+#~ msgid "Save"
+#~ msgstr "Simpan"
+
+#, fuzzy
+#~| msgid ""
+#~| "\n"
+#~| "Gradience is a tool for customizing Libadwaita applications and the adw-"
+#~| "gtk3 theme.\n"
+#~| "With Gradience you can:\n"
+#~| "\n"
+#~| "- Change any color of Adwaita theme\n"
+#~| "- Apply Material 3 colors from wallpaper\n"
+#~| "- Use other users presets\n"
+#~| "- Change advanced options with CSS\n"
+#~| "- Extend functionality using plugins\n"
+#~| "\n"
+#~| "This app is written in Python and uses GTK 4 and Libadwaita.\n"
+#~| "            "
+#~ msgid ""
+#~ "\n"
+#~ "Gradience is a tool for customizing Libadwaita applications and the adw-"
+#~ "gtk3 theme.\n"
+#~ "The main features of Gradience include the following:\n"
+#~ "\n"
+#~ "🎨️ Changing any color of Adwaita theme\n"
+#~ "🖼️ Applying Material 3 color scheme from wallpaper\n"
+#~ "🎁️ Usage of other users presets\n"
+#~ "⚙️ Changing advanced options with CSS\n"
+#~ "🧩️ Extending functionality using plugins\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Gradience adalah alat untuk menyesuaikan aplikasi Libadwaita dan tema adw-"
+#~ "gtk3.\n"
+#~ "Dengan Gradience Anda dapat:\n"
+#~ "\n"
+#~ "- Ubah warna tema Adwaita\n"
+#~ "- Terapkan Bahan 3 warna dari wallaper\n"
+#~ "- Gunakan preset pengguna lain\n"
+#~ "- Ubah opsi lanjutan dengan CSS\n"
+#~ "- Perluas fungsionalitas menggunakan plugin\n"
+#~ "\n"
+#~ "Aplikasi ini ditulis dengan Python dan menggunakan GTK 4 dan libadwaita.\n"
+
+#, fuzzy
+#~ msgid "Unsupported background type"
+#~ msgstr "Jenis latar belakang yang tidak didukung"
+
+#, fuzzy
+#~ msgid ""
+#~ "Enter a keyword to search on <a href=\"https://gradienceteam.github.io/"
+#~ "presets\">GradienceTeam/Community</a>."
+#~ msgstr ""
+#~ "Masukkan kata kunci untuk mencari di <a href=\"https://gradienceteam."
+#~ "github.io/presets\">GradienceTeam/Community</a>."
+
+#, fuzzy
+#~ msgid "Logout"
+#~ msgstr "Keluar"
+
+#, fuzzy
+#~ msgid ""
+#~ "In this release, we added plugin support, a plugin repository, badges, "
+#~ "and a quick preset switcher. We also split the preset repository into an "
+#~ "“Official” repository and a “Curated” repositories."
+#~ msgstr ""
+#~ "Dalam rilis ini, kami menambahkan dukungan plugin, repositori plugin, "
+#~ "lencana, dan pengalih preset cepat. Kami juga membagi repositori preset "
+#~ "menjadi repositori \"Resmi\" dan repositori \"Dikurasi\"."
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "<ul>\n"
+#~ "<li>Added ability to star preset to display it in Palette</li>\n"
+#~ "<li>Updated Firefox GNOME Theme plugin</li>\n"
+#~ "<li>Welcome screen have been improved</li>\n"
+#~ "<li>Margins in color info popovers are fixed</li>\n"
+#~ "<li>Added filter to search presets by repo</li>\n"
+#~ "<li>Added \"No Preferences\" window</li>\n"
+#~ "<li>Preset Manager window size have changed</li>\n"
+#~ "<li>\"Offline\" and \"Nothing Found\" pages have been added to Preset "
+#~ "Manager</li>\n"
+#~ "<li>All text have been rewritten to follow GNOME Writing Guides</li>\n"
+#~ "<li>Switch from aiohttp to Libsoup3</li>\n"
+#~ "<li>Migrate to GNOME SDK 43</li>\n"
+#~ "<li>All contributors have been added to \"About\" window</li>\n"
+#~ "<li>Added \"Log Out\" dialog after preset apply</li>\n"
+#~ "<li>Some symbolics have changed, removed unnecessary hardcoded symbolics</"
+#~ "li>\n"
+#~ "<li>Flatpak theme override now fixed</li>\n"
+#~ "<li>New and updated translations</li>\n"
+#~ "</ul>\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<ul>\n"
+#~ "<li>Menambahkan kemampuan untuk membintangi preset untuk menampilkannya "
+#~ "di Palette</li>\n"
+#~ "<li> Plugin Tema GNOME Firefox yang diperbarui</li>\n"
+#~ "<li>Layar selamat datang telah diperbaiki</li>\n"
+#~ "<li>Margin dalam popover info warna telah diperbaiki</li>\n"
+#~ "<li>Tambah filter untuk mencari preset berdasarkan repo</li>\n"
+#~ "<li> Ditambah jendela \"No Preferences\"</li>\n"
+#~ "<li> Ukuran jendela Preset Manager telah berubah</li>\n"
+#~ "<li>Halaman \"Offline\" dan \"Nothing Found\" telah ditambahkan ke Preset "
+#~ "Manager</li>\n"
+#~ "<li>Semua teks telah ditulis ulang untuk mengikuti Panduan Penulisan "
+#~ "GNOME</li>\n"
+#~ "<li> Beralih dari aiohttp ke Libsoup3</li>\n"
+#~ "<li> Bermigrasi ke GNOME SDK 43</li>\n"
+#~ "<li>Semua kontributor telah ditambahkan ke jendela \"Tentang\"</li>\n"
+#~ "<li>Dialog \"Log Out\" telah ditambahkan setelah preset berlaku</li>\n"
+#~ "<li> Beberapa simbol telah berubah, menghapus simbolik hardcoded yang "
+#~ "tidak perlu</li>\n"
+#~ "<li> Pengabaian tema flatpak sekarang sudah diperbaiki</li>\n"
+#~ "<li> Terjemahan baru dan diperbarui</li>\n"
+#~ "</ul>\n"
+
+#~ msgid "Change the look of Adwaita, with ease."
+#~ msgstr "Ubah tampilan Adwaita, dengan mudah."
+
+#~ msgid "With Gradience you can:"
+#~ msgstr "Dengan Gradience Anda dapat:"
+
+#~ msgid "This app is written in Python and uses GTK 4 and Libadwaita."
+#~ msgstr ""
+#~ "Aplikasi ini ditulis dengan Python dan menggunakan GTK 4 dan Libadwaita."
+
+#~ msgid "colors purple"
+#~ msgstr "warna ungu"
+
+#~ msgid "monet purple"
+#~ msgstr "ungu monet"
+
+#~ msgid "advanced purple"
+#~ msgstr "advanced purple"
+
+#~ msgid "Preset reseted"
+#~ msgstr "Preset disetel ulang"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "<ul>\n"
+#~ "<li>Add AdwViewSwitcher in the header bar.</li>\n"
+#~ "<li>Move CSS to the \"Advanced\" tab</li>\n"
+#~ "<li>Move the rest to the \"colors\" tab</li>\n"
+#~ "<li>Add Monet tab which generates a theme from a background</li>\n"
+#~ "<li>Add disk saved and disk unsaved icon in the header bar</li>\n"
+#~ "<li>Update about dialog</li>\n"
+#~ "<li>Change license to GNU GPLv3</li>\n"
+#~ "<li>Begin plugin support</li>\n"
+#~ "<li>Move preset selector to a drop-down called palette (icon palette)</"
+#~ "li>\n"
+#~ "<li>Add ability to apply the theme only for dark theme or oy for light "
+#~ "theme</li>\n"
+#~ "<li>Automaticly use Adwaita-dark preset if the user prefered scheme is "
+#~ "dark.</li>\n"
+#~ "<li>Added Flatpak CI build</li>\n"
+#~ "<li>Added issue template for bug and feature request </li>\n"
+#~ "<li>`Main` branch is now protected by GitHub branch protection. The "
+#~ "development is done on `next` branch</li>\n"
+#~ "</ul>\n"
+#~ msgstr ""
+#~ "\n"
+#~ "<ul>\n"
+#~ "<li>Tambahkan AdwViewSwitcher di header bar.</li>\n"
+#~ "<li>Pindahkan CSS ke tab \"Advanced\"</li>\n"
+#~ "<li>Pindahkan sisanya ke tab \"colors\"</li>\n"
+#~ "<li>Tambahkan tab Monet yang menghasilkan tema dari latar belakang</li>\n"
+#~ "<li>Tambahkan ikon disk yang disimpan dan disk yang tidak disimpan di "
+#~ "header bar</li>\n"
+#~ "<li> Perbarui tentang dialog</li>\n"
+#~ "<li>Ubah lisensi menjadi GNU GPLv3</li>\n"
+#~ "<li>Mulai dukungan plugin</li>\n"
+#~ "<li> Pindahkan pemilih preset ke drop-down yang disebut palet (palet "
+#~ "ikon)</li>\n"
+#~ "<li>Tambahkan kemampuan untuk menerapkan tema hanya untuk tema gelap atau "
+#~ "oy untuk tema terang</li>\n"
+#~ "<li> Secara otomatis menggunakan preset Adwaita-dark jika skema yang "
+#~ "disukai pengguna adalah gelap.</li>\n"
+#~ "<li>Tambahkan build CI Flatpak</li>\n"
+#~ "<li> Template isu yang ditambahkan untuk bug dan permintaan fitur </li>\n"
+#~ "<li>`Cabang utama` sekarang dilindungi oleh perlindungan cabang GitHub. "
+#~ "Pengembangan dilakukan di cabang `next`</li>\n"
+#~ "</ul>\n"
+
+#, fuzzy
+#~ msgid "Share preset"
+#~ msgstr "Bagikan preset"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "                <ul>\n"
+#~ "                <li>Add AdwViewSwitcher in the header bar.</li>\n"
+#~ "                <li>Move CSS to the \"Advanced\" tab</li>\n"
+#~ "                <li>Move the rest to the \"colors\" tab</li>\n"
+#~ "                <li>Add Monet tab which generates a theme from a "
+#~ "background</li>\n"
+#~ "                <li>Add disk saved and disk unsaved icon in the header "
+#~ "bar</li>\n"
+#~ "                <li>Update about dialog</li>\n"
+#~ "                <li>Change license to GNU GPLv3</li>\n"
+#~ "                <li>Begin plugin support</li>\n"
+#~ "                <li>Move preset selector to a drop-down called palette "
+#~ "(icon palette)</li>\n"
+#~ "                <li>Add ability to apply the theme onlyfor dark theme or "
+#~ "oy for light theme</li>\n"
+#~ "                <li>Automaticly use Adwaita-dark preset if the user "
+#~ "prefered scheme is dark.</li>\n"
+#~ "                <li>Added Flatpak CI build</li>\n"
+#~ "                <li>Added issue template for bug and feature request </"
+#~ "li>\n"
+#~ "                <li>`Main` branch is now protected by GitHub branch "
+#~ "protection. The development is done on `next` branch</li>\n"
+#~ "                </ul>\n"
+#~ "                "
+#~ msgstr ""
+#~ "\n"
+#~ "                <ul>\n"
+#~ "                <li>Tambahkan AdwViewSwitcher di header bar.</li>\n"
+#~ "                <li>Pindahkan CSS ke tab \"Advanced\"</li>\n"
+#~ "                <li>Pindahkan sisanya ke tab \"colors\"</li>\n"
+#~ "                <li>Tambahkan tab Monet yang menghasilkan tema dari latar "
+#~ "belakang</li>\n"
+#~ "                <li>Tambahkan ikon disk yang disimpan dan disk yang tidak "
+#~ "disimpan di header bar</li>\n"
+#~ "                <li> Perbarui tentang dialog</li>\n"
+#~ "                <li>Ubah lisensi menjadi GNU GPLv3</li>\n"
+#~ "                <li>Mulai dukungan plugin</li>\n"
+#~ "                <li> Pindahkan pemilih preset ke drop-down yang disebut "
+#~ "palet (palet ikon)</li>\n"
+#~ "                <li>Tambahkan kemampuan untuk menerapkan tema hanya untuk "
+#~ "tema gelap atau oy untuk tema terang</li>\n"
+#~ "                <li> Secara otomatis menggunakan preset Adwaita-gelap "
+#~ "jika skema yang disukai pengguna adalah gelap.</li>\n"
+#~ "                <li>Tambahkan build CI Flatpak</li>\n"
+#~ "                <li> Template isu yang ditambahkan untuk bug dan "
+#~ "permintaan fitur </li>\n"
+#~ "                <li>`Cabang utama` sekarang dilindungi oleh perlindungan "
+#~ "cabang GitHub. Pengembangan dilakukan di cabang `next`</li>\n"
+#~ "                </ul>\n"
+#~ "                "
+
+#~ msgid "colors"
+#~ msgstr "warna"
+
+#~ msgid "monet"
+#~ msgstr "monet"
+
+#~ msgid "advanced"
+#~ msgstr "advanced"
+
+#~ msgid "A small bug fix release of Gradience."
+#~ msgstr "Rilis perbaikan bug kecil dari Gradience."
+
+#~ msgid "Small improvements to the welcome screen"
+#~ msgstr "Perbaikan kecil pada layar selamat datang"
+
+#~ msgid "Fixing release notes"
+#~ msgstr "Memperbaiki catatan rilis"
+
+#~ msgid "New Release of Gradience."
+#~ msgstr "Rilis Baru Gradience."
+
+#~ msgid "Rebrand"
+#~ msgstr "Ubah merek"
+
+#~ msgid "Refactoring meson architecture"
+#~ msgstr "Memfaktorkan ulang arsitektur meson"
+
+#~ msgid "New debug check"
+#~ msgstr "Pemeriksaan debug baru"
+
+#~ msgid "Switching runtime to GNOME 42 and adding adw 1.2"
+#~ msgstr "Beralih runtime ke GNOME 42 dan menambahkan adw 1.2"
+
+#~ msgid "Add more info about monet"
+#~ msgstr "Tambahkan info lebih lanjut tentang monet"
+
+#~ msgid "Add preset manager with option to download other users presets"
+#~ msgstr ""
+#~ "Tambahkan pengelola preset dengan opsi untuk mengunduh preset pengguna "
+#~ "lain"
+
+#~ msgid "First release of Gradience."
+#~ msgstr "Rilis pertama Gradience."
+
+#~ msgid "Add AdwViewSwitcher in the header bar"
+#~ msgstr "Tambahkan AdwViewSwitcher di bilah header"
+
+#~ msgid "Move CSS to the \"Advanced\" tab"
+#~ msgstr "Pindahkan CSS ke tab \"Lanjutan\""
+
+#~ msgid "Move the rest to the \"colors\" tab"
+#~ msgstr "Pindahkan sisanya ke tab \"Warna\""
+
+#~ msgid "Add Monet tab which generates a theme from a background"
+#~ msgstr "Tambahkan tab Monet yang menghasilkan tema dari latar belakang"
+
+#~ msgid "Add disk saved and disk unsaved icon in the header bar"
+#~ msgstr ""
+#~ "Tambahkan ikon disk yang disimpan dan ikon disk yang belum disimpan di "
+#~ "bilah header"
+
+#~ msgid "Update about dialog"
+#~ msgstr "Perbarui tentang dialog"
+
+#~ msgid "Change license to GNU GPLv3"
+#~ msgstr "Ubah lisensi menjadi GNU GPLv3"
+
+#~ msgid "Begin plugin support"
+#~ msgstr "Mulai dukungan plugin"
+
+#~ msgid "Move preset selector to a drop-down called palette (icon palette)"
+#~ msgstr ""
+#~ "Pindahkan pemilih preset ke drop-down yang disebut palet (palet ikon)"
+
+#~ msgid ""
+#~ "Add ability to apply the theme onlyfor dark theme or oy for light theme"
+#~ msgstr ""
+#~ "Tambahkan kemampuan untuk menerapkan tema hanya untuk tema gelap atau oy "
+#~ "untuk tema terang"
+
+#~ msgid ""
+#~ "Automaticly use Adwaita-dark preset if the user prefered scheme is dark."
+#~ msgstr ""
+#~ "Secara otomatis menggunakan preset Adwaita-dark jika skema pilihan "
+#~ "pengguna gelap."
+
+#~ msgid "Added Flatpak CI build"
+#~ msgstr "Menambahkan versi Flatpak CI"
+
+#~ msgid "Added issue template for bug and feature request"
+#~ msgstr "Menambahkan template masalah untuk bug dan permintaan fitur"
+
+#~ msgid ""
+#~ "`Main` branch is now protected by GitHub branch protection. The "
+#~ "development is done on `next` branch"
+#~ msgstr ""
+#~ "Cabang `Main` sekarang dilindungi oleh perlindungan cabang GitHub. "
+#~ "Pengembangan dilakukan pada cabang `next`"
+
+#, fuzzy
+#~ msgid "Select app types you want to affect:"
+#~ msgstr "Pilih jenis aplikasi yang ingin Anda pengaruhi:"
+
+#~ msgid "Libadwaita and GTK 4 apps"
+#~ msgstr "Aplikasi Libadwaita dan GTK 4"
+
+#, fuzzy
+#~ msgid "GTK 3 apps (adw-gtk3 theme required)"
+#~ msgstr "Aplikasi GTK 3 (diperlukan tema adw-gtk3)"
+
+#~ msgid "Apply preset"
+#~ msgstr "Terapkan prasetel"
+
+#~ msgid "Download and apply"
+#~ msgstr "Unduh dan terapkan"
+
+#~ msgid "Download only"
+#~ msgstr "Unduh saja"
+
+#, fuzzy
+#~ msgid "Enable plugin"
+#~ msgstr "Aktifkan plugin"
+
+#~ msgid "Settings"
+#~ msgstr "Pengaturan"
+
+#~ msgid "Remove plugin"
+#~ msgstr "Hapus plugin"
+
+#~ msgid "Edit preset name"
+#~ msgstr "Edit nama prasetel"
+
+#~ msgid "Open in file manager"
+#~ msgstr "Buka di pengelola file"
+
+#~ msgid "Customize Adwaita with ease"
+#~ msgstr "Sesuaikan Adwaita dengan mudah"
+
+#, fuzzy
+#~ msgid ""
+#~ "Change colors of windows, buttons, lists and more with advanced features "
+#~ "like adding custom CSS"
+#~ msgstr ""
+#~ "Ubah warna jendela, tombol, daftar, dan lainnya dengan fitur lanjutan "
+#~ "seperti menambahkan CSS khusus"
+
+#~ msgid "Configure themes"
+#~ msgstr "Konfigurasikan tema"
+
+#, fuzzy
+#~ msgid "Install adw-gtk3 theme for legacy applications."
+#~ msgstr "Pasang tema adw-gtk3 untuk aplikasi lama."
+
+#~ msgid "adw-gtk3 theme"
+#~ msgstr "tema adw-gtk3"
+
+#~ msgid "Allow installation"
+#~ msgstr "Izinkan instalasi"
+
+#, fuzzy
+#~ msgid "Installing themes"
+#~ msgstr "Memasang tema"
+
+#, fuzzy
+#~ msgid "Please wait until themes will be installed. "
+#~ msgstr "Harap tunggu sampai tema akan dipasang. "
+
+#, fuzzy
+#~ msgid "Now you can make your own presets, or download some online."
+#~ msgstr ""
+#~ "Sekarang Anda dapat membuat preset Anda sendiri, atau mengunduh beberapa "
+#~ "secara online."
+
+#, fuzzy
+#~ msgid "Please Finish the setup first"
+#~ msgstr "Harap Selesaikan pengaturan terlebih dahulu"
+
+#~ msgid "Start using Gradience"
+#~ msgstr "Mulai menggunakan Gradience"
+
+#~ msgid "Unsaved changes"
+#~ msgstr "Perubahan yang belum disimpan"
+
+#~ msgid "Save changes"
+#~ msgstr "Simpan perubahan"
+
+#~ msgid "Apply this color scheme?"
+#~ msgstr "Menerapkan skema warna ini?"
+
+#, fuzzy
+#~ msgid ""
+#~ "Plugins add additional features to Gradience, plugins are made by "
+#~ "Gradience community and can make issues."
+#~ msgstr ""
+#~ "Plugin menambahkan fitur tambahan untuk Gradience, plugin dibuat oleh "
+#~ "komunitas Gradience dan dapat membuat masalah."
+
+#, fuzzy
+#~ msgid "No plugins found"
+#~ msgstr "Tidak ada pengaya yang ditemukan"
+
+#, fuzzy
+#~ msgid "Builtin Presets"
+#~ msgstr "Preset bawaan"
+
+#, fuzzy
+#~ msgid ""
+#~ "See <a href=\"https://github.com/GradienceTeam/Community\">GradienceTeam/"
+#~ "Community</a> on Github for more presets"
+#~ msgstr ""
+#~ "Lihat <a href=\"https://github.com/GradienceTeam/Community"
+#~ "\">GradienceTeam/Community</a> di Github untuk preset lainnya"
+
+#, fuzzy
+#~ msgid ""
+#~ "No preset found! Use the import button to import one or search one on the "
+#~ "Explore tab"
+#~ msgstr ""
+#~ "Tidak ada preset yang ditemukan! Gunakan tombol impor untuk mengimpor "
+#~ "satu atau cari satu pada tab Explore"
+
+#, fuzzy
+#~ msgid "Choose a file"
+#~ msgstr "Pilih berkas"
+
+#~ msgid "Save preset as..."
+#~ msgstr "Simpan preset sebagai..."
+
+#, fuzzy
+#~ msgid "Installed Presets"
+#~ msgstr "Terpasang"
+
+#, fuzzy
+#~ msgid "Rename preset"
+#~ msgstr "Hapus prasetel"
+
+#, fuzzy
+#~ msgid "Select app types you want to theme:"
+#~ msgstr "Pilih jenis aplikasi yang ingin Anda pengaruhi:"
+
+#, fuzzy
+#~ msgid "GTK 3 apps (adw-gtk3 theme is required)"
+#~ msgstr "Aplikasi GTK 3 (diperlukan tema adw-gtk3)"
+
+#, fuzzy
+#~ msgid "Toggle plugin"
+#~ msgstr "Aktifkan plugin"
+
+#, fuzzy
+#~ msgid "No plugins found."
+#~ msgstr "Tidak ada pengaya yang ditemukan"

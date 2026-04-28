@@ -1,0 +1,55 @@
+[project]
+name = "heap_viewer"
+version = "0.1.0" #➡️ Update this to match your plugin's version
+description = "IDA Pro plugin for heap analysis and visualization"
+authors = [{ name = "Your Name", email = "your.email@example.com" }]
+requires-python = ">=3.9" #➡️ Matches IDA 8+ requirements
+readme = "README.md"
+dependencies = [] #➡️ Only put external PyPI packages here
+
+[dependency-groups]
+dev = ["pytest>=8.0.0"]
+lint = ["mypy>=1.10.0", "ruff>=0.4.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.sdist]
+include = ["/heap_viewer"]
+
+[tool.hatch.build.targets.wheel]
+include = ["/heap_viewer"]
+
+[tool.hatch.envs.default]
+env-vars = { PYTHONPATH = "/home/as/cac/idas/python" } #➡️ Sets path when running Hatch commands
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+ignore = ["A003", "E402", "E501", "E731", "F405", "F821", "W505"]
+select = ["A", "E", "F", "W", "C4", "I", "ISC", "UP"]
+
+[tool.ruff.lint.isort]
+force-single-line = true
+# required-imports = ["from __future__ import annotations"]
+
+[tool.mypy]
+strict_optional = false
+check_untyped_defs = true
+allow_untyped_globals = false
+allow_redefinition = true
+allow_any_generics = false
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+show_error_context = true
+pretty = true
+show_error_codes = true
+
+[tool.pyright]
+include = ["."]
+extraPaths = [] 
+typeCheckingMode = "basic"
+useLibraryCodeForTypes = false

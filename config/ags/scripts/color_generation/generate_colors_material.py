@@ -10,6 +10,7 @@ from materialyoucolor.dynamiccolor.material_dynamic_colors import MaterialDynami
 from materialyoucolor.utils.color_utils import (rgba_from_argb, argb_from_rgb, argb_from_rgba)
 from materialyoucolor.utils.math_utils import (sanitize_degrees_double, difference_degrees, rotation_direction)
 import os
+import subprocess
 import colorsys
 import sys
 
@@ -37,6 +38,20 @@ rgba_to_hex = lambda rgba: "#{:02X}{:02X}{:02X}".format(rgba[0], rgba[1], rgba[2
 argb_to_hex = lambda argb: "#{:02X}{:02X}{:02X}".format(*map(round, rgba_from_argb(argb)))
 hex_to_argb = lambda hex_code: argb_from_rgb(int(hex_code[1:3], 16), int(hex_code[3:5], 16), int(hex_code[5:], 16))
 display_color = lambda rgba : "\x1B[38;2;{};{};{}m{}\x1B[0m".format(rgba[0], rgba[1], rgba[2], "\x1b[7m   \x1b[7m")
+def system(cmd):
+    return subprocess.check_output(cmd, shell=True, text=True)
+def run_detached(cmd):
+    return subprocess.Popen(
+        cmd,
+        stdin=subprocess.DEVNULL,
+        stdout=subprocess.DEVNULL,
+        stderr=None,
+        start_new_session=True,
+    )
+# p = run_detached()
+# print("PID:", p.pid)
+def shell(cmd):
+    print(system(cmd))
 def apply_ags(thing):
     forags = f""
     forags += f"$darkmode: {darkmode};\n"
@@ -47,22 +62,22 @@ def apply_ags(thing):
         f.write(forags)
     sass_file = home_dir+"/.config/ags/scss/main.scss"
     css_file = home_dir+"/.config/ags/style.css"
-    os.system(f"sass {sass_file} {css_file}")
+    shell(f"sass {sass_file} {css_file}")
     # compiled_css = sass.compile(filename=sass_file)
     # with open(css_file, 'w') as file:
     #     file.write(compiled_css)
-    # os.system(f"sass {home_dir}/.config/ags/scss/main.scss {home_dir}/.config/ags/style.css")
-    # os.system(f"ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'")
-    # os.system(f"ags run-js 'App.applyCss(\"{home_dir}/.cache/ags/user/generated/style.css\");'")
-def applygradience(thing):
+    # shell(f"sass {home_dir}/.config/ags/scss/main.scss {home_dir}/.config/ags/style.css")
+    # shell(f"ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'")
+    # shell(f"ags run-js 'App.applyCss(\"{home_dir}/.cache/ags/user/generated/style.css\");'")
+def apply_gradience():
     a = 'adw-gtk3-dark'
     b = '"prefer-dark"'
     if args.mode == 'light':
         a = 'adw-gtk3'
         b = '"prefer-light"'
-    os.system(f"gradience-cli apply -p {home_dir}/.cache/ags/user/generated/gradience/preset.json --gtk both")
-    os.system(f"gsettings set org.gnome.desktop.interface gtk-theme {a}")
-    os.system(f"gsettings set org.gnome.desktop.interface color-scheme {b}")
+    shell(f"{os.path.join(home_dir, '.config', 'ags', 'scripts/color_generation/gradience/gradience-cli')} apply -p {home_dir}/.cache/ags/user/generated/gradience/preset.json --gtk both")
+    shell(f"gsettings set org.gnome.desktop.interface gtk-theme {a}")
+    shell(f"gsettings set org.gnome.desktop.interface color-scheme {b}")
     
 def colorapply(path,thing):
     file_path = os.path.expanduser(path)
@@ -79,7 +94,7 @@ def colorapply(path,thing):
     # Write the modified content back to the file
     with open(file_path, 'w') as file:
         file.write(file_data)
-def calculate_optimal_size (width: int, height: int, bitmap_size: int) -> (int, int):
+def calculate_optimal_size (width: int, height: int, bitmap_size: int):
     image_area = width * height;
     bitmap_area = bitmap_size ** 2
     scale = math.sqrt(bitmap_area/image_area) if image_area > bitmap_area else 1
@@ -91,7 +106,7 @@ def calculate_optimal_size (width: int, height: int, bitmap_size: int) -> (int, 
         new_height = 1
     return new_width, new_height
 
-def harmonize (design_color: int, source_color: int, threshold: float = 35, harmony: float = 0.5) -> int:
+def harmonize(design_color: int, source_color: int, threshold: float = 35, harmony: float = 0.5) -> int:
     from_hct = Hct.from_int(design_color)
     to_hct = Hct.from_int(source_color)
     difference_degrees_ = difference_degrees(from_hct.hue, to_hct.hue)
@@ -114,8 +129,11 @@ if args.path is not None:
     wsize_new, hsize_new = calculate_optimal_size(wsize, hsize, args.size)
     if wsize_new < wsize or hsize_new < hsize:
         image = image.resize((wsize_new, hsize_new), Image.Resampling.BICUBIC)
-    colors = QuantizeCelebi(list(image.getdata()), 128)
-    argb = Score.score(colors)[0]
+    colors = QuantizeCelebi(list(iter(image.get_flattened_data())), 128)
+    scores = Score.score(colors)
+    for item in scores:
+        print(f"score: {item}")
+    argb = scores[0]
 
     if args.cache is not None:
         with open(args.cache, 'w') as file:
@@ -286,15 +304,15 @@ def copy_everything(src_dir, dest_dir):
 if args.apply:
     target_dir = os.path.join(home_dir, ".config", "ags", "scripts", "templates")
     copy_everything(target_dir, home_dir)
-    # os.system(f"cp -r {target_dir}/.* {home_dir}")
+    # shell(f"cp -r {target_dir}/.* {home_dir}")
     # Define the target directory
     # Walk through the directory
     for root, dirs, files in os.walk(target_dir):
         for file in files:
             relative_path = os.path.relpath(os.path.join(root, file), target_dir)
-            colorapply(os.path.join(os.getenv("HOME"),relative_path),material_colors.items())
+            colorapply(os.path.join(home_dir, relative_path),material_colors.items())
     apply_ags(material_colors.items())
-    applygradience(material_colors.items())
+    apply_gradience()
     datawrite = ""
     datawrite += args.mode + "\n"
     datawrite += args.transparency + "\n"
@@ -303,4 +321,12 @@ if args.apply:
     with open(file_path, 'w') as file:
         file.write(datawrite)
 if args.ags:
-    os.system("killall simple-bar; ~/.config/ags/simple-bar")
+    pid_file = "/tmp/.mbarpid"
+    pid = -1
+    try:
+        pid = int(open(pid_file, "r").read())
+        os.kill(pid, 9)
+    except Exception as e:
+        print(f"killError: {e}")
+    p = run_detached(os.path.join(home_dir, ".config/ags/mbar"))
+    open(pid_file, "w").write(str(p.pid))
