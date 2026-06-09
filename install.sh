@@ -41,6 +41,16 @@ $SU /bin/sh -c 'echo -ne "#!/bin/sh\ndbus-run-session -- niri --session $@" > /b
 
 
 echo "setting up artix linux ..."
+$SU pacman -S git base-devel openssh --noconfirm
+CUR_DIR=$(pwd)
+git clone https://aur.archlinux.org/yay-bin.git /tmp/yay-bin
+if [ ! -z yay-bin ]; then
+	cd /tmp/yay-bin
+	makepkg -si
+else
+	echo "can't clone yay !"
+fi
+cd $CUR_DIR
 $SU bash root.sh $(whoami) || exit
 choice "do you want to install aur packages ?" "bash aur.sh || exit"
 setup_user || exit

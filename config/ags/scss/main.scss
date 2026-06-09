@@ -26,6 +26,10 @@ $primary: $primary;
 }
 .bar {
   all: unset;
+  background-color: transparent;
+}
+.centerbox {
+  all: unset;
   /* margin-right: 0.273rem; */
   min-height: $bar-height;
   background: #ffffff;

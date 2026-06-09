@@ -1,9 +1,14 @@
 .active-label {
   background-color: transparent;
-  color: #E9F9FF;
+  color: #FFF4F4;
 }
 
 .bar {
+  all: unset;
+  background-color: transparent;
+}
+
+.centerbox {
   all: unset;
   /* margin-right: 0.273rem; */
   min-height: 25px;
@@ -11,15 +16,15 @@
   border-radius: 8px;
   /* min-width: $screen_width; */
   padding: 4px;
-  background-color: #E9F9FF;
-  color: #00343E;
+  background-color: #FFF4F4;
+  color: #4D2126;
   border-radius: 8px;
 }
 
 .cir {
   all: unset;
-  background-color: #BFF0FF;
-  color: #BFF0FF;
+  background-color: #FFE1E2;
+  color: #FFE1E2;
 }
 
 .icon {
@@ -31,7 +36,7 @@
 
 .panel {
   all: unset;
-  background-color: #BFF0FF;
+  background-color: #FFE1E2;
   border-radius: 8px;
   padding: 3px;
   margin-left: 3px;
@@ -42,7 +47,7 @@
 
 .scrollbar {
   all: unset;
-  background-color: #BFF0FF;
+  background-color: #FFE1E2;
 }
 
 .space {
@@ -66,14 +71,14 @@
 
 .text {
   all: unset;
-  color: #00343E;
+  color: #4D2126;
   background-color: transparent;
 }
 
 .tray {
   all: unset;
-  background-color: #E9F9FF;
-  color: #00343E;
+  background-color: #FFF4F4;
+  color: #4D2126;
   border-radius: 8px;
   padding: 7px;
 }
@@ -83,20 +88,20 @@
   background-color: transparent;
   min-height: 22.5px;
   min-width: 22.5px;
-  color: #00343E;
+  color: #4D2126;
 }
 .button:hover label {
-  background-color: rgba(233, 249, 255, 0.2);
-  border-color: rgba(0, 52, 62, 0.2);
+  background-color: rgba(255, 244, 244, 0.2);
+  border-color: rgba(77, 33, 38, 0.2);
   border-radius: 8px;
 }
 .button:active label {
-  background-color: rgba(0, 52, 62, 0.2);
+  background-color: rgba(77, 33, 38, 0.2);
   border-radius: 8px;
 }
 .button:focus {
-  background-color: #00666F;
-  color: #E9F9FF;
+  background-color: #AE271C;
+  color: #FFF4F4;
   border-radius: 8px;
 }
 
@@ -109,37 +114,37 @@
 
 .button_active_big {
   all: unset;
-  background-color: #00666F;
+  background-color: #AE271C;
   border-radius: 8px;
   min-height: 25px;
   min-width: 25px;
-  color: #E9F9FF;
+  color: #FFF4F4;
 }
 .button_active_big:hover label {
-  background-color: rgba(233, 249, 255, 0.2);
-  border-color: rgba(0, 52, 62, 0.2);
+  background-color: rgba(255, 244, 244, 0.2);
+  border-color: rgba(77, 33, 38, 0.2);
   border-radius: 8px;
 }
 .button_active_big:active label {
-  background-color: rgba(0, 52, 62, 0.2);
+  background-color: rgba(77, 33, 38, 0.2);
   border-radius: 8px;
 }
 
 .button_active {
   all: unset;
-  background-color: #00666F;
+  background-color: #AE271C;
   border-radius: 8px;
   min-height: 22.5px;
   min-width: 22.5px;
-  color: #E9F9FF;
+  color: #FFF4F4;
 }
 .button_active:hover label {
-  background-color: rgba(0, 102, 111, 0.2);
-  border-color: rgba(0, 52, 62, 0.2);
+  background-color: rgba(174, 39, 28, 0.2);
+  border-color: rgba(77, 33, 38, 0.2);
   border-radius: 8px;
 }
 .button_active:active label {
-  background-color: rgba(0, 52, 62, 0.2);
+  background-color: rgba(77, 33, 38, 0.2);
   border-radius: 8px;
 }
 
@@ -149,22 +154,22 @@
   border-radius: 8px;
   min-height: 22.5px;
   min-width: 22.5px;
-  border-color: #00666F;
-  color: #00666F;
+  border-color: #AE271C;
+  color: #AE271C;
 }
 
 .button_inactive_big {
   all: unset;
-  background-color: #E9F9FF;
+  background-color: #FFF4F4;
   border-radius: 8px;
   min-height: 25px;
   min-width: 25px;
-  border-color: #00666F;
-  color: #00666F;
+  border-color: #AE271C;
+  color: #AE271C;
 }
 .button_inactive_big:hover label {
-  background-color: rgba(0, 52, 62, 0.2);
-  border-color: rgba(0, 52, 62, 0.2);
+  background-color: rgba(77, 33, 38, 0.2);
+  border-color: rgba(77, 33, 38, 0.2);
   border-radius: 8px;
 }
 
@@ -210,22 +215,22 @@
   margin-right: 0.6em;
 }
 .AudioSlider trough {
-  background-color: rgba(0, 52, 62, 0.2);
+  background-color: rgba(77, 33, 38, 0.2);
   border-radius: 8px;
 }
 .AudioSlider highlight {
-  background-color: #00666F;
+  background-color: #AE271C;
   min-height: 0.8em;
   border-radius: 8px;
 }
 .AudioSlider slider {
-  background-color: #00343E;
+  background-color: #4D2126;
   border-radius: 8px;
   min-height: 1em;
   min-width: 1em;
   /* margin:0px; */
   margin: -0.2em;
-  border-color: #00666F;
+  border-color: #AE271C;
 }
 
 scrolledwindow.hidden-scroll scrollbar {
@@ -240,8 +245,8 @@ scrolledwindow.hidden-scroll scrollbar slider {
 }
 
 .tray-menu {
-  background-color: #E9F9FF; /* Dark Background */
-  border-color: rgba(0, 52, 62, 0.2);
+  background-color: #FFF4F4; /* Dark Background */
+  border-color: rgba(77, 33, 38, 0.2);
   border-radius: 8px;
   min-height: 22.5px;
   min-width: 22.5px;
@@ -250,7 +255,7 @@ scrolledwindow.hidden-scroll scrollbar slider {
 
 .button_panel {
   all: unset;
-  background-color: #BFF0FF;
+  background-color: #FFE1E2;
   border-radius: 8px;
   padding: 3px;
   margin-left: 3px;
@@ -259,16 +264,16 @@ scrolledwindow.hidden-scroll scrollbar slider {
   min-width: 22.5px;
 }
 .button_panel:hover label {
-  background-color: rgba(233, 249, 255, 0.2);
+  background-color: rgba(255, 244, 244, 0.2);
   border-radius: 8px;
 }
 .button_panel:active label {
-  background-color: rgba(0, 52, 62, 0.2);
+  background-color: rgba(77, 33, 38, 0.2);
   border-radius: 8px;
 }
 .button_panel:focus {
-  background-color: #00666F;
-  color: #E9F9FF;
+  background-color: #AE271C;
+  color: #FFF4F4;
   border-radius: 8px;
 }
 
@@ -277,20 +282,20 @@ scrolledwindow.hidden-scroll scrollbar slider {
   min-height: 100px;
   min-width: 375px;
   border-radius: 8px;
-  background-color: #BFF0FF;
+  background-color: #FFE1E2;
   margin: 4px;
 }
 .music_icon:hover label {
-  background-color: rgba(233, 249, 255, 0.2);
+  background-color: rgba(255, 244, 244, 0.2);
   border-radius: 8px;
 }
 .music_icon:active label {
-  background-color: rgba(0, 52, 62, 0.2);
+  background-color: rgba(77, 33, 38, 0.2);
   border-radius: 8px;
 }
 .music_icon:focus {
-  background-color: #00666F;
-  color: #E9F9FF;
+  background-color: #AE271C;
+  color: #FFF4F4;
   border-radius: 8px;
 }
 
@@ -301,7 +306,7 @@ scrolledwindow.hidden-scroll scrollbar slider {
 
 .volumeIcon {
   all: unset;
-  color: #00343E;
+  color: #4D2126;
 }
 
 /*# sourceMappingURL=style.css.map */

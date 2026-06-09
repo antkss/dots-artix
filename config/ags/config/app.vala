@@ -1,3 +1,14 @@
+using Posix;
+public void write_pid(string path) {
+	pid_t pid = getpid();
+
+    try {
+        FileUtils.set_contents(path, ((int)pid).to_string());
+        print("✅ PID %d saved to %s\n", (int)pid, path);
+    } catch (Error e) {
+        printf("❌ Error: %s\n", e.message);
+    }
+}
 class App : Gtk.Application {
     // alternative is to rely on GLib.Application.get_default
     static App instance;
@@ -51,11 +62,11 @@ class App : Gtk.Application {
         application_id = "org.antkss.bar";
         flags = ApplicationFlags.HANDLES_COMMAND_LINE;
     }
-
     // entry point of our app
     static int main(string[] argv) {
         App.instance = new App();
         Environment.set_prgname("mbar");
+		write_pid("/tmp/.mbarpid");
         return App.instance.run(argv);
     }
 }

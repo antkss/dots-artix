@@ -1,13 +1,13 @@
 local Colors = {
-  ibg		= '#00DBED',
-  bbg		= '#E9F9FF',
-  nbg		= '#00666F',
-  vfg		= '#00EAFE',
-  ifg		= '#003D42',
-  rbg		= '#59A6FF',
-  vbg		= '#67E1FF',
-  cmdbg         = '#00666F',
-  cmdfg         = '#00EAFE',
+  ibg		= '#FB5F4D',
+  bbg		= '#FFF4F4',
+  nbg		= '#AE271C',
+  vfg		= '#FF7765',
+  ifg		= '#000000',
+  rbg		= '#C78AF2',
+  vbg		= '#FFC2C7',
+  cmdbg         = '#AE271C',
+  cmdfg         = '#FF7765',
 }
 local M = {
   normal = {

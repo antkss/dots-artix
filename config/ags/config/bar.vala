@@ -1,11 +1,11 @@
 using GLib;
 using Posix;
 using GtkLayerShell;
-using PulseAudio;
 public class Command : GLib.Object {
     private string[] command;
-	string output = "";
-	string error_msg = "";
+	public string output = "";
+	public string error_msg = "";
+    private GLib.Subprocess? _process;
 
     public Command(string[] command) {
         this.command = command;
@@ -17,73 +17,116 @@ public class Command : GLib.Object {
 		return error_msg;
 	}
 
-    public GLib.Pid spawn(
-    ) {
-		int stdout_fd;
-		GLib.Pid async_pid;
-		try {
-
-			Process.spawn_async_with_pipes(
-				null,                  // Working directory (null for current)
-				command, // Command and arguments
-				null,                  // Environment variables (null for current)
-				SpawnFlags.SEARCH_PATH, // Flags: Search for the executable in PATH
-				null,                  // Child setup function (no user data needed)
-				out async_pid,         // Output: Process ID of the spawned process
-				null,      // Input stream for the child
-				out stdout_fd,     // Output stream from the child (our input)
-				null      // Error stream from the child (our input)
-			);
-
-
-			var pipe = new UnixInputStream(stdout_fd, true);
-			var reader = new DataInputStream(pipe);
-			output = "";
-			size_t len;
-			// Read until null
-			string line;
-			while ((line = reader.read_line(out len, null)) != null) {
-				output += line;
-			}
-		} catch (GLib.Error e) {
-			error_msg = e.message;
-		}
-		return async_pid;
-
+    /// Synchronous spawn: blocks until command finishes.
+    /// Suitable for short-lived commands that produce bounded output.
+    public bool spawn_sync() {
+        try {
+            _process = new GLib.Subprocess.newv(
+                command,
+                GLib.SubprocessFlags.STDOUT_PIPE | GLib.SubprocessFlags.STDERR_PIPE
+            );
+            string? stdout_buf, stderr_buf;
+            _process.communicate_utf8(null, null, out stdout_buf, out stderr_buf);
+            if (stdout_buf != null) output = stdout_buf;
+            if (stderr_buf != null) error_msg = stderr_buf;
+            return _process.get_successful();
+        } catch (GLib.Error e) {
+            error_msg = e.message;
+            return false;
+        }
     }
-	public void kill(GLib.Pid child) {
-		Posix.kill(child, Posix.Signal.KILL);
+
+    /// Async spawn: returns immediately, output available via signal or later read.
+    public async bool spawn_async() {
+        try {
+            _process = new GLib.Subprocess.newv(
+                command,
+                GLib.SubprocessFlags.STDOUT_PIPE | GLib.SubprocessFlags.STDERR_PIPE
+            );
+            string? stdout_buf, stderr_buf;
+            yield _process.communicate_utf8_async(null, null, out stdout_buf, out stderr_buf);
+            if (stdout_buf != null) output = stdout_buf;
+            if (stderr_buf != null) error_msg = stderr_buf;
+            return _process.get_successful();
+        } catch (GLib.Error e) {
+            error_msg = e.message;
+            return false;
+        }
+    }
+
+    /// Forcefully terminates the process (SIGKILL).
+    public void kill() {
+        if (_process != null) {
+            _process.force_exit();
+            _process = null;
+        }
+    }
+
+    // Legacy alias — kept for any external callers that still reference .spawn()
+    public GLib.Pid spawn() {
+        spawn_sync();
+        return 0;
+    }
+}
+public void widget_set_class_names(Gtk.Widget widget, string[] class_names) {
+	for (int i = 0; i < class_names.length; i++) {
+		widget.get_style_context().add_class(class_names[i]);
 	}
 }
-public string? execute_command(string command) {
-    string stdout_text;
-    string stderr_text;
-    int exit_status;
+private class Css {
+    private static HashTable<Gtk.Widget, Gtk.CssProvider> _providers;
+    public static HashTable<Gtk.Widget, Gtk.CssProvider> providers {
+        get {
+            if (_providers == null) {
+                _providers = new HashTable<Gtk.Widget, Gtk.CssProvider>(
+                    (w) => (uint)w,
+                    (a, b) => a == b);
+            }
+
+            return _providers;
+        }
+    }
+}
+public void remove_provider(Gtk.Widget widget) {
+    var providers = Css.providers;
+
+    if (providers.contains(widget)) {
+        var p = providers.get(widget);
+        widget.get_style_context().remove_provider(p);
+        providers.remove(widget);
+        p.dispose();
+    }
+}
+public void widget_set_css(Gtk.Widget widget, string css) {
+    var providers = Css.providers;
+
+    if (providers.contains(widget)) {
+        remove_provider(widget);
+    } else {
+        widget.destroy.connect(() => {
+            remove_provider(widget);
+        });
+    }
+
+    var style = !css.contains("{") || !css.contains("}")
+        ? "* { ".concat(css, "}") : css;
+
+    var p = new Gtk.CssProvider();
+    widget.get_style_context()
+        .add_provider(p, Gtk.STYLE_PROVIDER_PRIORITY_USER);
 
     try {
-        Process.spawn_command_line_sync(
-            command, 
-            out stdout_text, 
-            out stderr_text, 
-            out exit_status
-        );
-
-        if (exit_status == 0) {
-            return stdout_text.strip(); // Remove trailing newlines
-        } else {
-            printf("Command failed with status %d: %s\n", exit_status, stderr_text);
-            return null;
-        }
-    } catch (GLib.Error e) {
-        printf("Execution Error: %s\n", e.message);
-        return null;
+        p.load_from_data(style, style.length);
+        providers.set(widget, p);
+    } catch (GLib.Error err) {
+        warning(err.message);
     }
 }
 public string force_fit(string text, int limit) {
     // 🔵 Get the actual character count (handles UTF-8 correctly)
 	if (text == null) 
 		return string.nfill(limit, ' ');
-    long char_count = text.length;
+    long char_count = text.char_count();
 
     if (char_count > limit) {
         // ✂️ TRUNCATE: Cut it at the limit
@@ -285,7 +328,8 @@ class Workspaces : Gtk.Box {
 			context.remove_class("button_active");
 			context.add_class("button");
 		}
-		this.niri_focus.connect((focus_id, focused) => {
+		ulong niri_handler_id = 0;
+		niri_handler_id = this.niri_focus.connect((focus_id, focused) => {
 				bool active_now = focus_id == id;
 				if (active_now) {
 					context.add_class("button_active");
@@ -294,9 +338,14 @@ class Workspaces : Gtk.Box {
 					context.add_class("button");
 				}
 		});
+		btn.destroy.connect(() => {
+			if (niri_handler_id > 0)
+				this.disconnect(niri_handler_id);
+		});
 
 		btn.clicked.connect(()=> {
-			execute_command(@"niri msg action focus-workspace $idx");
+			Command action = new Command({"niri", "msg", "action", "focus-workspace", idx.to_string()});
+			action.spawn_sync();
 		});
         return btn;
     }
@@ -321,7 +370,8 @@ class Workspaces : Gtk.Box {
 		context.remove_class("button_active");
 	    context.add_class("button");
 	}
-	hypr.notify["focused-workspace"].connect(() => {
+	ulong hypr_handler_id = 0;
+	hypr_handler_id = hypr.notify["focused-workspace"].connect(() => {
 	    focused = hypr.focused_workspace == ws;
             if (focused) {
                 context.add_class("button_active");
@@ -329,6 +379,10 @@ class Workspaces : Gtk.Box {
 				context.remove_class("button_active");
                 context.add_class("button");
             }
+        });
+        btn.destroy.connect(() => {
+            if (hypr_handler_id > 0)
+                hypr.disconnect(hypr_handler_id);
         });
 
         // btn.clicked.connect(ws.focus);
@@ -362,7 +416,7 @@ class FocusedClient : Gtk.Box {
 		return title;
 	}
     public FocusedClient() {
-		Astal.widget_set_class_names(this.label,{"text"});
+		widget_set_class_names(this.label,{"text"});
 		this.label.set_xalign(0.0f);
 		this.label.set_ellipsize(Pango.EllipsizeMode.END);
 		this.label.set_max_width_chars(60);
@@ -464,7 +518,7 @@ public class TrayMenu : Gtk.Window {
         }
         
 		init_css();
-		Astal.widget_set_css(this, "background: transparent;");
+		widget_set_css(this, "background: transparent;");
 		this.key_press_event.connect((event) => {
 			switch (event.keyval) {
 				case Gdk.Key.Up:
@@ -512,8 +566,6 @@ public class TrayMenu : Gtk.Window {
 			return true;
 		});
 
-		
-		init_css();
 		this.button_press_event.connect((e) => {
 			// 🛑 1. Filter out Double/Triple Clicks
 			// If we don't do this, fast clicks on children bubble up and close us!
@@ -577,7 +629,7 @@ public class TrayMenu : Gtk.Window {
 //		label = player.playback_status == 0 ? "": ""
 //	};
 //
-//	Astal.widget_set_class_names(btn, {"button_active"});
+//	widget_set_class_names(btn, {"button_active"});
 //	btn.clicked.connect(() => {
 //
 //	});
@@ -587,6 +639,7 @@ class LabelBtn: Gtk.Button {
 	public Gtk.Label my_label = new Gtk.Label("");
 	public LabelBtn(string? str) {
 		this.get_style_context().add_class("button_inactive");
+		my_label.set_label(str ?? "");
 		add(my_label);
 	}
 }
@@ -601,19 +654,19 @@ class ActiveBtn: Gtk.Button {
 		set_label(str);
 		set_hexpand(false);
 		set_vexpand(false);
-		Astal.widget_set_class_names(this, {"button_active_big"});
+		widget_set_class_names(this, {"button_active_big"});
 	}
 }
 class LabelPanel: Gtk.Label {
 	public LabelPanel(string ?str) {
-		Astal.widget_set_class_names(this, { "button_panel"});
+		widget_set_class_names(this, { "button_panel"});
 		set_text(str);
 	}
 }
 class ButtonPanel: Gtk.Button {
 	public ButtonPanel(string ?str) {
 		set_label(str);
-		Astal.widget_set_class_names(this, {"button_panel"});
+		widget_set_class_names(this, {"button_panel"});
 	}
 }
 class Media : Gtk.Box {
@@ -624,11 +677,14 @@ class Media : Gtk.Box {
 	public GLib.List<weak AstalMpris.Player> players = null;
 	Gtk.Button menu_btn;
     TrayMenu tray_menu_media; // 1. Define the menu
+	// Track signal handler IDs to prevent accumulation
+	private ulong title_handler_id = 0;
+	private ulong playback_status_handler_id = 0;
 	//uint chosen_player = 0;
 	//public GLib.List <Gtk.Label> menu_tray_labels = null;
     public Media(Gdk.Monitor mon) {
-		Astal.widget_set_class_names(this.play_button, { "button_active" });
-		Astal.widget_set_class_names(play_label, {"space"});
+		widget_set_class_names(this.play_button, { "button_active" });
+		widget_set_class_names(play_label, {"space"});
 		play_label.set_ellipsize(Pango.EllipsizeMode.END);
 		play_label.set_max_width_chars(45);
 		//this.mpris.player_closed.connect(() => {
@@ -655,7 +711,7 @@ class Media : Gtk.Box {
 			}
 		});
         menu_btn = new Gtk.Button();
-		Astal.widget_set_class_names(menu_btn, { "button" });
+		widget_set_class_names(menu_btn, { "button" });
 		menu_btn.set_label("↓");
         menu_btn.clicked.connect(() => {
             // Pass the button itself so the menu knows where to appear
@@ -675,23 +731,14 @@ class Media : Gtk.Box {
 				this.play_button.set_label("");
 			}
 		}
-		//uint idx = 0;
-		//foreach(var child in this.tray_menu_media.menu_box.get_children()) {
-		//	var label = child.get_data<Gtk.Label>("label");
-		//	var player = players.nth_data(idx);
-		//	var title = player.title;
-		//	label.set_label(@"♫ $title");
-		//	idx += 1;
-		//}
 	}
 	void change_players() {
 		if (this.main_player != null) {
-			//this.main_player.notify.connect((sender, param_spec) => {
-			//	// 🟢 This prints ANY property that changes on the player
-			//	print(@"Property changed: $(param_spec.name)\n");
-			//	//print("%s \n", this.main_player.metadata.print(true));
-			//});
-			this.main_player.notify["playback-status"].connect(on_playback_status);
+			// Disconnect old handler to prevent accumulation
+			if (playback_status_handler_id > 0) {
+				this.main_player.disconnect(playback_status_handler_id);
+			}
+			playback_status_handler_id = this.main_player.notify["playback-status"].connect(on_playback_status);
 			var title = this.main_player.title;
 			this.play_label.set_label(@"♫ $title");
 			if (this.main_player.playback_status == 0) {
@@ -717,7 +764,11 @@ class Media : Gtk.Box {
 		this.players = this.mpris.players.copy();
 		if (this.main_player == null || this.players.find(this.main_player) == null) {
 			this.main_player = this.players.nth_data(0);
-			this.main_player.notify["title"].connect(()=>{
+			// Disconnect old handler to prevent accumulation
+			if (title_handler_id > 0) {
+				this.main_player.disconnect(title_handler_id);
+			}
+			title_handler_id = this.main_player.notify["title"].connect(()=>{
 				this.play_label.set_text(@"♫ $(this.main_player.title)");
 			});
 		} 
@@ -751,7 +802,7 @@ class Media : Gtk.Box {
 			if (!tray_menu_media.is_visible()) {
 				seekbar.playing = false;
 			}
-			//Astal.widget_set_css(seekbar, "all: unset; min-width: 200px;");
+			//widget_set_css(seekbar, "all: unset; min-width: 200px;");
             // 2. Put the scaled pixbuf into the Image widget
 			//icon.set_size_request(100, 100);
 			//if (player.cover_art != null) {int limit
@@ -759,7 +810,7 @@ class Media : Gtk.Box {
 			//} else {
 			//}
 			//icon.set_from_icon_name("library-music", Gtk.IconSize.DIALOG);
-			//Astal.widget_set_class_names(icon, {"music_icon"});
+			//widget_set_class_names(icon, {"music_icon"});
 			//label.set_xalign(0.0f);
 			//label.set_ellipsize(Pango.EllipsizeMode.END);
 			//label.set_max_width_chars(60);
@@ -768,16 +819,16 @@ class Media : Gtk.Box {
 			//label.width_chars = 30;
 			label.ellipsize = Pango.EllipsizeMode.END;
 			label.set_text(@"♫ $(player.title)");
-			Astal.widget_set_class_names(music_icon, { "music_icon" });
-			Astal.widget_set_class_names(line, { "music_icon" });
-			Astal.widget_set_class_names(label, { "space" });
-			Astal.widget_set_class_names(lower_box, { "bar" });
-			Astal.widget_set_css(lower_box, "margin: 4px;");
-			Astal.widget_set_css(pause_btn, "margin-left: 4px;");
-			Astal.widget_set_css(next_btn, "margin-left: 4px;");
-			Astal.widget_set_css(prev_btn, "margin-left: 4px;");
-			//Astal.widget_set_css(padding_box, "all:unset; min-height: 50px;");
-			//Astal.widget_set_css(seekbar, @"all: unset; min-width: 200px;");
+			widget_set_class_names(music_icon, { "music_icon" });
+			widget_set_class_names(line, { "music_icon" });
+			widget_set_class_names(label, { "space" });
+			widget_set_class_names(lower_box, { "bar" });
+			widget_set_css(lower_box, "margin: 4px;");
+			widget_set_css(pause_btn, "margin-left: 4px;");
+			widget_set_css(next_btn, "margin-left: 4px;");
+			widget_set_css(prev_btn, "margin-left: 4px;");
+			//widget_set_css(padding_box, "all:unset; min-height: 50px;");
+			//widget_set_css(seekbar, @"all: unset; min-width: 200px;");
 			line.set_data<AstalMpris.Player>("player", player);
 			//line.set_data<Gtk.Label>("label", label);
 			line.can_focus = true;
@@ -785,22 +836,19 @@ class Media : Gtk.Box {
 			pause_btn.can_focus = false;
 			next_btn.can_focus = false;
 			music_icon.can_focus = false;
-			//btn_box.add(label);
-			//label_box.add(label);
 			upper_box.add(music_icon);
 			upper_box.add(label);
 			lower_box.add(seekbar);
 			lower_box.add(control_box);
 			line.add(upper_box);
 			line.add(lower_box);
-			//line.add(ver_box);
-			//btn_box.add(ver_box);
-			//ver_box.add(padding_box);
-			//ver_box.add(control_box);
 			control_box.add(prev_btn);
 			control_box.add(pause_btn);
 			control_box.add(next_btn);
-			seekbar.set_progress(player.position / player.length);
+			if (player.length > 0)
+				seekbar.set_progress(player.position / player.length);
+			else
+				seekbar.set_progress(0);
 
 			music_icon.clicked.connect(()=> {
 				line.grab_focus();
@@ -851,15 +899,15 @@ class Media : Gtk.Box {
 			//line.add(pause_btn);
 
 			player.notify["cover-art"].connect(() => {
-				Astal.widget_set_css(music_icon, @"background-image: url(\"file://$(player.cover_art)\");background-position: center;");
-				//Astal.widget_set_css(music_icon, "background-size: cover;");
+				widget_set_css(music_icon, @"background-image: url(\"file://$(player.cover_art)\");background-position: center;");
+				//widget_set_css(music_icon, "background-size: cover;");
 			});
 			player.notify["title"].connect(()=>{
 				label.set_text(@"♫ $(player.title)");
 			});
-			Astal.widget_set_css(music_icon, @"background-image: url(\"file://$(player.cover_art)\");background-position: center;");
-			//Astal.widget_set_css(music_icon, "background-position: center;");
-			//Astal.widget_set_css(music_icon, "background-size: cover;");
+			widget_set_css(music_icon, @"background-image: url(\"file://$(player.cover_art)\");background-position: center;");
+			//widget_set_css(music_icon, "background-position: center;");
+			//widget_set_css(music_icon, "background-size: cover;");
 			//line.event.connect((a, b)=> {
 			//	print(@"name: $(a.name) \n");
 			//	return true;
@@ -873,21 +921,9 @@ class Media : Gtk.Box {
 					this.main_player = candidate;
 				}
 				change_players();
-				//Astal.widget_set_class_names(pause_btn, {"button_inactive_big"});
-				//Astal.widget_set_class_names(prev_btn, {"button_inactive_big"});
-				//Astal.widget_set_class_names(next_btn, {"button_inactive_big"});
-				//this.tray_menu_media.toggle_at_widget(this.menu_btn);
 				return true;
 			});
-			//line.focus_out_event.connect(()=> {
-			//	Astal.widget_set_class_names(pause_btn, {"button_active_big"});
-			//	Astal.widget_set_class_names(prev_btn, {"button_active_big"});
-			//	Astal.widget_set_class_names(next_btn, {"button_active_big"});
-			//	return true;
-			//});
 			this.tray_menu_media.add_to_tray(line);
-			//this.menu_tray_labels.append(label);
-			//i+= 1;
 		}
 
 		change_players();
@@ -901,7 +937,7 @@ class SysTray : Gtk.Box {
     AstalTray.Tray tray = AstalTray.get_default();
 
     public SysTray() {
-        Astal.widget_set_class_names(this, { "SysTray" });
+        widget_set_class_names(this, { "SysTray" });
         tray.item_added.connect(add_item);
         tray.item_removed.connect(remove_item);
     }
@@ -915,7 +951,7 @@ class SysTray : Gtk.Box {
         item.bind_property("tooltip-markup", btn, "tooltip-markup", BindingFlags.SYNC_CREATE);
         item.bind_property("gicon", icon, "gicon", BindingFlags.SYNC_CREATE);
         item.bind_property("menu-model", btn, "menu-model", BindingFlags.SYNC_CREATE);
-		Astal.widget_set_class_names(btn, {"button"});
+		widget_set_class_names(btn, {"button"});
         btn.insert_action_group("dbusmenu", item.action_group);
         item.notify["action-group"].connect(() => {
             btn.insert_action_group("dbusmenu", item.action_group);
@@ -935,7 +971,7 @@ class SysTray : Gtk.Box {
 }
 class Wifi : Astal.Icon {
     public Wifi() {
-        Astal.widget_set_class_names(this, {"Wifi"});
+        widget_set_class_names(this, {"Wifi"});
         var wifi = AstalNetwork.get_default();
         wifi.wifi.bind_property("ssid", this, "tooltip-text", BindingFlags.SYNC_CREATE);
         wifi.wifi.bind_property("icon-name", this, "icon", BindingFlags.SYNC_CREATE);
@@ -975,12 +1011,14 @@ public class VolumeWatcher : GLib.Object {
     private GLib.DataInputStream? monitor_stream;
     private uint refresh_timeout_id = 0;
 
-    private double last_volume = -1;
-    private bool last_muted = false;
+    /// Public: read the last known volume (0-100) and mute state.
+    public double current_volume { get; private set; default = -1; }
+    public bool current_muted { get; private set; default = false; }
 
     public VolumeWatcher() {
         start_monitor();
-        queue_refresh();
+        // Do an initial synchronous read so current_volume is available immediately
+        refresh_volume();
     }
 
     ~VolumeWatcher() {
@@ -1089,9 +1127,9 @@ public class VolumeWatcher : GLib.Object {
             double linear = double.parse(match.fetch(1));
             double percent = linear * 100.0;
 
-            if (Math.fabs(percent - last_volume) > 0.5 || muted != last_muted) {
-                last_volume = percent;
-                last_muted = muted;
+            if (Math.fabs(percent - current_volume) > 0.5 || muted != current_muted) {
+                current_volume = percent;
+                current_muted = muted;
                 volume_changed(percent, muted);
             }
         } catch (GLib.Error e) {
@@ -1157,12 +1195,10 @@ public class BrightnessWatcher : GLib.Object {
 			int target_val = (int)((percentage / 100.0) * this.max_level);
 
 			// 3. Write to file
-			//try {
-			var file = FileStream.open(this.path_brightness, "w");
-			if (file != null) {
-				file.printf("%d", target_val);
-			} else {
-				print("Write to %s: %s \n",this.path_brightness ,GLib.strerror(errno));
+			try {
+				FileUtils.set_contents(this.path_brightness, target_val.to_string());
+			} catch (GLib.Error e) {
+				print("Write to %s failed: %s\n", this.path_brightness, e.message);
 			}
 		} else {
 			print("No backlight found !");
@@ -1373,7 +1409,7 @@ class Time : Astal.Label {
         this.format = format;
         interval = Timeout.add(1000, sync, Priority.DEFAULT);
         destroy.connect(() => Source.remove(interval));
-        Astal.widget_set_class_names(this, {"Time"});
+        widget_set_class_names(this, {"Time"});
     }
 }
 
@@ -1389,7 +1425,7 @@ class Left : Gtk.Box {
 class Panel: Gtk.Box {
     public Panel(Gtk.Widget widget){
         GLib.Object(vexpand: true, hexpand: false);
-		Astal.widget_set_class_names(this, {"panel"});
+		widget_set_class_names(this, {"panel"});
 		add(widget);
     }
 }
@@ -1417,7 +1453,10 @@ class rightPart: Gtk.Box{
 			tray_menu.toggle_at_widget(tray_menu_btn);
 		});
 		add(tray_menu_btn);
-		this.audio_value = 0.0;
+		// Initialize from actual values
+		this.audio_value = audio_slider.volume.current_volume > 0
+			? audio_slider.volume.current_volume
+			: 0.0;
 		this.brightness_value = (int)brightness_slider.bright.get_brightness();
 		tray_menu_btn.my_label.set_label(@"$((int)this.brightness_value) 󱩖 $( "%.1f".printf(this.audio_value) )  ");
 		brightness_slider.bright.brightness_changed.connect((percent) => {
@@ -1433,60 +1472,61 @@ class rightPart: Gtk.Box{
 }
 
 class Utils: Gtk.Box{
+  private GLib.Subprocess? wlsunset_proc = null;
+
   public Utils(App app){
     var colorswitch = new Gtk.Button(){
 	  visible = true,
 	  label = ""
     };
-	Astal.widget_set_class_names(colorswitch,{"button_inactive","space_right"});
+	widget_set_class_names(colorswitch,{"button_inactive","space_right"});
     colorswitch.clicked.connect(()=>{
+		widget_set_class_names(colorswitch, {"button_active","space_right"});
+		// Run synchronously (script is short-lived)
 		Command cmd = new Command({ app.home + "/.config/ags/scripts/color_generation/switchcolor.sh" });
-		GLib.Pid async_pid = -1;
-		async_pid = cmd.spawn();
-		if (async_pid >= 0) {
-			GLib.ChildWatch.add(async_pid, () => {
-				app.init_css();
-				//app.apply_css(home+"/.config/ags/style.css");
-				Astal.widget_set_class_names(colorswitch, {"button_inactive","space_right"});
-			});
-		}
+		cmd.spawn_sync();
+		app.init_css();
+		widget_set_class_names(colorswitch, {"button_inactive","space_right"});
     });
     var screenshot = new Gtk.Button(){
 	  visible = true,
 	  label = ""
     };
-	Astal.widget_set_class_names(screenshot,{"button_inactive","space_right"});
+	widget_set_class_names(screenshot,{"button_inactive","space_right"});
     screenshot.clicked.connect(()=>{
+		// ✅ Set active style BEFORE spawn (not after)
+		widget_set_class_names(screenshot,{"button_active", "space_right"});
 		Command cmd = new Command({  app.home + "/.config/ags/scripts/grimblast.sh", "--freeze", "copy", "area" });
-		GLib.Pid async_pid = -1;
-		async_pid = cmd.spawn();
-		Astal.widget_set_class_names(screenshot,{"button_active", "space_right"});
-		if (async_pid >= 0) {
-			GLib.ChildWatch.add(async_pid, () => {
-				Astal.widget_set_class_names(screenshot,{ "button_inactive", "space_right"});
-			});
-		}
+		cmd.spawn_sync();
+		widget_set_class_names(screenshot,{ "button_inactive", "space_right"});
     });
+	// Keep killall -9 wlsunset at startup as requested
 	Command k = new Command({"killall", "-9", "wlsunset"});
-	k.spawn();
+	k.spawn_sync();
 	var reading = new Gtk.ToggleButton(){
 		visible = true,
 		label = ""
     };
-    Astal.widget_set_class_names(reading,{"button_inactive"});
+    widget_set_class_names(reading,{"button_inactive"});
 	GLib.stdout.printf("please ensure that no wlsunset is running right now \n");
-	GLib.Pid child_pid = -1;
     reading.toggled.connect(()=>{
-		Command cmd = new Command({"/usr/bin/wlsunset", "-T", "5000"});
-		if (reading.get_active() && child_pid < 0) {
-			Astal.widget_set_class_names(reading,{"button_active"});
+		if (reading.get_active() && wlsunset_proc == null) {
+			widget_set_class_names(reading,{"button_active"});
 			GLib.stdout.printf("toggle on \n");
-			child_pid = cmd.spawn();
-		} else if (child_pid > 0){
+			try {
+				wlsunset_proc = new GLib.Subprocess.newv(
+					{"/usr/bin/wlsunset", "-T", "5000"},
+					GLib.SubprocessFlags.STDOUT_SILENCE | GLib.SubprocessFlags.STDERR_SILENCE
+				);
+			} catch (GLib.Error e) {
+				warning("Failed to start wlsunset: %s", e.message);
+				wlsunset_proc = null;
+			}
+		} else if (!reading.get_active() && wlsunset_proc != null) {
 			GLib.stdout.printf("toggle off \n");
-			Astal.widget_set_class_names(reading,{"button_inactive"});
-			cmd.kill(child_pid);
-			child_pid = -1;
+			widget_set_class_names(reading,{"button_inactive"});
+			wlsunset_proc.force_exit();
+			wlsunset_proc = null;
 		}
     });
     add(colorswitch);
@@ -1518,8 +1558,8 @@ class Bar : Gtk.Window {
 		centerbox.start_widget = new Left(monitor);
 		centerbox.center_widget = new Center();
 		centerbox.end_widget = new Right(app, monitor);
-		Astal.widget_set_css(centerbox,@"min-width: $width"+"px;");
-		Astal.widget_set_class_names(centerbox,{"bar"});
+		widget_set_css(centerbox,@"min-width: $width" + "px;");
+		widget_set_class_names(centerbox,{ "centerbox" });
 		add(centerbox);
 		show_all();
     }

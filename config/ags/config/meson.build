@@ -19,8 +19,6 @@ pkgconfig_deps = [
   dependency('astal-hyprland-0.1'),
   dependency('astal-notifd-0.1'),
   dependency('json-glib-1.0'), 
-  dependency('libpulse'), # 🟢 The C library
-  dependency('libpulse-mainloop-glib'), # 🟢 Required for GLib integration
 ]
 # add_project_arguments(['-static'], language: 'vala')
 deps = pkgconfig_deps + meson.get_compiler('c').find_library('m')
@@ -28,8 +26,7 @@ deps = pkgconfig_deps + meson.get_compiler('c').find_library('m')
 sources = files(
   'bar.vala',
   'niri.vala',
-  'app.vala',
-  'niri.vala'
+  'app.vala'
 )
 
 executable(
@@ -37,6 +34,6 @@ executable(
   [sources],
   dependencies: deps,
   install: true,
-  vala_args: ['--pkg', 'posix', '--pkg', 'libpulse', '--pkg', 'libpulse-mainloop-glib'],
+  vala_args: ['--pkg', 'posix'],
   install_dir: bindir,
 )

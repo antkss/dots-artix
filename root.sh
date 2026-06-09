@@ -60,7 +60,7 @@ setup_clock() {
 }
 install_initial() {
 	echo "setting up initialize packages ..."
-	$SU pacman -S yay neovim --noconfirm
+	$SU pacman -S neovim base-devel --noconfirm
 }
 setup_group() {
 	$SU usermod -aG video $USER

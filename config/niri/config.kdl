@@ -21,6 +21,7 @@ input {
             // from org.freedesktop.locale1. You can control these using
             // localectl set-x11-keymap.
         }
+		repeat-delay 400 // Default is 600
 
         // Enable numlock on startup, omitting this setting disables it.
         numlock
@@ -73,6 +74,8 @@ environment {
     // Set a variable like this:
     // QT_QPA_PLATFORM "wayland"
 	CLIPBOARD_MANAGER "wl-paste"
+	XCURSOR_THEME "arya"
+	XCURSOR_SIZE "32"
 
     // Remove a variable by using null as the value:
     // DISPLAY null
@@ -119,6 +122,7 @@ output "eDP-1" {
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
+	background-color "transparent"
     gaps 7
 
     // When to center a column when changing focus, options are:
@@ -335,7 +339,13 @@ recent-windows {
 //     default-column-width {}
 // }
 //
+layer-rule {
+    match namespace="^awww-daemon$" // Or match your specific wallpaper daemon
+    place-within-backdrop true
+}
 // Open the Firefox picture-in-picture player as floating by default.
+
+
 window-rule {
     // This app-id regular expression will work for both:
     // - host Firefox (app-id is "firefox")
@@ -364,6 +374,10 @@ window-rule {
 
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
+overview {
+	backdrop-color "#000000"
+	// zoom 1.0
+}
 window-rule {
     geometry-corner-radius 5
     clip-to-geometry true
@@ -398,7 +412,7 @@ binds {
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
     // "-l 1.0" limits the volume to 100%.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.01+ -l 1.0"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.01+ -l 2.0"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.01-"; }
     XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
@@ -510,23 +524,29 @@ binds {
 	Mod+TouchpadScrollUp cooldown-ms=200 repeat=false { focus-workspace-up; }
 	Mod+TouchpadScrollLeft cooldown-ms=200 repeat=false { focus-column-left; }
 	Mod+TouchpadScrollRight cooldown-ms=200 repeat=false { focus-column-right; }
+	//
+    Mod+Shift+TouchpadScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Shift+TouchpadScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+    Mod+Shift+TouchpadScrollRight cooldown-ms=150 { move-column-left; }
+    Mod+Shift+TouchpadScrollLeft   cooldown-ms=150 { move-column-right; }
+	// 3 finger
 
     Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
     Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
-    Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
-    Mod+Ctrl+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
+    Mod+Shift+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
+    Mod+Shift+WheelScrollUp   cooldown-ms=150 { move-column-to-workspace-up; }
 
-    Mod+WheelScrollRight      { focus-column-right; }
-    Mod+WheelScrollLeft       { focus-column-left; }
-    Mod+Ctrl+WheelScrollRight { move-column-right; }
-    Mod+Ctrl+WheelScrollLeft  { move-column-left; }
+    // Mod+WheelScrollRight      { focus-column-right; }
+    // Mod+WheelScrollLeft       { focus-column-left; }
+    // Mod+Ctrl+WheelScrollRight { move-column-right; }
+    // Mod+Ctrl+WheelScrollLeft  { move-column-left; }
 
     // Usually scrolling up and down with Shift in applications results in
     // horizontal scrolling; these binds replicate that.
-    Mod+Shift+WheelScrollDown      { focus-column-right; }
-    Mod+Shift+WheelScrollUp        { focus-column-left; }
-    Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
-    Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
+    // Mod+Shift+WheelScrollDown      { focus-column-right; }
+    // Mod+Shift+WheelScrollUp        { focus-column-left; }
+    // Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
+    // Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
 
     // Similarly, you can bind touchpad scroll "ticks".
     // Touchpad scrolling is continuous, so for these binds it is split into
@@ -556,15 +576,15 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
-    Mod+Ctrl+1 { move-column-to-workspace 1; }
-    Mod+Ctrl+2 { move-column-to-workspace 2; }
-    Mod+Ctrl+3 { move-column-to-workspace 3; }
-    Mod+Ctrl+4 { move-column-to-workspace 4; }
-    Mod+Ctrl+5 { move-column-to-workspace 5; }
-    Mod+Ctrl+6 { move-column-to-workspace 6; }
-    Mod+Ctrl+7 { move-column-to-workspace 7; }
-    Mod+Ctrl+8 { move-column-to-workspace 8; }
-    Mod+Ctrl+9 { move-column-to-workspace 9; }
+    // Mod+Ctrl+1 { move-column-to-workspace 1; }
+    // Mod+Ctrl+2 { move-column-to-workspace 2; }
+    // Mod+Ctrl+3 { move-column-to-workspace 3; }
+    // Mod+Ctrl+4 { move-column-to-workspace 4; }
+    // Mod+Ctrl+5 { move-column-to-workspace 5; }
+    // Mod+Ctrl+6 { move-column-to-workspace 6; }
+    // Mod+Ctrl+7 { move-column-to-workspace 7; }
+    // Mod+Ctrl+8 { move-column-to-workspace 8; }
+    // Mod+Ctrl+9 { move-column-to-workspace 9; }
 
     // Alternatively, there are commands to move just a single window:
     // Mod+Ctrl+1 { move-window-to-workspace 1; }
@@ -575,13 +595,13 @@ binds {
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.
     // If the window is already in a column, they will expel it out.
-    Mod+BracketLeft  { consume-or-expel-window-left; }
-    Mod+BracketRight { consume-or-expel-window-right; }
-
+    Mod+Shift+BracketLeft  { consume-or-expel-window-left; }
+    Mod+Shift+BracketRight { consume-or-expel-window-right; }
     // Consume one window from the right to the bottom of the focused column.
-    Mod+Comma  { consume-window-into-column; }
+    Mod+Shift+Comma  { consume-window-into-column; }
     // Expel the bottom window from the focused column to the right.
-    Mod+Period { expel-window-from-column; }
+    Mod+Shift+Period { expel-window-from-column; }
+
 
     Mod+R { switch-preset-column-width; }
     // Cycling through the presets in reverse order is also possible.
@@ -609,12 +629,12 @@ binds {
     // * adjust width as a percentage of screen width: "-10%" or "+10%"
     // Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
     // set-column-width "100" will make the column occupy 200 physical screen pixels.
-    Mod+Minus { set-column-width "-10%"; }
-    Mod+Equal { set-column-width "+10%"; }
+    Mod+Minus { set-column-width "-5%"; }
+    Mod+Equal { set-column-width "+5%"; }
 
     // Finer height adjustments when in column with other windows.
-    Mod+Shift+Minus { set-window-height "-10%"; }
-    Mod+Shift+Equal { set-window-height "+10%"; }
+    Mod+Shift+Minus { set-window-height "-5%"; }
+    Mod+Shift+Equal { set-window-height "+5%"; }
 
     // Move the focused window between the floating and the tiling layout.
     Mod+I       { toggle-window-floating; }

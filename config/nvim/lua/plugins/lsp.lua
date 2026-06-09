@@ -79,6 +79,13 @@ return {
 				cmd = { 'gopls' },
 				filetypes = { 'go' },
 			})
+			vim.lsp.config('csharp-language-server', {
+				cmd = { 'csharp-language-server' },
+				filetypes = { 'cs', 'csharp' }
+			})
+			vim.lsp.config('clang', {
+				cmd = { 'clangd', '--background-index' }
+			})
 			-- vim.filetype.add({
 			--   extension = {
 			-- 	asm = 'nasm',
@@ -92,7 +99,7 @@ return {
 			-- 		assembler = "nasm"
 			-- 	}
 			-- })
-			vim.lsp.enable({'luals', 'rust-analyzer', 'clangd', 'typescript-language-server', 'pyright', 'java-language-server', 'vala-lang', 'gopls'})
+			vim.lsp.enable({'luals', 'rust-analyzer', 'clangd', 'typescript-language-server', 'pyright', 'java-language-server', 'vala-lang', 'gopls', 'csharp-language-server'})
 		end,
 	}, 
 	{

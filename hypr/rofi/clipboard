@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+COPY_TARGET=$(cliphist list | rofi -dmenu -theme ~/.config/hypr/rofi/clipboard.rasi)
+if [[ ! -z $COPY_TARGET ]]; then
+	cliphist decode $COPY_TARGET | wl-copy
+fi 
